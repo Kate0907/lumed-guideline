@@ -7,15 +7,14 @@ import { IllnessComponent } from './illness/illness.component';
 import { IllnessDetailComponent } from './illness-detail/illness-detail.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LinksComponent } from './links/links.component';
-import { TreatmentComponent } from './treatment/treatment.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     IllnessComponent,
     IllnessDetailComponent,
-    LinksComponent,
-    TreatmentComponent
+    LinksComponent
   ],
   imports: [
     BrowserModule,
