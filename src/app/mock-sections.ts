@@ -1,5 +1,3 @@
-import { Illness } from './illness';
-import { KEYMESSAGE } from './mock-keyMessage';
 import { LINK } from './mock-link';
 import { Section } from './section';
 
@@ -8,7 +6,7 @@ export const SECTIONS: Section[] = [
     { id: 0, title: 'Key Messages', message: [`Cefazolin is the recommended antibiotic for surgical prophylaxis and can be used safely in the majority of patients with penicillin allergy, including anaphylaxis¹`,
     // tslint:disable-next-line: max-line-length
         'Cefazolin has unique side chains unlike any currently marketed penicillins or cephalosporins, making cross-reactivity highly unlikely. Anaphylaxis to cefazolin is uncommon, occurring in 0.0006% of surgical patients² ³', 'Alternative pre-operative antibiotic regimens are associated with increased surgical site infections and adverse effects compared to cefazolin⁴ ⁵', 'Only patients with a history of anaphylactic reaction to cefazolin or a history of Stevens-Johnson Syndrome or other severe, delayed reaction to beta-lactams should use alternative agents'], link: null },
-        
+
     { id: 1, title: 'Type of Reaction to Penicillin', message: null, link: [LINK[6], LINK[7], LINK[8], LINK[9], LINK[10], ]},
 // tslint:disable-next-line: max-line-length
     { id: 2, title: 'Key Messages',  message: ['Clindamycin should not be used for empiric treatment due to increasing resistance', 'The listed oral antibiotics have excellent or very good bioavailability', 'MRSA coverage not required empirically except in critically ill patients with purulent head/neck infections including otitis externa', 'Pseudomonas coverage not required empirically except in otitis externa', 'Control the source of infection, and send appropriate specimens to the microbiology laboratory'], link: [LINK[11], LINK[12], LINK[13], LINK[14]] },

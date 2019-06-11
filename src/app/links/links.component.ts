@@ -4,10 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { IllnessService } from '../illness.service';
-import { KEYMESSAGE } from '../mock-keyMessage';
 import { Link } from '../Link';
-import { Treatment } from '../treatment';
-import { TreatmentService } from '../treatment.service';
+
+
 
 @Component({
   selector: 'app-links',
@@ -18,7 +17,6 @@ export class LinksComponent implements OnInit {
 
   @Input()
   public illill: Illness;
-  public trtr: Treatment;
   public linklink: Link;
 
   constructor() { }

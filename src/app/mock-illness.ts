@@ -1,6 +1,4 @@
 import { Illness } from './illness';
-import { KEYMESSAGE } from './mock-keyMessage';
-import { LINK } from './mock-link';
 import { SECTIONS } from './mock-sections';
 
 export const ILLNESSES: Illness[] = [
