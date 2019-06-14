@@ -28,6 +28,7 @@
     padding: .3em 0;
     height: 4.1em;
     border-radius: 4px;
+    
   }
 
   .msg li:hover {
@@ -44,6 +45,8 @@
     padding: .3em 0;
     height: 1.6em;
     border-radius: 4px;
+    width: 27em; 
+
   }
 
   .heroes li.selected:hover {
@@ -78,7 +81,7 @@
     margin: .5em;
     padding: .3em ;
     height: 1.6em;
-    width: 15em;
+    width: 20em;
     border-radius: 4px;
     
 }
