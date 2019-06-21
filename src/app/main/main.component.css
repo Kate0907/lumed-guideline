@@ -1,59 +1,63 @@
-/* HeroesComponent's private CSS styles */
+/* MainComponent's private CSS styles */
 .selected {
-    background-color: #CFD8DC !important;
-    color: white;
-  }
-  
-  .heroes {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 20em;
-    
-  }
-  .heroes li {
-    cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
-    height: 1.6em;
-    border-radius: 4px;
-  }
-  .heroes li.selected:hover {
-    background-color: #BBD8DC !important;
-    color: white;
-  }
-  .heroes li:hover {
-    color: #607D8B;
-    background-color: #E1B7B7;
-    left: .1em;
-  }
-  .heroes .text {
-    position: relative;
-    top: -3px;
-  }
-  .heroes .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #607D8B;
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
-  }
-  h2.heroes {
-    background-color: mistyrose ;
-    margin: .5em;
-    padding: .3em ;
-    height: 1.6em;
-    width: 12em;
-    border-radius: 4px;
-    
+  background-color: #CFD8DC !important;
+  color: white;
+}
+
+.ill {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 20em;
+}
+
+.ill li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+
+.ill li.selected:hover {
+  background-color: #BBD8DC !important;
+  color: white;
+}
+
+.ill li:hover {
+  color: #607D8B;
+  background-color: #E1B7B7;
+  left: .1em;
+}
+
+.ill .text {
+  position: relative;
+  top: -3px;
+}
+
+.ill .badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #607D8B;
+  line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -4px;
+  height: 1.8em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
+
+h2.ill {
+  background-color: mistyrose;
+  margin: .5em;
+  padding: .3em;
+  height: 1.6em;
+  width: 12em;
+  border-radius: 4px;
 }

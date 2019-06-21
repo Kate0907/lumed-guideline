@@ -3,10 +3,6 @@ import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET } from '@
 import { filter } from 'rxjs/operators';
 import { BreadcrumbService } from '../breadcrumb.service';
 import { IBreadcrumb } from '../IBreadcrumb';
-//    tslint:disable: max-line-length
-
-
-
 
 @Component({
   selector: 'app-breadcrumb',
@@ -17,18 +13,15 @@ export class BreadcrumbComponent implements OnInit {
 
   public breadcrumbs: IBreadcrumb[] = [];
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private breadcrumbService: BreadcrumbService, ) {
+  constructor(private router: Router) {
     this.breadcrumbs = [];
   }
 
   ngOnInit() {
     // subscribe to the NavigationEnd event
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      // set breadcrumbs(recursively call getBreadcrumbs)
-      this.breadcrumbs = this.breadcrumbService.getBreadcrumbs((event as NavigationEnd).urlAfterRedirects, this.breadcrumbs);
+      // set breadcrumbs, breadcrumbs increase each time function is called
+      this.breadcrumbs = BreadcrumbService.getBreadcrumbs((event as NavigationEnd).urlAfterRedirects, this.breadcrumbs);
     });
   }
 }

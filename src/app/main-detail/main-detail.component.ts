@@ -7,7 +7,6 @@ import { LINK } from '../mock-link';
 import { MAINS } from '../mock-mainsection';
 import { SECTIONS } from '../mock-sections';
 
-
 @Component({
   selector: 'app-main-detail',
   templateUrl: './main-detail.component.html',
@@ -28,25 +27,18 @@ export class MainDetailComponent implements OnInit {
     private mainService: MainService,
     private location: Location
   ) {
-    console.log(this)
        this.router.events.subscribe(navigation => {
-      console.log(navigation);
       if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
         this.getMain();
         const urls = navigation.url.split('/');
         const id = Number(urls[urls.length - 1]);
         this.url = urls;
         this.ID = id;
-  
       }
 });
-
   }
 
-  ngOnInit(): void {
-    console.log(this);
-    console.log('hello');
-  }
+  ngOnInit(): void {}
 
   public getMain(): void {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -57,8 +49,7 @@ export class MainDetailComponent implements OnInit {
         });
   }
 
-  goBack(): void {
+  public goBack(): void {
     this.location.back();
   }
-
 }

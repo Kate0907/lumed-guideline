@@ -2,29 +2,25 @@ import { Injectable } from '@angular/core';
 import { MAINS } from './mock-mainsection';
 import { IBreadcrumb } from './IBreadcrumb';
 
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class BreadcrumbService {
 
-  // public breadcrumbs: IBreadcrumb[] = [];
-
-  private reinitBreadcrumbs() {
+  private static reinitBreadcrumbs() {
     return [{
       url: '/',
       label: 'Home'
     } as IBreadcrumb];
   }
 
-  public getBreadcrumbs(url: string = '', breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {
+  public static getBreadcrumbs(url: string = '', breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {
 
     const urls = url.split('/');
     const urlId = urls[urls.length - 1];
     const suchid = Number(urlId);
     let suchname = 'no name';
-    console.log(url, urls, urlId, suchid);
     if (Number.isNaN(suchid) === true || urlId === '') {
       return this.reinitBreadcrumbs();
     }
@@ -40,7 +36,6 @@ export class BreadcrumbService {
       suchname = suchmain.name;
     }
 
-    console.log(suchmain == null);
     // add breadcrumb
     const breadcrumb: IBreadcrumb = {
       label: suchname,
@@ -51,7 +46,6 @@ export class BreadcrumbService {
     for (let i = 0; i < breadcrumbs.length; i++) {
       const bread = breadcrumbs[i];
       if (bread.url === url) {
-        console.log('should remove now', i, breadcrumbs);
         return breadcrumbs.slice(0, i + 1);
       }
     }

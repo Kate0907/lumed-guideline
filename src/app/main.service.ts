@@ -26,7 +26,6 @@ export class MainService {
     }
     const one = this._DB.createSection(particular);
     one.title = 'Please enter the title';
-
   }
 
   public updateMainName(particular: MainSection, newname: string): void {
@@ -44,9 +43,6 @@ export class MainService {
   }
 
   public deleteMessage(particular: MainSection, sectionIndex: number, messageIndex: number): void {
-    // if ( particular == null) {
-    // return;
-    // }
     particular.section[sectionIndex].message.splice(messageIndex, 1);
   }
 
@@ -72,9 +68,7 @@ export class MainService {
       return;
     }
     if (particular.section[sectionIndex].message == null) {
-      // tslint:disable-next-line: no-unused-expression
       particular.section[sectionIndex].message = ['Please enter the message'];
-
     } else {
       particular.section[sectionIndex].message.push('Please enter the message');
     }
@@ -85,8 +79,7 @@ export class MainService {
       return;
     }
     // add the new link to the current section:
-    if (particular.section[sectionIndex].link == null)  {
-      // tslint:disable-next-line: max-line-length
+    if (particular.section[sectionIndex].link == null) {
       particular.section[sectionIndex].link = [this._DB.createLink()];
     } else { particular.section[sectionIndex].link.push(this._DB.createLink()); }
   }
@@ -97,5 +90,4 @@ export class MainService {
     }
     particular.section[sectionIndex].message[messageIndex] = message;
   }
-
 }

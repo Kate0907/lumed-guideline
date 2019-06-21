@@ -10,7 +10,8 @@
       <button (click)="addMessage(sectionIndex)">Add a new message</button>
       <button (click)="addLink(sectionIndex)">Add a new link</button>
       <button (click)="updateTitle(sectionIndex, section.title)">Save</button>
-      <button (click)="deleteSection(sectionIndex)">Delete Section</button></h2>
+      <button (click)="deleteSection(sectionIndex)">Delete Section</button>
+    </h2>
 
     <ul class="msg" *ngIf="section.message != null">
       <li *ngFor="let message of section.message; let messageIndex = index;">
