@@ -1,0 +1,10 @@
+
+
+
+<ul class="heroes" *ngFor="let eachgroup of maingroup">
+  <h2 class="heroes">{{eachgroup.name}}</h2>
+  <li *ngFor="let main of eachgroup.samemains ">
+    <a style="text-decoration:none" routerLink="/detail/{{main.id}}">{{main.name}}</a>
+  </li>
+</ul>
+

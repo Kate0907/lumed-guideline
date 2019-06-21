@@ -1,17 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IllnessComponent } from './illness/illness.component';
-import { IllnessDetailComponent } from './illness-detail/illness-detail.component';
+import { MainComponent } from './main/main.component';
+import { MainDetailComponent } from './main-detail/main-detail.component';
+import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/illness', pathMatch: 'full' },
-  { path: 'illness', component: IllnessComponent },
-  { path: 'detail/:id', component: IllnessDetailComponent }
+  {
+    path: 'main',
+    component: MainComponent,
+    data: {
+      breadcrumb: 'MainMainMain illness'
+    }
+  },
+  {
+    path: 'detail/:id',
+    component: MainDetailComponent,
+    data: {
+      breadcrumb: 'Detail'
+    }
+  }
 ];
 
+
+
+
+
+
+
+
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

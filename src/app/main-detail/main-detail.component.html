@@ -1,0 +1,16 @@
+<span>main section id : {{url}}</span>
+
+<span><input type="checkbox" [(ngModel)]="isAdmin">is Admin</span>
+<span><button (click)="goBack()">go back</button></span>
+<p>
+<span>Total sections:{{kevin.length - 1 }}</span>
+<span>Total main:{{alisa.length - 1 }}</span>
+<span>Total links:{{lily.length - 1 }}</span>
+</p>
+
+<div *ngIf="!isAdmin"><app-main-detail-readonly [main]="main"></app-main-detail-readonly> </div>
+<div *ngIf="isAdmin"><app-main-detail-editable [main]="main"></app-main-detail-editable> </div>
+
+
+
+<button (click)="goBack()">go back</button>

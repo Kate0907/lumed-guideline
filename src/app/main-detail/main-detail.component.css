@@ -1,16 +1,45 @@
+/* illness detail Component's private CSS styles */
+span{
+  display: block;
+}
 .selected {
     background-color: #CFD8DC !important;
     color: white;
   }
   
-  .heroes {
+  .illness {
     margin: 0 0 2em 0;
     list-style-type: none;
     padding: 0;
     width: 20em;
     
   }
-  .heroes li {
+
+  .msg {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 40em;  
+  }
+
+  .msg li {
+    
+    position: relative;
+    left: 0;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em 0;
+    height: 4.1em;
+    border-radius: 4px;
+    
+  }
+
+  .msg li:hover {
+    color: #607D8B;
+    background-color: rgb(235, 191, 191);
+    left: .1em;
+  }
+  .illness li {
     cursor: pointer;
     position: relative;
     left: 0;
@@ -19,21 +48,24 @@
     padding: .3em 0;
     height: 1.6em;
     border-radius: 4px;
+    width: 27em; 
+
   }
-  .heroes li.selected:hover {
+
+  .illness li.selected:hover {
     background-color: #BBD8DC !important;
     color: white;
   }
-  .heroes li:hover {
+  .illness li:hover {
     color: #607D8B;
-    background-color: #E1B7B7;
+    background-color: rgb(235, 191, 191);
     left: .1em;
   }
-  .heroes .text {
+  .illness .text {
     position: relative;
     top: -3px;
   }
-  .heroes .badge {
+  .illness .badge {
     display: inline-block;
     font-size: small;
     color: white;
@@ -47,11 +79,12 @@
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
   }
-  h2.heroes {
+  h2.illness {
     background-color: mistyrose ;
     margin: .5em;
     padding: .3em ;
     height: 1.6em;
-    width: 12em;
+    width: 20em;
+    border-radius: 4px;
     
 }
