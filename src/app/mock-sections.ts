@@ -3,9 +3,14 @@ import { Section } from './section';
 
 export const SECTIONS: Section[] = [
 // tslint:disable-next-line: max-line-length
-    { id: 0, title: 'Key Messages', message: [`Cefazolin is the recommended antibiotic for surgical prophylaxis and can be used safely in the majority of patients with penicillin allergy, including anaphylaxis¹`,
+    { id: 0,  title: 'Key Messages', message:
+// tslint:disable-next-line: max-line-length
+    [`Cefazolin is the recommended antibiotic for surgical prophylaxis and can be used safely in the majority of patients with penicillin allergy, including anaphylaxis¹`,
     // tslint:disable-next-line: max-line-length
-        'Cefazolin has unique side chains unlike any currently marketed penicillins or cephalosporins, making cross-reactivity highly unlikely. Anaphylaxis to cefazolin is uncommon, occurring in 0.0006% of surgical patients² ³', 'Alternative pre-operative antibiotic regimens are associated with increased surgical site infections and adverse effects compared to cefazolin⁴ ⁵', 'Only patients with a history of anaphylactic reaction to cefazolin or a history of Stevens-Johnson Syndrome or other severe, delayed reaction to beta-lactams should use alternative agents'], link: null },
+    'Cefazolin has unique side chains unlike any currently marketed penicillins or cephalosporins, making cross-reactivity highly unlikely. Anaphylaxis to cefazolin is uncommon, occurring in 0.0006% of surgical patients² ³', 'Alternative pre-operative antibiotic regimens are associated with increased surgical site infections and adverse effects compared to cefazolin⁴ ⁵',
+// tslint:disable-next-line: max-line-length
+    'Only patients with a history of anaphylactic reaction to cefazolin or a history of Stevens-Johnson Syndrome or other severe, delayed reaction to beta-lactams should use alternative agents'],
+        link: null },
 
     { id: 1, title: 'Type of Reaction to Penicillin', message: null, link: [LINK[6], LINK[7], LINK[8], LINK[9], LINK[10], ]},
 // tslint:disable-next-line: max-line-length
