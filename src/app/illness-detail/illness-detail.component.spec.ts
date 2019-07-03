@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainReadonlyComponent } from './main-readonly.component';
+import { IllnessDetailComponent } from './illness-detail.component';
 
-describe('MainReadonlyComponent', () => {
-  let component: MainReadonlyComponent;
-  let fixture: ComponentFixture<MainReadonlyComponent>;
+describe('IllnessDetailComponent', () => {
+  let component: IllnessDetailComponent;
+  let fixture: ComponentFixture<IllnessDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainReadonlyComponent ]
+      declarations: [ IllnessDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MainReadonlyComponent);
+    fixture = TestBed.createComponent(IllnessDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

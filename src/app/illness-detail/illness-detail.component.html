@@ -1,0 +1,70 @@
+<button (click)="goBack()">go back</button>
+<input type="checkbox" [(ngModel)]="isAdmin">is Admin
+<br>
+total sections:{{kevin.length - 1 }}
+<br>
+total illness:{{alisa.length - 1 }}
+<br>
+total links:{{lily.length - 1 }}
+
+<div *ngIf="illness && !isAdmin" >
+
+  <h2>{{illness.name | uppercase}} Details</h2>
+
+  <ul  *ngFor="let section of illness.section">
+    <h2 class="heroes" *ngIf="section.title !== null">{{section.title}}</h2>
+  
+    <ul class="msg" *ngIf="section.message !== null">
+      <li *ngFor="let message of section.message">{{message}}</li>
+    </ul>
+   
+    <ul class="heroes" *ngIf="section.link !== null">
+      <li  *ngFor="let link of section.link">
+      <a style="text-decoration:none" routerLink="/detail/{{link.id}}">{{link.name}}</a>
+      </li>
+    </ul>
+
+  </ul>
+  <div><span>illness id in mock ILLNESSES: </span>{{illness.id}}</div>
+  <div><span>illness name: </span>{{illness.name}}</div>
+  
+</div>
+
+<div *ngIf="illness && isAdmin" >
+
+    <h2><textarea rows="1" cols="50" [(ngModel)]="illness.name"></textarea>Details</h2>
+    <button (click)="updateIllnessName(illness.name)">save title</button>  
+    <button (click)="addSection()">Add a new section</button>
+  
+    <ul  *ngFor="let section of illness.section; let sectionIndex = index;">
+      <h2 class="heroes" *ngIf="section.title !== null"><textarea rows="1" cols="50" [(ngModel)]="section.title"></textarea><br>
+        <button (click)="addMessage(sectionIndex)">Add a new message</button>
+        <button (click)="addLink(sectionIndex)">Add a new link</button>
+        <button (click)="updateTitle(sectionIndex, section.title)">Save</button>
+        <button (click)="deleteSection(sectionIndex)">Delete Section</button></h2>
+      
+      <ul class="msg" *ngIf="section.message !== null">
+        <li *ngFor="let message of section.message; let messageIndex = index;">
+          <textarea rows="4" cols="60" [(ngModel)]="message"></textarea>
+          <button (click)="updateMessage(sectionIndex,messageIndex,message)">save</button>
+          <button (click)="deleteMessage(sectionIndex,messageIndex)">delete</button>
+        </li>
+      </ul>
+     
+      <ul class="heroes" *ngIf="section.link !== null">
+        <li  *ngFor="let link of section.link; let linkIndex = index;">
+        <a style="text-decoration:none" routerLink="/detail/{{link.id}}">{{link.name}}</a>
+        <button (click)="deleteLink(sectionIndex, linkIndex)">delete link</button>
+        </li>
+      </ul>
+  
+    </ul>
+    
+    
+    <div><span>illness id in mock ILLNESSES: </span>{{illness.id}}</div>
+    <div><span>illness name: </span>{{illness.name}}</div>
+    
+  
+  </div>
+
+<button (click)="goBack()">go back</button>
