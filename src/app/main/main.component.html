@@ -1,0 +1,7 @@
+<span><input type="checkbox" [(ngModel)]="isAdmin">is Admin</span>
+
+<div *ngIf="!isAdmin"><app-main-readonly [mains]="mains"></app-main-readonly> </div>
+<div *ngIf="isAdmin"><app-main-editable [mains]="mains"></app-main-editable> </div>
+
+
+

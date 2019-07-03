@@ -1,8 +1,0 @@
-
-<ul class="heroes" *ngFor="let eachgroup of illnessgroup">
-  <h2 class="heroes">{{eachgroup.name}}</h2>
-  <li *ngFor="let ill of eachgroup.sameills ">
-    <a style="text-decoration:none" routerLink="/detail/{{ill.id}}">{{ill.name}}</a>
-  </li>
-</ul>
-

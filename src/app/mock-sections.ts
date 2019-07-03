@@ -1,7 +1,7 @@
-import { LINK } from './mock-link';
 import { Section } from './section';
 
 export const SECTIONS: Section[] = [
+    /*
 // tslint:disable-next-line: max-line-length
     { id: 0,  title: 'Key Messages', message:
 // tslint:disable-next-line: max-line-length
@@ -27,4 +27,5 @@ export const SECTIONS: Section[] = [
     { id: 8, title: 'IV', message: null , link:[LINK[17], LINK[15]] },
     { id: 9, title: 'Severe Penicillin Allergy', message: null , link:[LINK[17], LINK[15]] },
     { id: 10, title: 'Oral Stepdown', message: null , link:[LINK[17], LINK[18], LINK[19]] },
+    */
 ];

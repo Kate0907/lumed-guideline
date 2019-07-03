@@ -1,17 +1,16 @@
-/* HeroesComponent's private CSS styles */
 .selected {
     background-color: #CFD8DC !important;
     color: white;
   }
   
-  .heroes {
+  .group {
     margin: 0 0 2em 0;
     list-style-type: none;
     padding: 0;
     width: 20em;
-    
   }
-  .heroes li {
+  
+  .group li {
     cursor: pointer;
     position: relative;
     left: 0;
@@ -21,20 +20,24 @@
     height: 1.6em;
     border-radius: 4px;
   }
-  .heroes li.selected:hover {
+  
+  .group li.selected:hover {
     background-color: #BBD8DC !important;
     color: white;
   }
-  .heroes li:hover {
+  
+  .group li:hover {
     color: #607D8B;
     background-color: #E1B7B7;
     left: .1em;
   }
-  .heroes .text {
+  
+  .group .text {
     position: relative;
     top: -3px;
   }
-  .heroes .badge {
+  
+  .group .badge {
     display: inline-block;
     font-size: small;
     color: white;
@@ -48,12 +51,13 @@
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
   }
-  h2.heroes {
-    background-color: mistyrose ;
+  
+  h2.group {
+    background-color: mistyrose;
     margin: .5em;
-    padding: .3em ;
+    padding: .3em;
     height: 1.6em;
     width: 12em;
     border-radius: 4px;
-    
-}
+  }
+  
