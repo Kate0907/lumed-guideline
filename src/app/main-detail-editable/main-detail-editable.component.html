@@ -1,11 +1,11 @@
 <div *ngIf="main">
 
   <h2><textarea rows="1" cols="50" [(ngModel)]="main.name"></textarea>Details</h2>
-  <button (click)="updateIllnessName(main.name)">save title</button>
+  <button (click)="updateMainName(main.name)">save title</button>
   <button (click)="addSection()">Add a new section</button>
 
   <ul *ngFor="let section of main.section; let sectionIndex = index;">
-    <h2 class="illness" *ngIf="section.title != null"><textarea rows="1" cols="50"
+    <h2 class="mainsection" *ngIf="section.title != null"><textarea rows="1" cols="50"
         [(ngModel)]="section.title"></textarea><br>
       <button (click)="addMessage(sectionIndex)">Add a new message</button>
       <button (click)="addLink(sectionIndex)">Add a new link</button>
@@ -23,7 +23,7 @@
       </li>
     </ul>
 
-    <ul class="illness" *ngIf="section.link != null">
+    <ul class="mainsection" *ngIf="section.link != null">
       <li *ngFor="let link of section.link; let linkIndex = index;">
         <a style="text-decoration:none" routerLink="/detail/{{link.id}}">{{link.name}}</a>
         <button (click)="deleteLink(sectionIndex, linkIndex)">delete link</button>
@@ -33,7 +33,7 @@
     </ul>
 
   </ul>
-  <div><span>main id in mock MAINES: </span>{{main.id}}</div>
+  <div><span>main id: </span>{{main.id}}</div>
   <div><span>main name: </span>{{main.name}}</div>
 
 

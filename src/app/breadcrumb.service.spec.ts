@@ -1,6 +1,8 @@
-
 import { BreadcrumbService } from './breadcrumb.service';
 import { IBreadcrumb } from './IBreadcrumb';
+
+// tslint:disable-next-line: align
+public service = new BreadcrumbService;
 
 describe('BreadcrumbService', () => {
 

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MainSection } from '../main';
 import { MainService } from '../main.service';
-import { MAINGROUP } from './mock-mainGroup';
+import { MainGroup } from '../mainGroup';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-main',
@@ -10,16 +13,22 @@ import { MAINGROUP } from './mock-mainGroup';
 })
 
 export class MainComponent implements OnInit {
-  mains: MainSection[];
-  maingroup = MAINGROUP;
+  @Input() mains: MainSection[];
+  @Input() maingroup: MainGroup[];
+  isAdmin = true;
 
   constructor(private mainService: MainService) { }
 
   ngOnInit() {
     this.getMains();
+    this.getMainGroup();
+  }
+
+  public getMainGroup(): void {
+    this.mainService.getMainGroup().subscribe(mainGroup => this.maingroup = mainGroup);
   }
 
   public getMains(): void {
-    this.mainService.getMains().subscribe(elle => this.mains = elle);
+    this.mainService.getMains().subscribe(mains => this.mains = mains);
   }
 }

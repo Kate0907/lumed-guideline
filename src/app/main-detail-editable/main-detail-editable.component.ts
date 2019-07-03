@@ -3,9 +3,6 @@ import { MainSection } from '../main';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { MainService } from '../main.service';
-import { Link } from '../Link';
-
-
 
 @Component({
   selector: 'app-main-detail-editable',
@@ -21,24 +18,20 @@ export class MainDetailEditableComponent implements OnInit {
     private router: Router,
     private mainService: MainService,
     private location: Location) {
-      console.log(this)
-      this.router.events.subscribe(navigation => {
-        console.log(navigation);
-        if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
-          this.getMain();
-        }
-      });
+    this.router.events.subscribe(navigation => {
+      console.log(navigation);
+      if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
+        this.getMain();
+      }
+    });
   }
 
-  ngOnInit(): void {
-    console.log(this);
-  }
+  ngOnInit(): void { }
   public getMain(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.mainService.getMain(id)
       .subscribe(main => {
         this.main = main;
-        console.log(id, main);
       });
   }
 
@@ -46,12 +39,17 @@ export class MainDetailEditableComponent implements OnInit {
     this.mainService.addSection(this.main);
   }
 
-  public updateIllnessName(newname: string): void {
+  public addLink(sectionIndex: number): void {
+    this.mainService.addLink(this.main, sectionIndex);
+  }
+
+  public updateMainName(newname: string): void {
     this.mainService.updateMainName(this.main, newname);
   }
 
   public updateTitle(sectionIndex: number, newtitle: string): void {
     this.mainService.updateTitle(this.main, sectionIndex, newtitle);
+
   }
 
   public deleteMessage(sectionIndex: number, messageIndex: number): void {
@@ -70,51 +68,25 @@ export class MainDetailEditableComponent implements OnInit {
     this.mainService.addMessage(this.main, sectionIndex);
   }
 
-  public addLink(sectionIndex: number): void {
-    this.mainService.addLink(this.main, sectionIndex);
-  }
-
   public updateMessage(sectionIndex: number, messageIndex: number, message: string): void {
     this.mainService.updateMessage(this.main, sectionIndex, messageIndex, message);
   }
 
   public messageUp(sectionIndex: number, messageIndex: number): void {
-    let SWAP: string;
-    if (messageIndex !== 0) {
-      SWAP = this.main.section[sectionIndex].message[messageIndex];
-      this.main.section[sectionIndex].message[messageIndex] = this.main.section[sectionIndex].message[messageIndex - 1];
-      this.main.section[sectionIndex].message[messageIndex - 1] = SWAP;
-    }
+    this.mainService.messageUp(this.main, sectionIndex, messageIndex);
   }
 
   public messageDown(sectionIndex: number, messageIndex: number): void {
-    let SWAP: string;
-    if (messageIndex !== this.main.section[sectionIndex].message.length - 1) {
-      SWAP = this.main.section[sectionIndex].message[messageIndex];
-      this.main.section[sectionIndex].message[messageIndex] = this.main.section[sectionIndex].message[messageIndex + 1];
-      this.main.section[sectionIndex].message[messageIndex + 1] = SWAP;
-    }
+    this.mainService.messageDown(this.main, sectionIndex, messageIndex);
   }
 
   public linkUp(sectionIndex: number, linkIndex: number): void {
-    let SWAP: Link;
-    if (linkIndex !== 0) {
-      SWAP = this.main.section[sectionIndex].link[linkIndex];
-      this.main.section[sectionIndex].link[linkIndex] = this.main.section[sectionIndex].link[linkIndex - 1];
-      this.main.section[sectionIndex].link[linkIndex - 1] = SWAP;
-    }
+    this.mainService.linkUp(this.main, sectionIndex, linkIndex);
   }
 
   public linkDown(sectionIndex: number, linkIndex: number): void {
-    let SWAP: Link;
-    if (linkIndex !== this.main.section[sectionIndex].link.length - 1) {
-      SWAP = this.main.section[sectionIndex].link[linkIndex];
-      this.main.section[sectionIndex].link[linkIndex] = this.main.section[sectionIndex].link[linkIndex + 1];
-      this.main.section[sectionIndex].link[linkIndex + 1] = SWAP;
-    }
-
+    this.mainService.linkDown(this.main, sectionIndex, linkIndex);
   }
-
 
   public goBack(): void {
     this.location.back();

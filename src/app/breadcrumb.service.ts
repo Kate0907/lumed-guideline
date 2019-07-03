@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { MAINS } from './mock-mainsection';
+import { Observable, of } from 'rxjs';
 import { IBreadcrumb } from './IBreadcrumb';
+import { MainDatabaseService } from './main-database.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +10,17 @@ import { IBreadcrumb } from './IBreadcrumb';
 
 export class BreadcrumbService {
 
-  private static reinitBreadcrumbs() {
+  private reinitBreadcrumbs() {
     return [{
       url: '/',
       label: 'Home'
     } as IBreadcrumb];
   }
 
-  public static getBreadcrumbs(url: string = '', breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {
+  constructor(private _DB: MainDatabaseService,
+    private http: HttpClient, ) { }
+
+  public getBreadcrumbs(url: string = '', breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {
 
     const urls = url.split('/');
     const urlId = urls[urls.length - 1];
@@ -29,19 +34,22 @@ export class BreadcrumbService {
       breadcrumbs = this.reinitBreadcrumbs();
     }
 
-    const suchmain = MAINS.find(element => element.id === suchid);
-    if (suchmain == null) {
-      suchname = 'No Data';
-    } else {
-      suchname = suchmain.name;
-    }
+    const suchmain = this._DB.getMain(suchid);
+    suchmain.subscribe(main => {
+      const name = main.name;
+      if (suchmain == null) {
+        suchname = 'No Data';
+      } else {
+        suchname = name;
+      }
 
-    // add breadcrumb
-    const breadcrumb: IBreadcrumb = {
-      label: suchname,
-      url: url
-    };
-    breadcrumbs.push(breadcrumb);
+      // add breadcrumb
+      const breadcrumb: IBreadcrumb = {
+        label: suchname,
+        url: url
+      };
+      breadcrumbs.push(breadcrumb);
+    });
 
     for (let i = 0; i < breadcrumbs.length; i++) {
       const bread = breadcrumbs[i];

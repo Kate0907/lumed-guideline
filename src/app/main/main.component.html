@@ -1,7 +1,7 @@
-<ul class="ill" *ngFor="let eachgroup of maingroup">
-  <h2 class="ill">{{eachgroup.name}}</h2>
-  <li *ngFor="let main of eachgroup.samemains ">
-    <a style="text-decoration:none" routerLink="/detail/{{main.id}}">{{main.name}}</a>
-  </li>
-</ul>
+<span><input type="checkbox" [(ngModel)]="isAdmin">is Admin</span>
+
+<div *ngIf="!isAdmin"><app-main-readonly [mains]="mains"></app-main-readonly> </div>
+<div *ngIf="isAdmin"><app-main-editable [mains]="mains"></app-main-editable> </div>
+
+
 

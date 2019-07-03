@@ -1,105 +1,94 @@
 import { Injectable } from '@angular/core';
 import { MainSection } from './main';
-import { MAINS } from './mock-mainsection';
 import { Observable, of } from 'rxjs';
 import { Section } from './section';
 import { Link } from './link';
-import { LINK } from './mock-link';
-import { SECTIONS } from './mock-sections';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 const httpOptions = {
    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
- };
+};
 
 @Injectable({
    providedIn: 'root'
 })
 export class MainDatabaseService {
-   private guidelineUrl = 'http://localhost:64796/api/Guidline'; // URL to web api
-  constructor(
-    private http: HttpClient,
-    ) { }
+   private guidelineUrl = 'http://localhost:61291/api/Guideline'; // URL to web api
+   private sectionUrl = 'http://localhost:61291/api/Section';
+   private linkUrl = 'http://localhost:61291/api/Link';
+   private groupUrl = 'http://localhost:61291/api/MainGroup';
 
+
+   constructor(
+      private http: HttpClient,
+   ) { }
 
    public getMains(): Observable<MainSection[]> {
-      return of(MAINS);
+      return this.http.get<MainSection[]>(this.guidelineUrl)
+         .pipe(catchError(this.handleError<MainSection[]>('getMains', []))
+         );
    }
 
-   /** public getMains(): Observable<MainSection[]> {
-      return this.http.get<MainSection[]>(this.guidelineUrl);
-    }*/
-
+   /** GET main section by id. Will 404 if id not found */
    public getMain(id: number): Observable<MainSection> {
-      return of(MAINS.find(those => those.id === id));
+      const url = `${this.guidelineUrl}/${id}`;
+      return this.http.get<MainSection>(url).pipe(
+         catchError(this.handleError<MainSection>(`getMain id=${id}`))
+      );
    }
 
-   // create a new section and add to current Main
-   public createSection(some: MainSection): Section {
-      const one = new Section();
-      const total = SECTIONS.length - 1;
-      one.id = SECTIONS[total].id + 1;
-      one.title = '';
-      one.message = null;
-      one.link = null;
-      // add new section to current Main
-      // some.section.push(one);
-      // add new section to mock SECTIONS
-      SECTIONS.push(one);
-      // add new section to mock MainES = add section to current Main
-      const thisill = MAINS.find(Main => Main.id === some.id);
-      if (thisill.section == null) {
-         thisill.section = [one];
-      } else {
-         thisill.section.push(one);
-      }
-
-      return one;
+   // create a new section and add to MainSectionDB, return the new section
+   public createSection(): Observable<Section> {
+      const some = new Section();
+      return this.http.post<Section>(this.sectionUrl, some, httpOptions).pipe(
+         catchError(this.handleError<Section>('createNewSection'))
+      );
    }
 
-   public deleteLinkDB(ID: number) {
-      // delete link from mock LINK
-      const thislink = LINK.find(link => link.id === ID);
-      const thisIndex = LINK.indexOf(thislink);
-      LINK.splice(thisIndex, 1);
-      // delete link related Main from mock MainES
-      const thisMain = MAINS.find(Main => Main.id === ID);
-      const Mainindex = MAINS.indexOf(thisMain);
-      MAINS.splice(Mainindex, 1);
+   /** PUT: update the main section on the server and return a message; */
+   public updateMainSection(some: MainSection): Promise<any> {
+      const url = `${this.guidelineUrl}/${some.id}`;
+      return this.http.put(url, some, httpOptions).toPromise();
    }
 
-   public deleteSection(id: number) {
-      const thissection = SECTIONS.find(section => section.id === id);
-      const thisIndex = SECTIONS.indexOf(thissection);
-      SECTIONS.splice(thisIndex, 1);
-   }
-   public createLink(): Link {
-      // create a new link & add to LINK
-      const total = LINK.length - 1;
-      const emptylink = new Link();
-      emptylink.id = LINK[total].id + 1;
-
-      // create a new Main and match new Main.id = this new link.id:
-      const newly = this.createIll();
-      newly.id = emptylink.id;
-      newly.name = 'Pleas enter a name';
-      MAINS.push(newly);
-      // create an empty section and add to new Main
-      this.createSection(newly);
-      emptylink.name = newly.name;
-      // add the new link to mock LINK:
-      LINK.push(emptylink);
-      // add the new  Main to mock MainES:
-      // MainES.push(newly);
-      return (emptylink);
+   /** PUT: update the section on the server and return a message */
+   public updateSection(some: Section): Promise<any> {
+      const url = `${this.sectionUrl}/${some.id}`;
+      return this.http.put(url, some, httpOptions).toPromise();
    }
 
-   public createIll(): MainSection {
-      const newill = new MainSection();
-      newill.id = null;
-      newill.name = '';
-      return newill;
+   /** PUT: update the link on the server and return a message */
+   public updateLink(some: Link): Promise<any> {
+      const url = `${this.linkUrl}/${some.id}`;
+      return this.http.put(url, some, httpOptions).toPromise();
+   }
+   /** DELETE: delete link from LinkDB */
+   public deleteLinkDB(id: number): Promise<Link> {
+      const url = `${this.linkUrl}/${id}`;
+      return this.http.delete<Link>(url, httpOptions).toPromise();
+   }
+
+   // delete section from SectionDB
+   public deleteSection(id: number): Promise<Section> {
+      const url = `${this.sectionUrl}/${id}`;
+      return this.http.delete<Section>(url, httpOptions).toPromise();
+   }
+
+   // create a new link and add to LinkDB, return the new link
+   public createLink(): Observable<Link> {
+      const some = new Link();
+      return this.http.post<Link>(this.linkUrl, some, httpOptions).pipe(
+         catchError(this.handleError<Link>('createNewLink'))
+      );
+   }
+
+
+   public createMain(): MainSection {
+      const main = new MainSection();
+      main.id = null;
+      main.name = '';
+      return main;
 
    }
 
@@ -109,17 +98,17 @@ export class MainDatabaseService {
  * @param operation - name of the operation that failed
  * @param result - optional value to return as the observable result
  */
-private handleError<T> (operation = 'operation', result?: T) {
-   return (error: any): Observable<T> => {
- 
-     // TODO: send the error to remote logging infrastructure
-     console.error(error); // log to console instead
- 
-     // TODO: better job of transforming error for user consumption
-    
- 
-     // Let the app keep running by returning an empty result.
-     return of(result as T);
-   };
- }
+   private handleError<T>(operation = 'operation', result?: T) {
+      return (error: any): Observable<T> => {
+
+         // TODO: send the error to remote logging infrastructure
+         console.error(error); // log to console instead
+
+         // TODO: better job of transforming error for user consumption
+
+
+         // Let the app keep running by returning an empty result.
+         return of(result as T);
+      };
+   }
 }

@@ -30,7 +30,6 @@ export class MainDetailReadonlyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this);
   }
   public getMain(): void {
     const id = +this.route.snapshot.paramMap.get('id');

@@ -1,0 +1,12 @@
+<p>
+  main-editable works!
+</p>
+
+<ul class="group" *ngFor="let eachgroup of maingroup; let groupIndex = index;">
+  <h2 class="group"><textarea rows="1" cols="40" [(ngModel)]="eachgroup.name"></textarea></h2>
+  <button (click)="updateGroupName(groupIndex,eachgroup.name)">save group name</button>
+  <button (click)="addMain(groupIndex)">Add a new main section</button>
+  <li *ngFor="let main of eachgroup.samemains;let samemainIndex = index ">
+    <a style="text-decoration:none" routerLink="/detail/{{main.id}}">{{main.name}}</a>
+  </li>
+</ul>

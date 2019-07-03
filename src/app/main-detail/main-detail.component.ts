@@ -3,9 +3,6 @@ import { MainSection } from '../main';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { MainService } from '../main.service';
-import { LINK } from '../mock-link';
-import { MAINS } from '../mock-mainsection';
-import { SECTIONS } from '../mock-sections';
 
 @Component({
   selector: 'app-main-detail',
@@ -15,9 +12,6 @@ import { SECTIONS } from '../mock-sections';
 export class MainDetailComponent implements OnInit {
   @Input() main: MainSection;
   isAdmin = true;
-  lily = LINK;
-  alisa = MAINS;
-  kevin = SECTIONS;
   url: string[];
   ID: number;
 
@@ -45,7 +39,6 @@ export class MainDetailComponent implements OnInit {
     this.mainService.getMain(id)
       .subscribe(main => {
          this.main = main;
-         console.log(id, main);
         });
   }
 

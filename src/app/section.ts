@@ -5,4 +5,5 @@ export class Section {
     title: string;
     message: Array<string>;
     link: Array<Link>;
+    linkId: Array<number>;
 }

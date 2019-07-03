@@ -8,6 +8,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainDetailReadonlyComponent } from './main-detail-readonly/main-detail-readonly.component';
 import { MainDetailEditableComponent } from './main-detail-editable/main-detail-editable.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MainEditableComponent } from './main-editable/main-editable.component';
+import { MainReadonlyComponent } from './main-readonly/main-readonly.component';
 
 
 
@@ -19,11 +22,14 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     MainDetailComponent,
     MainDetailReadonlyComponent,
     MainDetailEditableComponent,
+    MainEditableComponent,
+    MainReadonlyComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { MainService } from './main.service';
-import { MAINS } from './mock-mainsection';
-import { SECTIONS } from './mock-sections';
-import { LINK } from './mock-link';
+
+
 import { MainDatabaseService } from './main-database.service';
 
 describe('IllnessService', () => {
