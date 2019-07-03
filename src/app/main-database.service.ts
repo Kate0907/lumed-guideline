@@ -5,6 +5,7 @@ import { Section } from './section';
 import { Link } from './link';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { MainGroup } from './mainGroup';
 
 const httpOptions = {
    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -38,7 +39,23 @@ export class MainDatabaseService {
       );
    }
 
-   // create a new section and add to MainSectionDB, return the new section
+      /** POST create a new main section and add to MainDB, return the new main section */
+      public createMain(): Observable<MainSection> {
+         const some = new MainSection();
+         return this.http.post<MainSection>(this.guidelineUrl, some, httpOptions).pipe(
+            catchError(this.handleError<MainSection>('createNewMainSection'))
+         );
+      }
+
+   /** POST create a new maingroup and add to MainGroupDB, return the new maingroup */
+   public createMainGroup(): Observable<MainGroup> {
+      const some = new MainGroup();
+      return this.http.post<MainGroup>(this.groupUrl, some, httpOptions).pipe(
+         catchError(this.handleError<MainGroup>('createNewSection'))
+      );
+   }
+
+   /** POST:  create a new section and add to MainSectionDB, return the new section */
    public createSection(): Observable<Section> {
       const some = new Section();
       return this.http.post<Section>(this.sectionUrl, some, httpOptions).pipe(
@@ -46,9 +63,23 @@ export class MainDatabaseService {
       );
    }
 
+      /** POST: create a new link and add to LinkDB, return the new link  */
+      public createLink(): Observable<Link> {
+         const some = new Link();
+         return this.http.post<Link>(this.linkUrl, some, httpOptions).pipe(
+            catchError(this.handleError<Link>('createNewLink'))
+         );
+      }
+
    /** PUT: update the main section on the server and return a message; */
    public updateMainSection(some: MainSection): Promise<any> {
       const url = `${this.guidelineUrl}/${some.id}`;
+      return this.http.put(url, some, httpOptions).toPromise();
+   }
+
+   /** PUT: update the maingroup on the server and return a message; */
+   public updateMainGroup(some: MainGroup): Promise<any> {
+      const url = `${this.groupUrl}/${some.id}`;
       return this.http.put(url, some, httpOptions).toPromise();
    }
 
@@ -68,28 +99,16 @@ export class MainDatabaseService {
       const url = `${this.linkUrl}/${id}`;
       return this.http.delete<Link>(url, httpOptions).toPromise();
    }
+   /** DELETE: delete a maingroup from MainGroupDB */
+   public deleteMainGroupDB(id: number): Promise<MainGroup> {
+      const url = `${this.groupUrl}/${id}`;
+      return this.http.delete<MainGroup>(url, httpOptions).toPromise();
+   }
 
-   // delete section from SectionDB
+   /** DELETE: delete section from SectionDB */
    public deleteSection(id: number): Promise<Section> {
       const url = `${this.sectionUrl}/${id}`;
       return this.http.delete<Section>(url, httpOptions).toPromise();
-   }
-
-   // create a new link and add to LinkDB, return the new link
-   public createLink(): Observable<Link> {
-      const some = new Link();
-      return this.http.post<Link>(this.linkUrl, some, httpOptions).pipe(
-         catchError(this.handleError<Link>('createNewLink'))
-      );
-   }
-
-
-   public createMain(): MainSection {
-      const main = new MainSection();
-      main.id = null;
-      main.name = '';
-      return main;
-
    }
 
    /**
