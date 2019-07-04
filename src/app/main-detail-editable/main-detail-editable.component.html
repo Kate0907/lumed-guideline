@@ -23,9 +23,9 @@
       </li>
     </ul>
 
-    <ul class="mainsection" *ngIf="section.link != null">
-      <li *ngFor="let link of section.link; let linkIndex = index;">
-        <a style="text-decoration:none" routerLink="/detail/{{link.id}}">{{link.name}}</a>
+    <ul class="mainsection" *ngIf="section.main != null">
+      <li *ngFor="let main of section.main; let linkIndex = index;">
+        <a style="text-decoration:none" routerLink="/detail/{{main.id}}">{{main.name}}</a>
         <button (click)="deleteLink(sectionIndex, linkIndex)">delete link</button>
         <button (click)="linkUp(sectionIndex,linkIndex)">up</button>
         <button (click)="linkDown(sectionIndex,linkIndex)">down</button>

@@ -31,6 +31,23 @@ export class MainEditableComponent implements OnInit {
     this.mainService.getMains().subscribe(mains => this.mains = mains);
   }
 
+  public updateGroupName(maingroup: MainGroup, newname: string) {
+    this.mainService.updateGroupName(maingroup, newname);
+
+  }
+
+  public addMain(maingroup: MainGroup) {
+    this.mainService.addMain(maingroup);
+  }
+
+  public addMainGroup(maingroup: MainGroup[]){
+    this.mainService.addMainGroup(maingroup);
+  }
+
+  public deleteMain(main: MainSection, sameIndex: number, eachgroup: MainGroup) {
+    this.mainService.deleteMain(main, sameIndex, eachgroup);
+  }
+
 /**   public updateGroupName(groupIndex: number, newname: string) {
     this.mainService.updateGroupName(groupIndex, newname);
 

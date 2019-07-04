@@ -20,11 +20,8 @@ export class MainService {
   constructor(private _DB: MainDatabaseService,
     private http: HttpClient, ) { }
 
-  /** GET maingroup from the server */
-  getMainGroup(): Observable<MainGroup[]> {
-    return this.http.get<MainGroup[]>(this.mainGroupUrl)
-      .pipe(catchError(this.handleError<MainGroup[]>('getMaingroup', []))
-      );
+  public getMainGroup(): Observable<MainGroup[]> {
+    return this._DB.getMainGroup();
   }
 
   public getMains(): Observable<MainSection[]> {
@@ -34,6 +31,69 @@ export class MainService {
   public getMain(id: number): Observable<MainSection> {
     return this._DB.getMain(id);
   }
+
+  // create a new main section, add new  main section id to this main group's samemainsIds
+  public addMain(particular: MainGroup): void {
+    if (particular == null) {
+      return;
+    }
+    // create a new main section
+    const newMain = this._DB.createMain();
+    // get the new main section's id
+    newMain.subscribe(a => {
+      const id = a.id;
+      particular.samemainsIds.push(id);
+      particular.samemains.push(a);
+      this._DB.updateMainGroup(particular);
+    });
+  }
+
+  public addLink(particular: MainSection, sectionIndex: number): void {
+    if (particular.section[sectionIndex] == null) {
+      return;
+    }
+    const ms = this._DB.createMain();
+    ms.subscribe(a => {
+      const id = a.id;
+      if(particular.section[sectionIndex].mainId == null) {
+        particular.section[sectionIndex].mainId = [id];
+      }
+      else {
+        particular.section[sectionIndex].mainId.push(id);
+        particular.section[sectionIndex].main.push(a);
+        this._DB.updateSection(particular.section[sectionIndex]);
+      }
+    });
+  }
+
+/**   public addLink(particular: MainSection, sectionIndex: number): void {
+    if (particular.section[sectionIndex] == null) {
+      return;
+    }
+    // create a new link add the new link to the current section:
+    const link = this._DB.createLink();
+    // get new section's id:
+    link.subscribe(a => {
+      const id = a.id;
+      // add this id to this section's linkId
+      if (particular.section[sectionIndex].linkId == null) {
+        particular.section[sectionIndex].linkId = [id];
+      } else {
+        particular.section[sectionIndex].linkId.push(id);
+        particular.section[sectionIndex].link.push(a);
+        this._DB.updateSection(particular.section[sectionIndex]);
+        this._DB.updateMainSection(particular);
+      }
+    });
+  }*/
+
+    // create a new main group, add new  main group to current maingroup list
+    public addMainGroup(maingroup: MainGroup[]): void {
+      const newGroup = this._DB.createMainGroup();
+      newGroup.subscribe(a => { maingroup.push(a);
+      });
+    }
+
 
   // create a new section, add new section id to this main section's sectionId
   public addSection(particular: MainSection): void {
@@ -52,16 +112,20 @@ export class MainService {
     });
   }
 
+  public updateGroupName(particular: MainGroup, newname: string): void {
+    if (particular == null) {
+      return;
+    }
+    particular.name = newname;
+    this._DB.updateMainGroup(particular);
+  }
+
   public updateMainName(particular: MainSection, newname: string): void {
     if (particular == null) {
       return;
     }
     particular.name = newname;
-    const link = new Link();
-    link.id = particular.id;
-    link.name = particular.name;
     this._DB.updateMainSection(particular);
-    this._DB.updateLink(link);
   }
 
   public updateTitle(particular: MainSection, sectionIndex: number, newtitle: string): void {
@@ -77,7 +141,37 @@ export class MainService {
     this._DB.updateSection(particular.section[sectionIndex]);
   }
 
-  public deleteLink(particular: MainSection, sectionIndex: number, linkIndex: number): void {
+  public deleteMain(particular: MainSection, sameIndex: number,eachgroup: MainGroup) {
+    if (eachgroup == null) {
+      return;
+    }
+    eachgroup.samemains.splice(sameIndex, 1);
+    for (let i = 0; i < eachgroup.samemainsIds.length; i++) {
+      if (eachgroup.samemainsIds[i] === particular.id) {
+        eachgroup.samemainsIds.splice(i, 1);
+      }
+    }
+    this._DB.updateMainGroup(eachgroup);
+    this._DB.deleteMain(particular.id);
+  }
+
+    public deleteLink(particular: MainSection, sectionIndex: number, linkIndex: number): void {
+    if (particular.section[sectionIndex].mainId[linkIndex] == null) {
+      return;
+    }
+    const linkId = particular.section[sectionIndex].mainId[linkIndex];
+    particular.section[sectionIndex].main.splice(linkIndex, 1);
+    for (let i = 0; i < particular.section[sectionIndex].mainId.length; i++) {
+      if (particular.section[sectionIndex].mainId[i] === linkId) {
+        particular.section[sectionIndex].mainId.splice(i, 1);
+      }
+    }
+    this._DB.updateSection(particular.section[sectionIndex]);
+    this._DB.updateMainSection(particular);
+    this._DB.deleteMain(linkId);
+  }
+
+  /** public deleteLink(particular: MainSection, sectionIndex: number, linkIndex: number): void {
     if (particular.section[sectionIndex].linkId[linkIndex] == null) {
       return;
     }
@@ -91,7 +185,7 @@ export class MainService {
     this._DB.updateSection(particular.section[sectionIndex]);
     this._DB.updateMainSection(particular);
     this._DB.deleteLinkDB(linkId);
-  }
+  }*/
 
   public deleteSection(particular: MainSection, sectionIndex: number): void {
     const cat = particular.section[sectionIndex].id;
@@ -115,27 +209,6 @@ export class MainService {
       particular.section[sectionIndex].message.push('Please enter the message');
     }
     this._DB.updateSection(particular.section[sectionIndex]);
-  }
-
-  public addLink(particular: MainSection, sectionIndex: number): void {
-    if (particular.section[sectionIndex] == null) {
-      return;
-    }
-    // create a new link add the new link to the current section:
-    const link = this._DB.createLink();
-    // get new section's id:
-    link.subscribe(a => {
-      const id = a.id;
-      // add this id to this section's linkId
-      if (particular.section[sectionIndex].linkId == null) {
-        particular.section[sectionIndex].linkId = [id];
-      } else {
-        particular.section[sectionIndex].linkId.push(id);
-        particular.section[sectionIndex].link.push(a);
-        this._DB.updateSection(particular.section[sectionIndex]);
-        this._DB.updateMainSection(particular);
-      }
-    });
   }
 
   public updateMessage(particular: MainSection, sectionIndex: number, messageIndex: number, message: string): void {
@@ -173,41 +246,41 @@ export class MainService {
   }
 
   public linkUp(particular: MainSection, sectionIndex: number, linkIndex: number): void {
-    if (particular.section[sectionIndex] == null || particular.section[sectionIndex].linkId == null) {
+    if (particular.section[sectionIndex] == null || particular.section[sectionIndex].mainId == null) {
       return;
     }
     let SWAP: number;
     if (linkIndex !== 0) {
-      SWAP = particular.section[sectionIndex].linkId[linkIndex];
-      particular.section[sectionIndex].linkId[linkIndex] = particular.section[sectionIndex].linkId[linkIndex - 1];
-      particular.section[sectionIndex].linkId[linkIndex - 1] = SWAP;
+      SWAP = particular.section[sectionIndex].mainId[linkIndex];
+      particular.section[sectionIndex].mainId[linkIndex] = particular.section[sectionIndex].mainId[linkIndex - 1];
+      particular.section[sectionIndex].mainId[linkIndex - 1] = SWAP;
     }
 
-    let SSSS: Link;
+    let SSSS: MainSection;
     if (linkIndex !== 0) {
-      SSSS = particular.section[sectionIndex].link[linkIndex];
-      particular.section[sectionIndex].link[linkIndex] = particular.section[sectionIndex].link[linkIndex - 1];
-      particular.section[sectionIndex].link[linkIndex - 1] = SSSS;
+      SSSS = particular.section[sectionIndex].main[linkIndex];
+      particular.section[sectionIndex].main[linkIndex] = particular.section[sectionIndex].main[linkIndex - 1];
+      particular.section[sectionIndex].main[linkIndex - 1] = SSSS;
     }
     this._DB.updateSection(particular.section[sectionIndex]);
   }
 
   public linkDown(particular: MainSection, sectionIndex: number, linkIndex: number): void {
-    if (particular.section[sectionIndex] == null || particular.section[sectionIndex].linkId == null) {
+    if (particular.section[sectionIndex] == null || particular.section[sectionIndex].mainId == null) {
       return;
     }
     let SWAP: number;
-    if (linkIndex !== particular.section[sectionIndex].link.length - 1) {
-      SWAP = particular.section[sectionIndex].linkId[linkIndex];
-      particular.section[sectionIndex].linkId[linkIndex] = particular.section[sectionIndex].linkId[linkIndex + 1];
-      particular.section[sectionIndex].linkId[linkIndex + 1] = SWAP;
+    if (linkIndex !== particular.section[sectionIndex].main.length - 1) {
+      SWAP = particular.section[sectionIndex].mainId[linkIndex];
+      particular.section[sectionIndex].mainId[linkIndex] = particular.section[sectionIndex].mainId[linkIndex + 1];
+      particular.section[sectionIndex].mainId[linkIndex + 1] = SWAP;
     }
 
-    let SSSS: Link;
-    if (linkIndex !== particular.section[sectionIndex].link.length - 1) {
-      SSSS = particular.section[sectionIndex].link[linkIndex];
-      particular.section[sectionIndex].link[linkIndex] = particular.section[sectionIndex].link[linkIndex + 1];
-      particular.section[sectionIndex].link[linkIndex + 1] = SSSS;
+    let SSSS: MainSection;
+    if (linkIndex !== particular.section[sectionIndex].main.length - 1) {
+      SSSS = particular.section[sectionIndex].main[linkIndex];
+      particular.section[sectionIndex].main[linkIndex] = particular.section[sectionIndex].main[linkIndex + 1];
+      particular.section[sectionIndex].main[linkIndex + 1] = SSSS;
     }
     this._DB.updateSection(particular.section[sectionIndex]);
   }
