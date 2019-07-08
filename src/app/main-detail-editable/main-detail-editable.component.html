@@ -1,40 +1,39 @@
 <div *ngIf="main">
 
   <h2><textarea rows="1" cols="50" [(ngModel)]="main.name"></textarea>Details</h2>
-  <button (click)="updateMainName(main.name)">save title</button>
-  <button (click)="addSection()">Add a new section</button>
+  <button (click)="updateMainName(main.name)">Save Title</button>
+  <button (click)="addSection()">Add A New Section</button>
 
   <ul *ngFor="let section of main.section; let sectionIndex = index;">
     <h2 class="mainsection" *ngIf="section.title != null"><textarea rows="1" cols="50"
         [(ngModel)]="section.title"></textarea><br>
-      <button (click)="addMessage(sectionIndex)">Add a new message</button>
-      <button (click)="addLink(sectionIndex)">Add a new link</button>
-      <button (click)="updateTitle(sectionIndex, section.title)">Save</button>
-      <button (click)="deleteSection(sectionIndex)">Delete Section</button>
+      <button (click)="addMessage(sectionIndex)">Add A New Message</button>
+      <button (click)="addLink(sectionIndex)">Add A New Link</button>
+      <button (click)="updateTitle(section, section.title)">Save</button>
+      <button (click)="deleteSection(section.id)">Delete Section</button>
     </h2>
 
-    <ul class="msg" *ngIf="section.message != null">
-      <li *ngFor="let message of section.message; let messageIndex = index;">
-        <textarea rows="4" cols="60" [(ngModel)]="message"></textarea>
-        <button (click)="updateMessage(sectionIndex,messageIndex,message)">save</button>
-        <button (click)="deleteMessage(sectionIndex,messageIndex)">delete</button>
-        <button (click)="messageUp(sectionIndex,messageIndex)">up</button>
+    <ul class="msg" *ngIf="section.messages != null">
+      <li *ngFor="let message of section.messages; let messageIndex = index;">
+        <textarea rows="4" cols="60" [(ngModel)]="message.content"></textarea>
+        <button (click)="updateMessage(message,message.content)">save</button>
+        <button (click)="deleteMessage(message.id)">delete</button>
+        <button (click)="messageUp(this.main,sectionIndex,messageIndex)">up</button>
         <button (click)="messageDown(sectionIndex,messageIndex)">down</button>
       </li>
     </ul>
 
     <ul class="mainsection" *ngIf="section.main != null">
       <li *ngFor="let main of section.main; let linkIndex = index;">
+        {{main.id}}
         <a style="text-decoration:none" routerLink="/detail/{{main.id}}">{{main.name}}</a>
-        <button (click)="deleteLink(sectionIndex, linkIndex)">delete link</button>
+        <button (click)="deleteLink(main.id)">delete link</button>
         <button (click)="linkUp(sectionIndex,linkIndex)">up</button>
         <button (click)="linkDown(sectionIndex,linkIndex)">down</button>
       </li>
     </ul>
-
+  
   </ul>
   <div><span>main id: </span>{{main.id}}</div>
   <div><span>main name: </span>{{main.name}}</div>
-
-
 </div>

@@ -150,13 +150,13 @@ describe('IllnessService', () => {
   }));
 
   it('addMessage - expect add by 1', ( async () => {
-    //expect(SECTIONS[2].message.length).toBe(5);
+    expect(SECTIONS[2].message.length).toBe(5);
     expect(MAINS[1].section[0].message[5]).toBeUndefined();
     expect(MAINS[1].section[0].message.length).toBe(5);
     service.addMessage(MAINS[1], 0); {
     expect(MAINS[1].section[0].message.length).toBe(6);
     expect(MAINS[1].section[0].message[5]).toBe('Please enter the message');
-    //expect(SECTIONS[2].message.length).toBe(6);
+    expect(SECTIONS[2].message.length).toBe(6);
     }
   }));
 

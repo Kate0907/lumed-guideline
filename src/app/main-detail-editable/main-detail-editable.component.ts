@@ -3,6 +3,8 @@ import { MainSection } from '../main';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { MainService } from '../main.service';
+import { Message } from '../message';
+import { Section } from '../section';
 
 @Component({
   selector: 'app-main-detail-editable',
@@ -11,7 +13,6 @@ import { MainService } from '../main.service';
 })
 export class MainDetailEditableComponent implements OnInit {
   @Input() public main: MainSection;
-
 
   constructor(
     private route: ActivatedRoute,
@@ -26,66 +27,75 @@ export class MainDetailEditableComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
-  public getMain(): void {
+  public ngOnInit(): void { }
+
+  public async getMain(): Promise<void> {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.mainService.getMain(id)
-      .subscribe(main => {
-        this.main = main;
-      });
+    this.main = await this.mainService.getMain(id);
+    console.log(id, this.main);
   }
 
-  public addSection(): void {
-    this.mainService.addSection(this.main);
+  public async addSection(): Promise<void> {
+    await this.mainService.addSection(this.main);
+    this.getMain();
   }
 
-  public addLink(sectionIndex: number): void {
-    this.mainService.addLink(this.main, sectionIndex);
+  public async addLink(sectionIndex: number): Promise<void> {
+    await this.mainService.addLink(this.main, sectionIndex);
+    this.getMain();
+  }
+
+  public async addMessage(sectionIndex: number): Promise<void> {
+    await this.mainService.addMessage(this.main, sectionIndex);
+    this.getMain();
   }
 
   public updateMainName(newname: string): void {
     this.mainService.updateMainName(this.main, newname);
   }
 
-  public updateTitle(sectionIndex: number, newtitle: string): void {
-    this.mainService.updateTitle(this.main, sectionIndex, newtitle);
-
+  public updateTitle(section: Section, newtitle: string): void {
+    this.mainService.updateTitle(section, newtitle);
   }
 
-  public deleteMessage(sectionIndex: number, messageIndex: number): void {
-    this.mainService.deleteMessage(this.main, sectionIndex, messageIndex);
+  public async deleteMessage(mainId: number): Promise<void> {
+    await this.mainService.deleteMessage(mainId);
+    this.getMain();
   }
 
-  public deleteLink(sectionIndex: number, linkIndex: number): void {
-    this.mainService.deleteLink(this.main, sectionIndex, linkIndex);
+  public async deleteLink(mainId: number): Promise<void> {
+    await this.mainService.deleteMain(mainId);
+    this.getMain();
   }
 
-  public deleteSection(sectionIndex: number): void {
-    this.mainService.deleteSection(this.main, sectionIndex);
+  public async deleteSection(sectionId: number): Promise<void> {
+    await this.mainService.deleteSection(sectionId);
+    this.getMain();
   }
 
-  public addMessage(sectionIndex: number): void {
-    this.mainService.addMessage(this.main, sectionIndex);
+  public async updateMessage(message: Message, newContent: string): Promise<void> {
+    await this.mainService.updateMessage(message, newContent);
+    this.getMain();
   }
 
-  public updateMessage(sectionIndex: number, messageIndex: number, message: string): void {
-    this.mainService.updateMessage(this.main, sectionIndex, messageIndex, message);
+  public async messageUp(particular: MainSection, sectionIndex: number, messageIndex: number): Promise<void> {
+    await this.mainService.messageUp(particular, sectionIndex, messageIndex);
+    this.getMain();
   }
 
-  public messageUp(sectionIndex: number, messageIndex: number): void {
-    this.mainService.messageUp(this.main, sectionIndex, messageIndex);
+  public async messageDown(sectionIndex: number, messageIndex: number): Promise<void> {
+    await this.mainService.messageDown(this.main, sectionIndex, messageIndex);
+    this.getMain();
   }
 
-  public messageDown(sectionIndex: number, messageIndex: number): void {
-    this.mainService.messageDown(this.main, sectionIndex, messageIndex);
+  public async linkUp(sectionIndex: number, linkIndex: number): Promise<void> {
+    await this.mainService.linkUp(this.main, sectionIndex, linkIndex);
+    this.getMain();
   }
 
-  public linkUp(sectionIndex: number, linkIndex: number): void {
-    this.mainService.linkUp(this.main, sectionIndex, linkIndex);
-  }
-
-  public linkDown(sectionIndex: number, linkIndex: number): void {
-    this.mainService.linkDown(this.main, sectionIndex, linkIndex);
+  public async linkDown(sectionIndex: number, linkIndex: number): Promise<void> {
+    await this.mainService.linkDown(this.main, sectionIndex, linkIndex);
+    this.getMain();
   }
 
   public goBack(): void {

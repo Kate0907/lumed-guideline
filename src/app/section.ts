@@ -1,10 +1,11 @@
-import { Link } from './link';
 import { MainSection } from './main';
+import { Message } from './message';
 
 export class Section {
     id: number;
     title: string;
-    message: Array<string>;
+    messages: Array<Message>;
     main: Array<MainSection>;
     mainId: Array<number>;
+    messageId: Array<number>;
 }
