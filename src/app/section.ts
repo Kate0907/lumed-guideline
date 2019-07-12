@@ -5,7 +5,7 @@ export class Section {
     id: number;
     title: string;
     messages: Array<Message>;
-    main: Array<MainSection>;
-    mainId: Array<number>;
-    messageId: Array<number>;
+    mains: Array<MainSection>;
+    mainIds?: Array<number>;
+    messageIds?: Array<number>;
 }

@@ -25,7 +25,6 @@ export class MainDatabaseService {
    constructor(
       private http: HttpClient,
    ) { }
-   
    /** GET maingroup from the server */
    public async getMainGroup(): Promise<MainGroup[]> {
       return this.http.get<MainGroup[]>(this.groupUrl)
@@ -50,7 +49,6 @@ export class MainDatabaseService {
 
    /** POST create a new main section and add to MainDB, return the new main section */
    public createMain(): Promise<MainSection> {
-      console.log('vfghg');
       const some = new MainSection();
       const ns = this.http.post<MainSection>(this.guidelineUrl, some, httpOptions)
          .pipe(
@@ -61,39 +59,46 @@ export class MainDatabaseService {
 
    /** POST create a new maingroup and add to MainGroupDB, return the new maingroup */
    public async createMainGroup(): Promise<MainGroup> {
-      const some = new MainGroup();
-      return this.http.post<MainGroup>(this.groupUrl, some, httpOptions).pipe(
+      return this.http.post<MainGroup>(this.groupUrl, httpOptions).pipe(
          catchError(this.handleError<MainGroup>('createNewSection'))
       ).toPromise();
    }
 
-   /** POST:  create a new section and add to MainSectionDB, return the new section */
+   /** POST:  create a new section and add to MainSectionDB, return the new section 
    public async createSection(): Promise<Section> {
-      const some = new Section();
-      return this.http.post<Section>(this.sectionUrl, some, httpOptions).pipe(
+      return this.http.post<Section>(this.sectionUrl, httpOptions).pipe(
          catchError(this.handleError<Section>('createNewSection'))
       ).toPromise();
-   }
+   }*/
 
-   /** POST: create a new link and add to LinkDB, return the new link  */
+   /** POST: create a new link and add to LinkDB, return the new link  
    public async createLink(): Promise<Link> {
-      const some = new Link();
-      return this.http.post<Link>(this.linkUrl, some, httpOptions).pipe(
+      return this.http.post<Link>(this.linkUrl, httpOptions).pipe(
          catchError(this.handleError<Link>('createNewLink'))
       ).toPromise();
+   }*/
+
+
+   /** POST: create a new main section and add to current section */
+   public createMainToSection(sectionId: number): Promise<any> {
+      const url = `${this.guidelineUrl}/${sectionId}`;
+      return this.http.post(url,  httpOptions).toPromise();
    }
 
-   /** POST: create a new link and add to LinkDB, return the new link  */
-   public async createMessage(): Promise<Message> {
-      const some = new Message();
-      return this.http.post<Message>(this.messageUrl, some, httpOptions).pipe(
-         catchError(this.handleError<Message>('createNewMessage'))
-      ).toPromise();
+   /** POST: create a new message and add to current section; */
+   public createMessageToSection(sectionId: number): Promise<any> {
+      const url = `${this.messageUrl}/${sectionId}`;
+      return this.http.post(url, httpOptions).toPromise();
+   }
+
+   /** POST: create a new section to current main section; */
+   public createSectionToMain(main: MainSection): Promise<any> {
+      const url = `${this.sectionUrl}`;
+      return this.http.post(url, main, httpOptions).toPromise();
    }
 
    /** PUT: update the main section on the server and return a message; */
    public async updateMainSection(some: MainSection): Promise<any> {
-      console.log('gggggg');
       const url = `${this.guidelineUrl}/${some.id}`;
       return this.http.put(url, some, httpOptions).toPromise();
    }
@@ -104,26 +109,9 @@ export class MainDatabaseService {
       return this.http.put(url, some, httpOptions).toPromise();
    }
 
-   /** POST: add a main section to current maingroup on the server; */
+   /** POST: add a main section to current maingroup ; */
    public updateMainToGroup(particular: MainGroup, some: MainSection): Promise<any> {
       const url = `${this.groupUrl}/${particular.id}`;
-      return this.http.post(url, some, httpOptions).toPromise();
-   }
-
-   /** POST: add a link of main section to current section; */
-   public updateMainToSection(sectionId: number, some: MainSection): Promise<any> {
-      const url = `${this.sectionUrl}/${sectionId}`;
-      return this.http.post(url, some, httpOptions).toPromise();
-   }
-   /** POST: add a new message to current section; */
-   public updateMessageToSection(sectionId: number, some: Message): Promise<any> {
-      const url = `${this.messageUrl}/${sectionId}`;
-      return this.http.post(url, some, httpOptions).toPromise();
-   }
-
-   /** POST: add a new section to current main section; */
-   public updateSectionToMain(mainId: number, some: Section): Promise<any> {
-      const url = `${this.guidelineUrl}/${mainId}`;
       return this.http.post(url, some, httpOptions).toPromise();
    }
 
@@ -133,22 +121,12 @@ export class MainDatabaseService {
       return this.http.put(url, some, httpOptions).toPromise();
    }
 
-   /** PUT: update the link on the server and return a message */
-   public async updateLink(some: Link): Promise<any> {
-      const url = `${this.linkUrl}/${some.id}`;
-      return this.http.put(url, some, httpOptions).toPromise();
-   }
-
-   /** PUT: update the link on the server and return a message */
+   /** PUT: update the message on the server and return a message */
    public async updateMessage(some: Message): Promise<any> {
       const url = `${this.messageUrl}/${some.id}`;
       return this.http.put(url, some, httpOptions).toPromise();
    }
-   /** DELETE: delete link from LinkDB */
-   public async deleteLinkDB(id: number): Promise<Link> {
-      const url = `${this.linkUrl}/${id}`;
-      return this.http.delete<Link>(url, httpOptions).toPromise();
-   }
+
    /** DELETE: delete a main section from MainSectionDB */
    public deleteMain(id: number): Promise<MainSection> {
       const url = `${this.guidelineUrl}/${id}`;
@@ -167,7 +145,7 @@ export class MainDatabaseService {
       return this.http.delete<Section>(url, httpOptions).toPromise();
    }
 
-   /** DELETE: delete section from SectionDB */
+   /** DELETE: delete message from MessageDB */
    public async deleteMessage(id: number): Promise<Message> {
       const url = `${this.messageUrl}/${id}`;
       return this.http.delete<Message>(url, httpOptions).toPromise();
