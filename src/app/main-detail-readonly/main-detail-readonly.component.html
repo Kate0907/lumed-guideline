@@ -1,16 +1,16 @@
 <div>
   <h2>{{main.name | uppercase}} Details</h2>
 
-  <ul *ngFor="let section of main.section">
+  <ul *ngFor="let section of main.sections">
     <h2 class="mainsection" *ngIf="section.title != null">{{section.title}}</h2>
 
     <ul class="msg" *ngIf="section.messages != null">
       <li *ngFor="let message of section.messages">{{message.content}}</li>
     </ul>
 
-    <ul class="mainsection" *ngIf="section.main != null">
-      <li *ngFor="let link of section.main">
-        <a style="text-decoration:none" routerLink="/detail/{{link.id}}">{{link.name}}</a>
+    <ul class="mainsection" *ngIf="section.mains != null">
+      <li *ngFor="let main of section.mains">
+        <a style="text-decoration:none" routerLink="/detail/{{main.id}}">{{main.name}}</a>
       </li>
     </ul>
   </ul>

@@ -3,6 +3,6 @@ import { Section } from './section';
 export class MainSection {
     id: number;
     name: string;
-    section: Array<Section>;
-    sectionId: Array<number>;
+    sections: Array<Section>;
+    sectionIds?: Array<number>;
 }

@@ -35,28 +35,26 @@ export class MainService {
   }
 
   public async addLink(particular: MainSection, sectionIndex: number): Promise<void> {
-    if (particular.section[sectionIndex] == null) {
+    if (particular.sections[sectionIndex] == null) {
       return;
     }
-    const sectionId = particular.section[sectionIndex].id;
-    const ms = await this._DB.createMain();
-    await this._DB.updateMainToSection(sectionId, ms);
+    const sectionId = particular.sections[sectionIndex].id;
+    await this._DB.createMainToSection(sectionId);
   }
 
 
   public async addMessage(particular: MainSection, sectionIndex: number): Promise<void> {
-    if (particular.section[sectionIndex] == null) {
+    if (particular.sections[sectionIndex] == null) {
       return;
     }
-    const sectionId = particular.section[sectionIndex].id;
-    const ms = await this._DB.createMessage();
-    await this._DB.updateMessageToSection(sectionId, ms);
+    const sectionId = particular.sections[sectionIndex].id;
+    // const ms = await this._DB.createMessage();
+    await this._DB.createMessageToSection(sectionId);
   }
 
   // create a new main group, add new  main group to current maingroup list
   public async addMainGroup(): Promise<void> {
     await this._DB.createMainGroup();
-    await this._DB.getMainGroup();
   }
 
   // create a new section, add new section id to this main section's sectionId
@@ -64,8 +62,7 @@ export class MainService {
     if (particular == null) {
       return;
     }
-    const newSection = await this._DB.createSection();
-    await this._DB.updateSectionToMain(particular.id, newSection);
+    await this._DB.createSectionToMain(particular);
   }
 
   public updateGroupName(particular: MainGroup, newname: string): void {
@@ -117,55 +114,55 @@ export class MainService {
   }
 
   public async messageUp(particular: MainSection, sectionIndex: number, messageIndex: number): Promise<void> {
-    if (particular.section[sectionIndex] == null || messageIndex == null) {
+    if (particular.sections[sectionIndex] == null || messageIndex == null) {
       return;
     }
     let swap: number;
     if (messageIndex > 0) {
-      swap = particular.section[sectionIndex].messageId[messageIndex];
-      particular.section[sectionIndex].messageId[messageIndex] = particular.section[sectionIndex].messageId[messageIndex - 1];
-      particular.section[sectionIndex].messageId[messageIndex - 1] = swap;
+      swap = particular.sections[sectionIndex].messageIds[messageIndex];
+      particular.sections[sectionIndex].messageIds[messageIndex] = particular.sections[sectionIndex].messageIds[messageIndex - 1];
+      particular.sections[sectionIndex].messageIds[messageIndex - 1] = swap;
     }
-    await this._DB.updateSection(particular.section[sectionIndex]);
+    await this._DB.updateSection(particular.sections[sectionIndex]);
   }
 
   public async messageDown(particular: MainSection, sectionIndex: number, messageIndex: number): Promise<void> {
-    if (particular.section[sectionIndex] == null || messageIndex == null) {
+    if (particular.sections[sectionIndex] == null || messageIndex == null) {
       return;
     }
     let swap: number;
-    if (messageIndex < particular.section[sectionIndex].messageId.length) {
-      swap = particular.section[sectionIndex].messageId[messageIndex];
-      particular.section[sectionIndex].messageId[messageIndex] = particular.section[sectionIndex].messageId[messageIndex + 1];
-      particular.section[sectionIndex].messageId[messageIndex + 1] = swap;
+    if (messageIndex < particular.sections[sectionIndex].messageIds.length) {
+      swap = particular.sections[sectionIndex].messageIds[messageIndex];
+      particular.sections[sectionIndex].messageIds[messageIndex] = particular.sections[sectionIndex].messageIds[messageIndex + 1];
+      particular.sections[sectionIndex].messageIds[messageIndex + 1] = swap;
     }
-    await this._DB.updateSection(particular.section[sectionIndex]);
+    await this._DB.updateSection(particular.sections[sectionIndex]);
   }
 
   public async linkUp(particular: MainSection, sectionIndex: number, linkIndex: number): Promise<void> {
-    if (particular.section[sectionIndex] == null || particular.section[sectionIndex].mainId == null) {
+    if (particular.sections[sectionIndex] == null || particular.sections[sectionIndex].mainIds == null) {
       return;
     }
     let SWAP: number;
     if (linkIndex !== 0) {
-      SWAP = particular.section[sectionIndex].mainId[linkIndex];
-      particular.section[sectionIndex].mainId[linkIndex] = particular.section[sectionIndex].mainId[linkIndex - 1];
-      particular.section[sectionIndex].mainId[linkIndex - 1] = SWAP;
+      SWAP = particular.sections[sectionIndex].mainIds[linkIndex];
+      particular.sections[sectionIndex].mainIds[linkIndex] = particular.sections[sectionIndex].mainIds[linkIndex - 1];
+      particular.sections[sectionIndex].mainIds[linkIndex - 1] = SWAP;
     }
-    await this._DB.updateSection(particular.section[sectionIndex]);
+    await this._DB.updateSection(particular.sections[sectionIndex]);
   }
 
   public async linkDown(particular: MainSection, sectionIndex: number, linkIndex: number): Promise<void> {
-    if (particular.section[sectionIndex] == null || particular.section[sectionIndex].mainId == null) {
+    if (particular.sections[sectionIndex] == null || particular.sections[sectionIndex].mainIds == null) {
       return;
     }
     let SWAP: number;
-    if (linkIndex < particular.section[sectionIndex].main.length) {
-      SWAP = particular.section[sectionIndex].mainId[linkIndex];
-      particular.section[sectionIndex].mainId[linkIndex] = particular.section[sectionIndex].mainId[linkIndex + 1];
-      particular.section[sectionIndex].mainId[linkIndex + 1] = SWAP;
+    if (linkIndex < particular.sections[sectionIndex].mains.length) {
+      SWAP = particular.sections[sectionIndex].mainIds[linkIndex];
+      particular.sections[sectionIndex].mainIds[linkIndex] = particular.sections[sectionIndex].mainIds[linkIndex + 1];
+      particular.sections[sectionIndex].mainIds[linkIndex + 1] = SWAP;
     }
-    await this._DB.updateSection(particular.section[sectionIndex]);
+    await this._DB.updateSection(particular.sections[sectionIndex]);
   }
 
   /**

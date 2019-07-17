@@ -19,7 +19,6 @@ export class MainDetailReadonlyComponent implements OnInit {
     private router: Router,
     private mainService: MainService,
     private location: Location) {
-    console.log(this)
     this.router.events.subscribe(navigation => {
       console.log(navigation);
       if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
