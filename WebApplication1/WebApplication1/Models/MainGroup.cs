@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,24 +9,24 @@ namespace Guideline.Models
     {
         public int id { get; set; }
         public string name { get; set; }
-        public List<MainSection> samemains
+/*        public List<Item> samemains
         {
             get
             {
-                var newList = new List<MainSection>();
+                var newList = new List<Item>();
                 foreach(var id in samemainsIds ?? new List<int>())
                 {
-                    foreach(var main in MainDb.MAINS)
+                    foreach(var item in ItemDb.ITEMS)
                     {
-                        if (main.id == id)
+                        if (item.id == id)
                         {
-                            newList.Add(main);
+                            newList.Add(item);
                         }
                     }
                 }
                 return newList;
             }
-        }
+        }*/
         public List<int> samemainsIds { get; set; } = new List<int>();
     }
 }

@@ -1,8 +1,8 @@
-import { MainSection } from './main';
+
+import { Item } from './item';
 
 export class MainGroup {
     id: number;
     name: string;
-    samemains: Array <MainSection>;
     samemainsIds?: Array <number>;
 }

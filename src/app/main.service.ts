@@ -5,6 +5,8 @@ import { MainDatabaseService } from './main-database.service';
 import { MainGroup } from './mainGroup';
 import { Section } from './section';
 import { Message } from './message';
+import { Item } from './item';
+import { ItemType } from './ItemType';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +18,11 @@ export class MainService {
     return this._DB.getMainGroup();
   }
 
-  public getMains(): Promise<MainSection[]> {
+  public getMains(): Promise<Item[]> {
     return this._DB.getMains();
   }
 
-  public getMain(id: number): Promise<MainSection> {
+  public getMain(id: number): Promise<Item> {
     return this._DB.getMain(id);
   }
 
@@ -34,22 +36,17 @@ export class MainService {
     return newMain;
   }
 
-  public async addLink(particular: MainSection, sectionIndex: number): Promise<void> {
-    if (particular.sections[sectionIndex] == null) {
-      return;
-    }
-    const sectionId = particular.sections[sectionIndex].id;
-    await this._DB.createMainToSection(sectionId);
+  public async addLink(id: number, type: ItemType): Promise<void> {
+    await this._DB.createItemToChildren(id, type);
   }
 
+  public async addMessage(id: number, type: ItemType): Promise<void> {
+    await this._DB.createItemToChildren(id, type);
+  }
 
-  public async addMessage(particular: MainSection, sectionIndex: number): Promise<void> {
-    if (particular.sections[sectionIndex] == null) {
-      return;
-    }
-    const sectionId = particular.sections[sectionIndex].id;
-    // const ms = await this._DB.createMessage();
-    await this._DB.createMessageToSection(sectionId);
+   // create a new section, add new section id to this main section's sectionId
+   public async addSection(id: number, type: ItemType): Promise<void> {
+    await this._DB.createItemToChildren(id, type);
   }
 
   // create a new main group, add new  main group to current maingroup list
@@ -57,44 +54,24 @@ export class MainService {
     await this._DB.createMainGroup();
   }
 
-  // create a new section, add new section id to this main section's sectionId
-  public async addSection(particular: MainSection): Promise<void> {
-    if (particular == null) {
-      return;
-    }
-    await this._DB.createSectionToMain(particular);
-  }
-
-  public updateGroupName(particular: MainGroup, newname: string): void {
+  public async updateGroupName(particular: MainGroup, newname: string): Promise<void> {
     if (particular == null) {
       return;
     }
     particular.name = newname;
-    this._DB.updateMainGroup(particular);
+    await this._DB.updateMainGroup(particular);
   }
 
-  public updateMainName(particular: MainSection, newname: string): void {
-    if (particular == null) {
-      return;
-    }
-    particular.name = newname;
-    this._DB.updateMainSection(particular);
+  public async updateMainName(some: Item): Promise<void> {
+    await this._DB.updateItemName(some);
   }
 
-  public async updateMessage(particular: Message, newcontent: string): Promise<void> {
-    if (particular == null) {
-      return;
-    }
-    particular.content = newcontent;
-    await this._DB.updateMessage(particular);
+  public async updateMessage(some: Item): Promise<void> {
+    await this._DB.updateItemName(some);
   }
 
-  public async updateTitle(particular: Section, newtitle: string): Promise<void> {
-    if (particular == null) {
-      return;
-    }
-    particular.title = newtitle;
-    await this._DB.updateSection(particular);
+  public async updateTitle(some: Item): Promise<void> {
+    await this._DB.updateItemName(some);
   }
 
   public async deleteMessage(mainId: number) {

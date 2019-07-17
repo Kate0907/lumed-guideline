@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MainSection } from '../main';
 import { MainGroup } from '../mainGroup';
 import { MainService } from '../main.service';
+import { Item } from '../item';
 
 @Component({
   selector: 'app-main-readonly',
@@ -9,7 +10,7 @@ import { MainService } from '../main.service';
   styleUrls: ['./main-readonly.component.css']
 })
 export class MainReadonlyComponent implements OnInit {
-  @Input() public mains: MainSection[];
+  @Input() public mains: Item[];
   @Input() public maingroup: MainGroup[];
 
   constructor(
@@ -26,6 +27,10 @@ export class MainReadonlyComponent implements OnInit {
   }
 
   public async getMains(): Promise<void> {
-    this. mains = await this.mainService.getMains();
+    this.mains = await this.mainService.getMains();
+  }
+
+  public getMainById(id: number): Item {
+    return this.mains.find(main => main.id === id);
   }
 }

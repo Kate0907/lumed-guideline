@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,7 +9,7 @@ namespace Guideline.Models
     {
         public static List<Section> SECTIONS { get; set; } = new List<Section>
         {
-            new Section { id = 0, title = "Key Messages", mainIds =new List<int> {},  messageIds = new List<int> {0,1,2,3}},
+            new Section { id = 0, title = "Key Messages", mainIds =new List<int> {},  messageIds = new List<int> {100,101,2,3} },
             new Section { id = 1, title = "Type of Reaction to Penicillin",mainIds = new List<int>{6,7,8,9,10}, messageIds = new List<int> {4}},
             new Section { id = 2, title = "Key Messages",mainIds =new List<int> {11,12,13,14}, messageIds = new List<int> {5,6}},
             new Section { id = 3, title = "Key Messages", mainIds = new List<int>{},messageIds = new List<int> {7}},

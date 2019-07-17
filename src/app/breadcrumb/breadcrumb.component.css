@@ -1,5 +1,5 @@
 ol.breadcrumb {
-    padding: 10px 16px;
+    padding: 4px 4px;
     list-style: none;
     background-color: #eee;
   }
@@ -7,7 +7,7 @@ ol.breadcrumb {
   /* Display list items side by side */
   ol.breadcrumb li {
     display: inline;
-    font-size: 18px;
+    font-size: 10px;
   }
   
   /* Add a slash symbol (/) before/behind each list item */

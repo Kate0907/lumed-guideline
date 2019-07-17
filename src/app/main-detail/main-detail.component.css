@@ -1,90 +1,118 @@
 /* illness detail Component's private CSS styles */
-span{
+span {
   display: block;
 }
+
 .selected {
-    background-color: #CFD8DC !important;
-    color: white;
-  }
-  
-  .mainsection {
-    margin: 0 0 2em 0;
+  background-color: #CFD8DC !important;
+  color: white;
+}
+
+.mainsection {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 20em;
+
+}
+
+.msg {
+  margin: 0 0 0 0;
+  list-style-type: none;
+  padding: 0;
+  width: 20em;
+  border-color: #dfdfdf;
+  border-style: solid;
+  border-width: 1px 0 0 0;
+  /*margin: 0 0 2em 0;
     list-style-type: none;
     padding: 0;
-    width: 20em;
-    
-  }
+    width: 40em;  */
+}
 
-  .msg {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 40em;  
-  }
+.msg li {
 
-  .msg li {
-    
-    position: relative;
+  background: #fff;
+  border-color: #dfdfdf;
+  border-style: solid;
+  border-width: 1px 0 0 0;
+  height: 1.6em;
+  padding: .3em 0;
+  /**padding-left: 0.5rem;*/
+  font-weight: 300;
+  margin: 0.4em;
+  width: 20em;
+
+  /*position: relative;
     left: 0;
     background-color: #EEE;
     margin: .5em;
     padding: .3em 0;
     height: 4.1em;
-    border-radius: 4px;
-    
-  }
+    border-radius: 4px;*/
 
-  .msg li:hover {
-    color: #607D8B;
-    background-color: rgb(235, 191, 191);
-    left: .1em;
-  }
-  .mainsection li {
-    cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
-    height: 1.6em;
-    border-radius: 4px;
-    width: 27em; 
+}
 
-  }
+.msg li:hover {
+  color: #607D8B;
+  background-color: rgb(235, 191, 191);
+  left: .1em;
+}
 
-  .mainsection li.selected:hover {
-    background-color: #BBD8DC !important;
-    color: white;
-  }
-  .mainsection li:hover {
-    color: #607D8B;
-    background-color: rgb(235, 191, 191);
-    left: .1em;
-  }
-  .mainsection .text {
-    position: relative;
-    top: -3px;
-  }
-  .mainsection .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #607D8B;
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
-  }
-  h2.mainsection {
-    background-color: mistyrose ;
-    margin: .5em;
-    padding: .3em ;
-    height: 1.6em;
-    width: 20em;
-    border-radius: 4px;
-    
+.mainsection li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+  width: 27em;
+
+}
+
+.mainsection li.selected:hover {
+  background-color: #BBD8DC !important;
+  color: white;
+}
+
+.mainsection li:hover {
+  color: #607D8B;
+  background-color: rgb(235, 191, 191);
+  left: .1em;
+}
+
+.mainsection .text {
+  position: relative;
+  top: -3px;
+}
+
+.mainsection .badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #607D8B;
+  line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -4px;
+  height: 1.8em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
+
+h2.mainsection {
+  background-color: mistyrose;
+  margin: .5em;
+  padding: .3em;
+  height: 1.6em;
+  width: 20em;
+  border-radius: 4px;
+
+}
+
+.checkbox {
+  font: 8px arial, sans-serif;
 }
