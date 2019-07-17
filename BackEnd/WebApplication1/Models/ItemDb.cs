@@ -31,14 +31,14 @@ namespace Guideline.Models
             new Item { id = 19, name = "The Butterfly", childrenIds = new List<int>{22}, type = ItemType.Link},
 
             new Item { id = 20, name = "Key Messages", childrenIds = new List<int> {40,41,42,43}, type = ItemType.Link },
-            new Item { id = 21, name = "Type of Reaction to Penicillin",childrenIds = new List<int>{6,7,8,9,10,44}, type = ItemType.Link},
+            new Item { id = 21, name = "Type of Reaction to Penicillin",childrenIds = new List<int>{16,17,18,19,40,44}, type = ItemType.Link},
             new Item { id = 22, name = "Key Messages",childrenIds = new List<int> {11,12,13,14,45,46}, type = ItemType.Link},
-            new Item { id = 23, name = "Key Messages", childrenIds = new List<int> {47}, type = ItemType.Link},
+            new Item { id = 23, name = "Key Messages", childrenIds = new List<int> {10,11,47}, type = ItemType.Link},
             new Item { id = 24, name = "Test",childrenIds = null, type = ItemType.Link},
-            new Item { id = 25, name = "Management",childrenIds = new List<int>{15,49}, type = ItemType.Link},
+            new Item { id = 25, name = "Management",childrenIds = new List<int>{13,15,49}, type = ItemType.Link},
             new Item { id = 26, name = "Proceed With Administering", childrenIds = new List<int> {16,50}, type = ItemType.Link },
-            new Item { id = 27, name = "Most likely organisms",childrenIds = new List<int> {20,21,22,44,45,48}, type = ItemType.Link},
-            new Item { id = 28, name = "IV", childrenIds = new List<int>{17,15}, type = ItemType.Link},
+            new Item { id = 27, name = "Most likely organisms",childrenIds = new List<int> {11,12,13,44,45,48}, type = ItemType.Link},
+            new Item { id = 28, name = "IV", childrenIds = new List<int>{17,15,46}, type = ItemType.Link},
             new Item { id = 29, name = "Severe Penicillin Allergy",childrenIds = new List<int>{17,15,42,49}, type = ItemType.Link},
             new Item { id = 30, name = "Oral Stepdown",childrenIds = new List<int> {17,18,19,50}, type = ItemType.Link},
 
@@ -54,11 +54,11 @@ namespace Guideline.Models
             new Item { id = 49, name = "Lion And The Mouse – This story explains the proverb “Small acts of kindness will be rewarded greatly” and how anyone regardless of their size and appearance, can make a major impact in certain situations. This tale can teach your child to appreciate others and create a helping tendency in their minds.", type = ItemType.Message},
             new Item { id = 50, name = "Hare And The Tortoise – Everyone is aware about this story where the hare is defeated by the tortoise in a race proving the proverb “Slow and steady wins the race”. But the story doesn’t end there as they eventually have another race! And it consists of a number of morals your child should learn about.", type = ItemType.Message},
 
-            new Item { id = 61, name = "Stories for 0-2 years", childrenIds = new List<int> {0} , type = ItemType.Link},
-            new Item { id = 62, name = "Stories for 3-6 years", childrenIds = new List<int>{1}, type = ItemType.Link},
-            new Item { id = 63, name = "Stories for 7-10 years", childrenIds = new List<int>{2}, type = ItemType.Link},
-            new Item { id = 64, name = "Stories for 11-16 years", childrenIds = new List<int>{3, 4, 5}, type = ItemType.Link},
-            new Item { id = 65, name = "test", childrenIds = null}
+            new Item { id = 61, name = "Stories for 0-2 years", childrenIds = new List<int> {0,1} , type = ItemType.Group},
+            new Item { id = 62, name = "Stories for 3-6 years", childrenIds = new List<int>{2,3}, type = ItemType.Group},
+            new Item { id = 63, name = "Stories for 7-10 years", childrenIds = new List<int>{4,5,6}, type = ItemType.Group},
+            new Item { id = 64, name = "Stories for 11-16 years", childrenIds = new List<int>{7,8,9}, type = ItemType.Group},
+            new Item { id = 65, name = "test", childrenIds = null,type = ItemType.Group}
     };
 
     public static int LastId = 70;

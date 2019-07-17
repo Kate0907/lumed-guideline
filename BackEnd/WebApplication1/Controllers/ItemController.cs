@@ -28,13 +28,7 @@ namespace Guideline.Controllers
       return service.Get(id);
     }
 
-    // POST api/<controller>
-    public Item Post(MainSection item)
-    {
-      return service.Post();
-    }
-
-    public HttpResponseMessage Post(int id, ItemType type)
+    public HttpResponseMessage Post(int id, [FromBody]ItemType type)
     {
       if (ModelState.IsValid)
       {

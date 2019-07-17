@@ -6,7 +6,6 @@ import { Section } from './section';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MainGroup } from './mainGroup';
-import { Message } from './message';
 import { ItemType } from './ItemType';
 
 const httpOptions = {
@@ -90,7 +89,7 @@ export class MainDatabaseService {
    /** POST: create a new item and add to item's (id = sectionId) childrenIds */
    public createItemToChildren(itemId: number, type: ItemType): Promise<any> {
       const url = `${this.itemUrl}/${itemId}`;
-      return this.http.post(url,  httpOptions).toPromise();
+      return this.http.post(url, type,  httpOptions).toPromise();
    }
 
    /** POST: create a new message and add to current section; */
@@ -106,13 +105,13 @@ export class MainDatabaseService {
    }
 
    /** PUT: update the main section on the server and return a message; */
-   public async updateItemName(some: Item ): Promise<any> {
+   public updateItemName(some: Item ): Promise<any> {
       const url = `${this.itemUrl}/${some.id}`;
       return this.http.put(url, some, httpOptions).toPromise();
    }
 
    /** PUT: update the maingroup on the server and return a message; */
-   public async updateMainGroup(some: MainGroup): Promise<any> {
+   public updateMainGroup(some: MainGroup): Promise<any> {
       const url = `${this.groupUrl}/${some.id}`;
       return this.http.put(url, some, httpOptions).toPromise();
    }
@@ -124,14 +123,14 @@ export class MainDatabaseService {
    }
 
    /** PUT: update the section on the server and return a message */
-   public async updateSection(some: Section): Promise<any> {
-      const url = `${this.sectionUrl}/${some.id}`;
+   public updateSection(some: Item): Promise<any> {
+      const url = `${this.itemUrl}/${some.id}`;
       return this.http.put(url, some, httpOptions).toPromise();
    }
 
    /** PUT: update the message on the server and return a message */
-   public async updateMessage(some: Message): Promise<any> {
-      const url = `${this.messageUrl}/${some.id}`;
+   public updateMessage(some: Item): Promise<any> {
+      const url = `${this.itemUrl}/${some.id}`;
       return this.http.put(url, some, httpOptions).toPromise();
    }
 
@@ -148,15 +147,15 @@ export class MainDatabaseService {
    }
 
    /** DELETE: delete section from SectionDB */
-   public async deleteSection(id: number): Promise<Section> {
-      const url = `${this.sectionUrl}/${id}`;
-      return this.http.delete<Section>(url, httpOptions).toPromise();
+   public async deleteSection(id: number): Promise<Item> {
+      const url = `${this.itemUrl}/${id}`;
+      return this.http.delete<Item>(url, httpOptions).toPromise();
    }
 
    /** DELETE: delete message from MessageDB */
-   public async deleteMessage(id: number): Promise<Message> {
-      const url = `${this.messageUrl}/${id}`;
-      return this.http.delete<Message>(url, httpOptions).toPromise();
+   public async deleteMessage(id: number): Promise<Item> {
+      const url = `${this.itemUrl}/${id}`;
+      return this.http.delete<Item>(url, httpOptions).toPromise();
    }
 
    /**

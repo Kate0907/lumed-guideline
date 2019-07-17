@@ -142,15 +142,12 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\MainGroupController.cs" />
     <Compile Include="Controllers\SectionController.cs" />
-    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemDb.cs" />
-    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\MainGroupDb.cs" />
-    <Compile Include="Models\MessageDb.cs" />
     <Compile Include="Models\SectionDb.cs" />
     <Compile Include="Models\MainDb.cs" />
     <Compile Include="Models\Section.cs" />
@@ -161,7 +158,6 @@
     <Compile Include="Services\ItemService.cs" />
     <Compile Include="Services\GuidelineService.cs" />
     <Compile Include="Services\MainGroupService.cs" />
-    <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\SectionService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -221,7 +217,7 @@
     </ItemGroup>
     <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
     <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
-</Target>
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

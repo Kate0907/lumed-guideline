@@ -3,8 +3,6 @@ import { MainSection } from '../main';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { MainService } from '../main.service';
-import { Message } from '../message';
-import { Section } from '../section';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
 
@@ -54,19 +52,22 @@ export class MainDetailEditableComponent implements OnInit {
   public async addSection(): Promise<void> {
     const type = this.itemType.Link;
     await this.mainService.addSection(this.main.id, type);
-    this.getMain();
+    await this.getMains();
+    await this.getMain();
   }
 
   public async addLink(id: number): Promise<void> {
     const type = this.itemType.Link;
     await this.mainService.addLink(id, type);
-    this.getMain();
+    await this.getMains();
+    await this.getMain();
   }
 
   public async addMessage(id: number): Promise<void> {
     const type = this.itemType.Message;
     await this.mainService.addMessage(id, type);
-    this.getMain();
+    await this.getMains();
+    await this.getMain();
   }
 
   public async updateMainName(some: Item): Promise<void> {
@@ -81,46 +82,40 @@ export class MainDetailEditableComponent implements OnInit {
 
   public async updateMessage(some: Item): Promise<void> {
     await this.mainService.updateMessage(some);
-    this.getMains();
+    await this.getMains();
+    await this.getMain();
   }
 
   public async deleteMessage(mainId: number): Promise<void> {
     await this.mainService.deleteMessage(mainId);
-    this.getMain();
+    await this.getMains();
+    await this.getMain();
   }
 
   public async deleteLink(mainId: number): Promise<void> {
     await this.mainService.deleteMain(mainId);
-    this.getMain();
+    await this.getMains();
+    await this.getMain();
   }
 
   public async deleteSection(sectionId: number): Promise<void> {
     await this.mainService.deleteSection(sectionId);
-    this.getMain();
+    await this.getMains();
+    await this.getMain();
   }
 
-
-  /**
-    public async messageUp(particular: MainSection, sectionIndex: number, messageIndex: number): Promise<void> {
-      await this.mainService.messageUp(particular, sectionIndex, messageIndex);
+    public async messageUp(sectionId: number, messageIndex: number): Promise<void> {
+      const section = this.getMainById(sectionId);
+      await this.mainService.messageUp(section, messageIndex);
       this.getMain();
     }
   
-    public async messageDown(sectionIndex: number, messageIndex: number): Promise<void> {
-      await this.mainService.messageDown(this.main, sectionIndex, messageIndex);
+    public async messageDown(sectionId: number, messageIndex: number): Promise<void> {
+      const section = this.getMainById(sectionId);
+      await this.mainService.messageDown(section, messageIndex);
       this.getMain();
     }
   
-    public async linkUp(sectionIndex: number, linkIndex: number): Promise<void> {
-      await this.mainService.linkUp(this.main, sectionIndex, linkIndex);
-      this.getMain();
-    }
-  
-     public async linkDown(sectionIndex: number, linkIndex: number): Promise<void> {
-      await this.mainService.linkDown(this.main, sectionIndex, linkIndex);
-      this.getMain();
-    }*/
-
   public goBack(): void {
     this.location.back();
   }
