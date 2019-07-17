@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MainSection } from '../main';
 import { MainGroup } from '../mainGroup';
 import { MainService } from '../main.service';
+import { Item } from '../item';
 
 @Component({
   selector: 'app-main-editable',
@@ -9,7 +10,7 @@ import { MainService } from '../main.service';
   styleUrls: ['./main-editable.component.css']
 })
 export class MainEditableComponent implements OnInit {
-  @Input() public mains: MainSection[];
+  @Input() public mains: Item[];
   @Input() public maingroup: MainGroup[];
 
   constructor(
@@ -19,6 +20,10 @@ export class MainEditableComponent implements OnInit {
   public ngOnInit() {
     this.getMains();
     this.getMainGroup();
+  }
+
+  public getMain(id: number): Item {
+    return this.mains.find(main => main.id === id);
   }
 
   public async getMainGroup(): Promise<void> {

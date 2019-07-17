@@ -1,0 +1,22 @@
+
+
+/**.root {
+    margin: auto;
+    cursor: pointer;
+    position: relative;
+    left: 40em;
+    background-color: #EEE;
+    
+    padding: .3em 0;
+    height: 1.6em;
+    border-radius: 4px;
+    width: 40em;
+  }*/
+
+ .root {
+    margin: auto;
+    width: 30%;
+    border: 1px solid #666;
+    padding: 10px;
+  }
+

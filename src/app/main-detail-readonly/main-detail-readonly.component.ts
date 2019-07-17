@@ -3,6 +3,8 @@ import { MainSection } from '../main';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { MainService } from '../main.service';
+import { Item } from '../item';
+import { ItemType } from '../ItemType';
 
 
 
@@ -12,7 +14,10 @@ import { MainService } from '../main.service';
   styleUrls: ['./main-detail-readonly.component.css']
 })
 export class MainDetailReadonlyComponent implements OnInit {
-  @Input() public main: MainSection;
+  @Input() public main: Item;
+  @Input() public mains: Item[];
+
+  public readonly itemType = ItemType;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,11 +33,21 @@ export class MainDetailReadonlyComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.getMains();
   }
+
   public async getMain(): Promise<void> {
     const id = +this.route.snapshot.paramMap.get('id');
     this.main = await this.mainService.getMain(id);
     console.log(id, this.main);
+  }
+
+  public async getMains(): Promise<void> {
+    this.mains = await this.mainService.getMains();
+  }
+
+  public getMainById(id: number): Item {
+    return this.mains.find(main => main.id === id);
   }
 
   goBack(): void {

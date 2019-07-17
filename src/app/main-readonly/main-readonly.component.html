@@ -1,11 +1,10 @@
-<p>
-  main-readonly works!
-</p>
 
-
-<ul class="group" *ngFor="let eachgroup of maingroup">
-  <h2 class="group">{{eachgroup.name}}</h2>
-  <li *ngFor="let main of eachgroup.samemains ">
-    <a style="text-decoration:none" routerLink="/detail/{{main.id}}">{{main.name}}</a>
-  </li>
-</ul>
+<div>
+  <ul class="group" *ngFor="let eachgroup of maingroup">
+    <h2 class="group">{{eachgroup.name}}</h2>
+    <li *ngFor="let id of eachgroup.samemainsIds ">
+      <a style="text-decoration:none" routerLink="/detail/{{id}}">{{getMainById(id).name}}
+      </a>
+    </li>
+  </ul>
+</div>

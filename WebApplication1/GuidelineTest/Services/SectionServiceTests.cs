@@ -35,7 +35,7 @@ namespace Guideline.Services.Tests
         public void PutTest()
         {
             Assert.AreEqual("Key Messages", SectionDb.SECTIONS[0].title);
-            var s = new Section();
+            var s = new Item();
             s.title = "Mushroom";
             _Service.Put(0, s);
             Assert.AreEqual("Mushroom", SectionDb.SECTIONS[0].title);
@@ -46,7 +46,7 @@ namespace Guideline.Services.Tests
         [ExpectedException(typeof(NullReferenceException))]
         public void PutTestOnAnUnexistId()
         {
-            var s = new Section();
+            var s = new Item();
             s.title = "Mushroom";
             _Service.Put(90, s);
         }

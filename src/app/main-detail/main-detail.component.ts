@@ -3,6 +3,7 @@ import { MainSection } from '../main';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { MainService } from '../main.service';
+import { Item } from '../item';
 
 @Component({
   selector: 'app-main-detail',
@@ -10,7 +11,8 @@ import { MainService } from '../main.service';
   styleUrls: ['./main-detail.component.css']
 })
 export class MainDetailComponent implements OnInit {
-  @Input() public main: MainSection;
+  @Input() public main: Item;
+  @Input() public mains: Item[];
   isAdmin = true;
   url: string[];
   ID: number;
@@ -32,12 +34,23 @@ export class MainDetailComponent implements OnInit {
     });
   }
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void {
+    this.getMains();
+   }
 
   public async getMain(): Promise<void> {
     const id = +this.route.snapshot.paramMap.get('id');
     this.main = await this.mainService.getMain(id);
   }
+
+  public async getMains(): Promise<void> {
+    this.mains = await this.mainService.getMains();
+  }
+
+  public getMainById(id: number): Item {
+    return this.mains.find(main => main.id === id);
+  }
+
 
   public goBack(): void {
     this.location.back();

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Guideline.Models
 {
     public class Section
     {
+        
         public int id { get; set; }
         public string title { get; set; }
 

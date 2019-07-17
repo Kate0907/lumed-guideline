@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Item } from './item';
 import { MainSection } from './main';
 import { Observable, of } from 'rxjs';
 import { Section } from './section';
-import { Link } from './link';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MainGroup } from './mainGroup';
 import { Message } from './message';
+import { ItemType } from './ItemType';
 
 const httpOptions = {
    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,9 +19,9 @@ const httpOptions = {
 export class MainDatabaseService {
    private guidelineUrl = 'http://localhost:61291/api/Guideline';
    private sectionUrl = 'http://localhost:61291/api/Section';
-   private linkUrl = 'http://localhost:61291/api/Link';
    private groupUrl = 'http://localhost:61291/api/MainGroup';
    private messageUrl = 'http://localhost:61291/api/Message';
+   private itemUrl = 'http://localhost:61291/api/Item';
 
    constructor(
       private http: HttpClient,
@@ -32,22 +33,29 @@ export class MainDatabaseService {
          ).toPromise();
    }
 
-   /** GET all main sections from the server */
+   /** GET all items from the server */ 
+   public async getMains(): Promise<Item[]> {
+      return this.http.get<Item[]>(this.itemUrl)
+         .pipe(catchError(this.handleError<Item[]>('getItems', []))
+         ).toPromise();
+   }
+
+   /** GET all main sections from the server 
    public async getMains(): Promise<MainSection[]> {
       return this.http.get<MainSection[]>(this.guidelineUrl)
          .pipe(catchError(this.handleError<MainSection[]>('getMains', []))
          ).toPromise();
-   }
+   }*/
 
-   /** GET main section by id. Will 404 if id not found */
-   public getMain(id: number): Promise<MainSection> {
-      const url = `${this.guidelineUrl}/${id}`;
-      return this.http.get<MainSection>(url).pipe(
-         catchError(this.handleError<MainSection>(`getMain id=${id}`))
+   /** GET item by id. Will 404 if id not found */
+   public getMain(id: number): Promise<Item> {
+      const url = `${this.itemUrl}/${id}`;
+      return this.http.get<Item>(url).pipe(
+         catchError(this.handleError<Item>(`getMain id=${id}`))
       ).toPromise();
    }
 
-   /** POST create a new main section and add to MainDB, return the new main section */
+   /** POST create a new item and add to MainDB, return the new main section */
    public createMain(): Promise<MainSection> {
       const some = new MainSection();
       const ns = this.http.post<MainSection>(this.guidelineUrl, some, httpOptions)
@@ -79,9 +87,9 @@ export class MainDatabaseService {
    }*/
 
 
-   /** POST: create a new main section and add to current section */
-   public createMainToSection(sectionId: number): Promise<any> {
-      const url = `${this.guidelineUrl}/${sectionId}`;
+   /** POST: create a new item and add to item's (id = sectionId) childrenIds */
+   public createItemToChildren(itemId: number, type: ItemType): Promise<any> {
+      const url = `${this.itemUrl}/${itemId}`;
       return this.http.post(url,  httpOptions).toPromise();
    }
 
@@ -98,8 +106,8 @@ export class MainDatabaseService {
    }
 
    /** PUT: update the main section on the server and return a message; */
-   public async updateMainSection(some: MainSection): Promise<any> {
-      const url = `${this.guidelineUrl}/${some.id}`;
+   public async updateItemName(some: Item ): Promise<any> {
+      const url = `${this.itemUrl}/${some.id}`;
       return this.http.put(url, some, httpOptions).toPromise();
    }
 
