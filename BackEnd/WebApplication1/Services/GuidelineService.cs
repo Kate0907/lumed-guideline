@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -51,14 +51,14 @@ namespace Guideline.Services
             item.name = "New Main Section";
             MainDb.MAINS.Add(item);
 
-            var s = SectionDb.SECTIONS.FirstOrDefault(v => v.id == id);
-            if(s.mainIds == null)
+            var s = ItemDb.ITEMS.FirstOrDefault(v => v.id == id);
+            if(s.childrenIds == null)
             {
-                s.mainIds = new List<int> { item.id };
+                s.childrenIds = new List<int> { item.id };
             }
             else
             {
-                s.mainIds.Add(item.id);
+                s.childrenIds.Add(item.id);
             }
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
@@ -79,27 +79,27 @@ namespace Guideline.Services
             }           
         }
 
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
-            var m = MainDb.MAINS.FirstOrDefault(v => v.id == id);
-            if(m == null)
-            {
-                throw (new NullReferenceException());
-            }
-            else
-            {
-                SectionDb.SECTIONS.ForEach(section =>
-                {
-                    if (section.mainIds == null)
-                    {
-                        section.mainIds = new List<int> { };
-                    }
-                    section.mainIds = section.mainIds.Where(linkId => linkId != id).ToList();
-                });
-                MainDb.MAINS.Remove(m);
-            }
-            
-        }
-    }
+         //DELETE api/values/5
+         public void Delete(int id)
+         {
+             var m = ItemDb.ITEMS.FirstOrDefault(v => v.id == id);
+             if(m == null)
+             {
+                 throw (new NullReferenceException());
+             }
+             else
+             {
+               ItemDb.ITEMS.ForEach(section =>
+                 {
+                     if (section.childrenIds == null)
+                     {
+                     section.childrenIds = new List<int> { };
+                     }
+                   section.childrenIds = section.childrenIds.Where(linkId => linkId != id).ToList();
+                 });
+        ItemDb.ITEMS.Remove(m);
+             }
+             
+         }
+     }
 }

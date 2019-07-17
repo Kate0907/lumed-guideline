@@ -141,16 +141,13 @@
     <Compile Include="Controllers\GuidelineController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\MainGroupController.cs" />
-    <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemDb.cs" />
     <Compile Include="Models\MainGroupDb.cs" />
-    <Compile Include="Models\SectionDb.cs" />
     <Compile Include="Models\MainDb.cs" />
-    <Compile Include="Models\Section.cs" />
     <Compile Include="Models\MainGroup.cs" />
     <Compile Include="Models\MainSection.cs" />
     <Compile Include="Models\ItemType.cs" />
@@ -158,7 +155,6 @@
     <Compile Include="Services\ItemService.cs" />
     <Compile Include="Services\GuidelineService.cs" />
     <Compile Include="Services\MainGroupService.cs" />
-    <Compile Include="Services\SectionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
