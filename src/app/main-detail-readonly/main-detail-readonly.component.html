@@ -4,17 +4,14 @@
   <ul *ngFor="let section of main.section">
     <h2 class="mainsection" *ngIf="section.title != null">{{section.title}}</h2>
 
-    <ul class="msg" *ngIf="section.message != null">
-      <li *ngFor="let message of section.message">{{message}}</li>
+    <ul class="msg" *ngIf="section.messages != null">
+      <li *ngFor="let message of section.messages">{{message.content}}</li>
     </ul>
 
-    <ul class="mainsection" *ngIf="section.link != null">
-      <li *ngFor="let link of section.link">
+    <ul class="mainsection" *ngIf="section.main != null">
+      <li *ngFor="let link of section.main">
         <a style="text-decoration:none" routerLink="/detail/{{link.id}}">{{link.name}}</a>
       </li>
     </ul>
   </ul>
-  
-
-
-</div>
+ </div>

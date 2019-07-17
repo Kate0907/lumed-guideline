@@ -10,7 +10,7 @@ import { MainService } from '../main.service';
   styleUrls: ['./main-detail.component.css']
 })
 export class MainDetailComponent implements OnInit {
-  @Input() main: MainSection;
+  @Input() public main: MainSection;
   isAdmin = true;
   url: string[];
   ID: number;
@@ -21,7 +21,7 @@ export class MainDetailComponent implements OnInit {
     private mainService: MainService,
     private location: Location
   ) {
-       this.router.events.subscribe(navigation => {
+    this.router.events.subscribe(navigation => {
       if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
         this.getMain();
         const urls = navigation.url.split('/');
@@ -29,17 +29,14 @@ export class MainDetailComponent implements OnInit {
         this.url = urls;
         this.ID = id;
       }
-});
+    });
   }
 
-  ngOnInit(): void {}
+  public ngOnInit(): void { }
 
-  public getMain(): void {
+  public async getMain(): Promise<void> {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.mainService.getMain(id)
-      .subscribe(main => {
-         this.main = main;
-        });
+    this.main = await this.mainService.getMain(id);
   }
 
   public goBack(): void {

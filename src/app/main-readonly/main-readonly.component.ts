@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MainSection } from '../main';
 import { MainGroup } from '../mainGroup';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Location } from '@angular/common';
 import { MainService } from '../main.service';
 
 @Component({
@@ -18,17 +16,16 @@ export class MainReadonlyComponent implements OnInit {
     private mainService: MainService,
   ) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.getMains();
     this.getMainGroup();
   }
 
-  public getMainGroup(): void {
-    this.mainService.getMainGroup().subscribe(mainGroup => this.maingroup = mainGroup);
+  public async getMainGroup(): Promise<void> {
+    this.maingroup = await this.mainService.getMainGroup();
   }
 
-  public getMains(): void {
-    this.mainService.getMains().subscribe(mains => this.mains = mains);
+  public async getMains(): Promise<void> {
+    this. mains = await this.mainService.getMains();
   }
-
 }

@@ -2,11 +2,15 @@
   main-editable works!
 </p>
 
+<div> <button (click)="addMainGroup()">Add New Group</button></div>
+
 <ul class="group" *ngFor="let eachgroup of maingroup; let groupIndex = index;">
   <h2 class="group"><textarea rows="1" cols="40" [(ngModel)]="eachgroup.name"></textarea></h2>
-  <button (click)="updateGroupName(groupIndex,eachgroup.name)">save group name</button>
-  <button (click)="addMain(groupIndex)">Add a new main section</button>
-  <li *ngFor="let main of eachgroup.samemains;let samemainIndex = index ">
+  <button (click)="updateGroupName(eachgroup,eachgroup.name)">Save Group Name</button>
+  <button (click)="addMain(eachgroup)">Add New Main Section</button>
+  <button (click)="deleteGroup(eachgroup)">Delete Group</button>
+  <li *ngFor="let main of eachgroup.samemains;let sameIndex = index ">{{main.id}}
     <a style="text-decoration:none" routerLink="/detail/{{main.id}}">{{main.name}}</a>
+    <button (click)="deleteMain(main,sameIndex,eachgroup)">Delete</button>
   </li>
 </ul>

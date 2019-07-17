@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MainSection } from '../main';
 import { MainGroup } from '../mainGroup';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Location } from '@angular/common';
 import { MainService } from '../main.service';
 
 @Component({
@@ -18,22 +16,44 @@ export class MainEditableComponent implements OnInit {
     private mainService: MainService,
   ) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.getMains();
     this.getMainGroup();
   }
 
-  public getMainGroup(): void {
-    this.mainService.getMainGroup().subscribe(mainGroup => this.maingroup = mainGroup);
+  public async getMainGroup(): Promise<void> {
+    this.maingroup = await this.mainService.getMainGroup();
   }
 
-  public getMains(): void {
-    this.mainService.getMains().subscribe(mains => this.mains = mains);
+  public async getMains(): Promise<void> {
+    this.mains = await this.mainService.getMains();
   }
 
-/**   public updateGroupName(groupIndex: number, newname: string) {
-    this.mainService.updateGroupName(groupIndex, newname);
+  public updateGroupName(maingroup: MainGroup, newname: string) {
+    this.mainService.updateGroupName(maingroup, newname);
 
-  }*/
+  }
 
+  public async addMain(maingroup: MainGroup): Promise<void> {
+    const newMain = await this.mainService.addMain(maingroup);
+    console.log(newMain);
+    this.getMains();
+    this.getMainGroup();
+  }
+
+  public async addMainGroup(): Promise<void> {
+    await this.mainService.addMainGroup();
+    this.getMainGroup();
+
+  }
+
+  public async deleteGroup(eachgroup: MainGroup): Promise<void> {
+    await this.mainService.deleteGroup(eachgroup);
+    this.getMainGroup();
+  }
+
+  public async deleteMain(main: MainSection) {
+    await this.mainService.deleteMain(main.id);
+    this.getMainGroup();
+  }
 }

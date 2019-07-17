@@ -2,9 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MainSection } from '../main';
 import { MainService } from '../main.service';
 import { MainGroup } from '../mainGroup';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-main',
@@ -13,22 +10,22 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 
 export class MainComponent implements OnInit {
-  @Input() mains: MainSection[];
-  @Input() maingroup: MainGroup[];
+  @Input() public mains: MainSection[];
+  @Input() public maingroup: MainGroup[];
   isAdmin = true;
 
   constructor(private mainService: MainService) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.getMains();
     this.getMainGroup();
   }
 
-  public getMainGroup(): void {
-    this.mainService.getMainGroup().subscribe(mainGroup => this.maingroup = mainGroup);
+  public async getMainGroup(): Promise<void> {
+    this.maingroup = await this.mainService.getMainGroup();
   }
 
-  public getMains(): void {
-    this.mainService.getMains().subscribe(mains => this.mains = mains);
+  public async getMains(): Promise<void> {
+    this.mains = await this.mainService.getMains();
   }
 }
