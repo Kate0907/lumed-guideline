@@ -9,7 +9,7 @@ namespace Guideline.Models
     {
         public int id { get; set; }
         public string name { get; set; }
-/*        public List<Item> samemains
+       public List<Item> samemains
         {
             get
             {
@@ -26,7 +26,7 @@ namespace Guideline.Models
                 }
                 return newList;
             }
-        }*/
+        }
         public List<int> samemainsIds { get; set; } = new List<int>();
     }
 }

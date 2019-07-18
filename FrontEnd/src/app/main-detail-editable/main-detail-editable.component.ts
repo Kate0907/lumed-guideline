@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainSection } from '../main';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { MainService } from '../main.service';
@@ -41,8 +40,6 @@ export class MainDetailEditableComponent implements OnInit {
     this.main = await this.mainService.getMain(id);
     console.log(id, this.main);
   }
-
-
 
   public getMainById(id: number): Item {
     return this.mains.find(main => main.id === id);

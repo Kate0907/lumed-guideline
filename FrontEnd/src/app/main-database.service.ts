@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Item } from './item';
-import { MainSection } from './main';
 import { Observable, of } from 'rxjs';
-import { Section } from './section';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError,  } from 'rxjs/operators';
 import { MainGroup } from './mainGroup';
 import { ItemType } from './ItemType';
 
@@ -16,8 +14,6 @@ const httpOptions = {
    providedIn: 'root'
 })
 export class MainDatabaseService {
-   private guidelineUrl = 'http://localhost:61291/api/Guideline';
-   private sectionUrl = 'http://localhost:61291/api/Section';
    private groupUrl = 'http://localhost:61291/api/MainGroup';
    private itemUrl = 'http://localhost:61291/api/Item';
 
@@ -46,16 +42,6 @@ export class MainDatabaseService {
       ).toPromise();
    }
 
-   /** POST create a new item and add to MainDB, return the new main section */
-   public createMain(): Promise<MainSection> {
-      const some = new MainSection();
-      const ns = this.http.post<MainSection>(this.guidelineUrl, some, httpOptions)
-         .pipe(
-            catchError(this.handleError<MainSection>('createNewMainSection'))
-         ).toPromise();
-      return ns;
-   }
-
    /** POST create a new maingroup and add to MainGroupDB, return the new maingroup */
    public async createMainGroup(): Promise<MainGroup> {
       return this.http.post<MainGroup>(this.groupUrl, httpOptions).pipe(
@@ -63,7 +49,7 @@ export class MainDatabaseService {
       ).toPromise();
    }
 
-   /** POST: create a new item and add to item's (id = sectionId) childrenIds */
+   /** POST: create a new item and add to parent item's (id = parentId) childrenIds */
    public createItemToChildren(parentId: number, type: ItemType): Promise<any> {
       const url = `${this.itemUrl}/${parentId}`;
       return this.http.post(url, type, httpOptions).toPromise();
@@ -82,15 +68,9 @@ export class MainDatabaseService {
    }
 
    /** POST: add a main section to current maingroup ; */
-   public updateMainToGroup(particular: MainGroup, some: MainSection): Promise<any> {
+   public updateMainToGroup(particular: MainGroup, some: Item): Promise<any> {
       const url = `${this.groupUrl}/${particular.id}`;
       return this.http.post(url, some, httpOptions).toPromise();
-   }
-
-   /** DELETE: delete a main section from MainSectionDB */
-   public deleteMain(id: number): Promise<MainSection> {
-      const url = `${this.guidelineUrl}/${id}`;
-      return this.http.delete<MainSection>(url, httpOptions).toPromise();
    }
 
    /** DELETE: delete a main group from MainGroupDB */

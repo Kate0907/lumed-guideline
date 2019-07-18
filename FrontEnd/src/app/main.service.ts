@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MainSection } from './main';
 import { Observable, of } from 'rxjs';
 import { MainDatabaseService } from './main-database.service';
 import { MainGroup } from './mainGroup';
@@ -24,15 +23,6 @@ export class MainService {
     return this._DB.getMain(id);
   }
 
-  // create a new main section, add new  main section id to this main group's samemainsIds
-  public async addMain(particular: MainGroup): Promise<MainSection> {
-    if (particular == null) {
-      return;
-    }
-    const newMain = await this._DB.createMain();
-    await this._DB.updateMainToGroup(particular, newMain);
-    return newMain;
-  }
 
   public async addItem(parentId: number, type: ItemType): Promise<void> {
     await this._DB.createItemToChildren(parentId, type);
@@ -57,10 +47,6 @@ export class MainService {
 
   public async deleteGroup(eachgroup: MainGroup) {
     await this._DB.deleteMainGroup(eachgroup.id);
-  }
-
-  public async deleteMain(itemId: number): Promise<void> {
-    await this._DB.deleteMain(itemId);
   }
 
   public async deleteItem(itemId: number): Promise<void> {

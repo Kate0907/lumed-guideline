@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainSection } from '../main';
 import { MainService } from '../main.service';
 import { MainGroup } from '../mainGroup';
 import { Item } from '../item';
