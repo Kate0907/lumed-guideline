@@ -35,6 +35,11 @@ export class MainDetailEditableComponent implements OnInit {
     this.getMains();
   }
 
+  public async refresh(): Promise<void> {
+    await this.getMains();
+    await this.getMain();
+  }
+
   public async getMain(): Promise<void> {
     const id = +this.route.snapshot.paramMap.get('id');
     this.main = await this.mainService.getMain(id);
@@ -52,56 +57,48 @@ export class MainDetailEditableComponent implements OnInit {
   public async addSection(): Promise<void> {
     const type = this.itemType.Link;
     await this.mainService.addSection(this.main.id, type);
-    await this.getMains();
-    await this.getMain();
+    await this.refresh();
   }
 
   public async addLink(id: number): Promise<void> {
     const type = this.itemType.Link;
     await this.mainService.addLink(id, type);
-    await this.getMains();
-    await this.getMain();
+    await this.refresh();
   }
 
   public async addMessage(id: number): Promise<void> {
     const type = this.itemType.Message;
     await this.mainService.addMessage(id, type);
-    await this.getMains();
-    await this.getMain();
+    await this.refresh();
   }
 
-  public async updateMainName(some: Item): Promise<void> {
-    await this.mainService.updateMainName(some);
-    await this.getMains();
-    await this.getMain();
+  public async updateMainName(item: Item): Promise<void> {
+    await this.mainService.updateMainName(item);
+    await this.refresh();
   }
 
-  public async updateTitle(some: Item): Promise<void> {
-    await this.mainService.updateTitle(some);
+  public async updateTitle(item: Item): Promise<void> {
+    await this.mainService.updateTitle(item);
   }
 
-  public async updateMessage(some: Item): Promise<void> {
-    await this.mainService.updateMessage(some);
-    await this.getMains();
-    await this.getMain();
+  public async updateMessage(item: Item): Promise<void> {
+    await this.mainService.updateMessage(item);
+    await this.refresh();
   }
 
   public async deleteMessage(mainId: number): Promise<void> {
     await this.mainService.deleteMessage(mainId);
-    await this.getMains();
-    await this.getMain();
+    await this.refresh();
   }
 
   public async deleteLink(mainId: number): Promise<void> {
     await this.mainService.deleteMain(mainId);
-    await this.getMains();
-    await this.getMain();
+    await this.refresh();
   }
 
   public async deleteSection(sectionId: number): Promise<void> {
     await this.mainService.deleteSection(sectionId);
-    await this.getMains();
-    await this.getMain();
+    await this.refresh();
   }
 
     public async messageUp(sectionId: number, messageIndex: number): Promise<void> {
@@ -109,13 +106,13 @@ export class MainDetailEditableComponent implements OnInit {
       await this.mainService.messageUp(section, messageIndex);
       this.getMain();
     }
-  
+
     public async messageDown(sectionId: number, messageIndex: number): Promise<void> {
       const section = this.getMainById(sectionId);
       await this.mainService.messageDown(section, messageIndex);
       this.getMain();
     }
-  
+
   public goBack(): void {
     this.location.back();
   }
