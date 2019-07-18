@@ -42,22 +42,22 @@ export class MainEditableComponent implements OnInit {
 
   public async addMain(groupId: number, type: ItemType): Promise<void> {
     await this.mainService.addItem(groupId, type);
-    this.getMains();
-    this.getMainGroup();
+    await this.getMains();
+    await this.getMainGroup();
   }
 
   public async addMainGroup(): Promise<void> {
     await this.mainService.addMainGroup();
-    this.getMainGroup();
+    await this.getMainGroup();
   }
 
   public async deleteGroup(eachgroup: MainGroup): Promise<void> {
     await this.mainService.deleteGroup(eachgroup);
-    this.getMainGroup();
+    await this.getMainGroup();
   }
 
   public async deleteMain(mainId: number) {
     await this.mainService.deleteItem(mainId);
-    this.getMainGroup();
+    await this.getMainGroup();
   }
 }

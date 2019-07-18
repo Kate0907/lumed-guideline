@@ -12,7 +12,7 @@ import { Item } from '../item';
 export class MainComponent implements OnInit {
   @Input() public mains: Item[];
   @Input() public maingroup: MainGroup[];
-  isAdmin = false;
+  public isAdmin = false;
 
   constructor(private mainService: MainService) { }
 
