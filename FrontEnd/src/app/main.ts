@@ -1,8 +1,9 @@
-import { Section } from './section';
+
+import { Item } from './item';
 
 export class MainSection {
     id: number;
     name: string;
-    sections: Array<Section>;
+    sections: Array<Item>;
     sectionIds?: Array<number>;
 }

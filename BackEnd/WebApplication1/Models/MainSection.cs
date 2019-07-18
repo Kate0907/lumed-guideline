@@ -7,15 +7,15 @@ namespace Guideline.Models
     {
         public int id { get; set; }
         public string name { get; set; }  
-        public List<Section> sections
+        public List<Item> sections
         {
             get
             {
-                var newList = new List<Section>();
+                var newList = new List<Item>();
                 
                 foreach (var id in sectionIds ?? new List<int>())
                 {
-                    foreach (var section in SectionDb.SECTIONS)
+                    foreach (var section in ItemDb.ITEMS)
                     {
                         if (section.id == id)
                         {

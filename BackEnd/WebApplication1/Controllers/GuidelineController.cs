@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -15,19 +15,16 @@ namespace Guideline.Controllers
     {
         private GuidelineService service = new GuidelineService();
 
-        // GET api/values
         public IEnumerable<MainSection> GetAllMainSections()
         {
             return service.GetAllMainSections();
         }
         
-        // GET api/values/5
         public MainSection Get(int id)
         {
             return service.Get(id);
         }
 
-        // POST api/<controller>
         public MainSection Post(MainSection item)
         {    
             return service.Post();
@@ -45,7 +42,6 @@ namespace Guideline.Controllers
             }
         }
 
-        // PUT api/values/5
         public HttpResponseMessage Put(int id, [FromBody]MainSection item)
         {
             if (ModelState.IsValid)
@@ -58,7 +54,6 @@ namespace Guideline.Controllers
             }
         }
 
-        // DELETE api/values/5
         public void Delete(int id)
         {
             service.Delete(id);

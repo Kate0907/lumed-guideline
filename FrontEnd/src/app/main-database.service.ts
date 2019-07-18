@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Item } from './item';
 import { MainSection } from './main';
 import { Observable, of } from 'rxjs';
-import { Section } from './section';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MainGroup } from './mainGroup';
@@ -17,7 +16,6 @@ const httpOptions = {
 })
 export class MainDatabaseService {
    private guidelineUrl = 'http://localhost:61291/api/Guideline';
-   private sectionUrl = 'http://localhost:61291/api/Section';
    private groupUrl = 'http://localhost:61291/api/MainGroup';
    private itemUrl = 'http://localhost:61291/api/Item';
 
