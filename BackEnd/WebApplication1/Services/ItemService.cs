@@ -32,31 +32,31 @@ namespace Guideline.Services
         
         public Item Post()
         {
-            var item = new Item();
-            item.id = ItemDb.LastId++;
-            item.childrenIds = new List<int> { };
-            item.name = "New Main Section";
-            ItemDb.ITEMS.Add(item);
-            return item;
+            var itemToAdd = new Item();
+            itemToAdd.id = ItemDb.LastId++;
+            itemToAdd.childrenIds = new List<int> { };
+            itemToAdd.name = "New Main Section";
+            ItemDb.ITEMS.Add(itemToAdd);
+            return itemToAdd;
         }
         
         public HttpResponseMessage Post(int id,ItemType type)
         {
-            var item = new Item();
-            item.id = ItemDb.LastId++;
-            item.type = type;
-            item.childrenIds = new List<int> { };
-            item.name = "New Item";
-            ItemDb.ITEMS.Add(item);
+            var itemToAdd = new Item();
+            itemToAdd.id = ItemDb.LastId++;
+            itemToAdd.type = type;
+            itemToAdd.childrenIds = new List<int> { };
+            itemToAdd.name = "New Item";
+            ItemDb.ITEMS.Add(itemToAdd);
 
-            var parentItem = ItemDb.ITEMS.FirstOrDefault(Item => Item.id == id);
+            var parentItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
             if(parentItem.childrenIds == null)
             {
-                   parentItem.childrenIds = new List<int> { item.id };
+                   parentItem.childrenIds = new List<int> { itemToAdd.id };
             }
             else
             {
-                   parentItem.childrenIds.Add(item.id);
+                   parentItem.childrenIds.Add(itemToAdd.id);
             }
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
