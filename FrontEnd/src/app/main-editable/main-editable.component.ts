@@ -18,8 +18,8 @@ export class MainEditableComponent implements OnInit {
     private mainService: MainService,
   ) { }
 
-  public ngOnInit() {
-    this.getMains();
+  public async ngOnInit() {
+    await this.getMains();
     this.getMainGroup();
   }
 
@@ -53,6 +53,7 @@ export class MainEditableComponent implements OnInit {
 
   public async deleteMain(mainId: number) {
     await this.mainService.deleteItem(mainId);
+    await this.getMains();
     this.getMainGroup();
   }
 }

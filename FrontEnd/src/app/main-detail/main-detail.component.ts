@@ -33,8 +33,8 @@ export class MainDetailComponent implements OnInit {
     });
   }
 
-  public ngOnInit(): void {
-    this.getMains();
+  public async ngOnInit() {
+    await this.getMains();
    }
 
   public async getMain(): Promise<void> {

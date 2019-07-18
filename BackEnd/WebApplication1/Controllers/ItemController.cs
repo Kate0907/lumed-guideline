@@ -37,16 +37,21 @@ namespace Guideline.Controllers
       }
     }
 
+    public Item Post([FromBody]ItemType type)
+    {
+        return service.Post(type);
+    }
+
     public HttpResponseMessage Put( [FromBody]Item some)
     {
-      // if (ModelState.IsValid)
-      //{
+       if (ModelState.IsValid)
+      {
         return service.Put(some);
-      //}
-      //else
-      //{
-       // return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-      //}
+      }
+      else
+      {
+        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+      }
     }
 
     // DELETE api/values/5

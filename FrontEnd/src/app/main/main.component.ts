@@ -17,9 +17,9 @@ export class MainComponent implements OnInit {
 
   constructor(private mainService: MainService) { }
 
-  public ngOnInit() {
-    this.getMains();
-    this.getMainGroup();
+  public  ngOnInit() {
+      this.getMains();
+      this.getMainGroup();
   }
 
   public  getMainGroup(): void  {

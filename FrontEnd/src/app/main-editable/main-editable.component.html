@@ -2,7 +2,7 @@
 <ul class="group" *ngFor="let eachgroup of maingroup; let groupIndex = index;">
   <h2 class="group"><textarea rows="1" cols="40" [(ngModel)]="eachgroup.name"></textarea></h2>
   <button (click)="updateItem(eachgroup)">Save Group Name</button>
-  <button (click)="addMain(eachgroup.id,this.itemType.Group)">Add New Main Section</button>
+  <button (click)="addMain(eachgroup.id,this.itemType.Link)">Add New Main Section</button>
   <button (click)="deleteMain(eachgroup.id)">Delete Group</button>
   <li *ngFor="let id of eachgroup.childrenIds">{{id}}
     <a style="text-decoration:none" routerLink="/detail/{{id}}">{{getMain(id).name}}</a>
