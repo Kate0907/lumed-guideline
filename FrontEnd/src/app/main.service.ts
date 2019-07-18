@@ -34,17 +34,8 @@ export class MainService {
     return newMain;
   }
 
-  public async addLink(id: number, type: ItemType): Promise<void> {
-    await this._DB.createItemToChildren(id, type);
-  }
-
-  public async addMessage(id: number, type: ItemType): Promise<void> {
-    await this._DB.createItemToChildren(id, type);
-  }
-
-   // create a new section, add new section id to this main section's sectionId
-   public async addSection(id: number, type: ItemType): Promise<void> {
-    await this._DB.createItemToChildren(id, type);
+  public async addItem(parentId: number, type: ItemType): Promise<void> {
+    await this._DB.createItemToChildren(parentId, type);
   }
 
   // create a new main group, add new  main group to current maingroup list
@@ -60,58 +51,46 @@ export class MainService {
     await this._DB.updateMainGroup(particular);
   }
 
-  public async updateMainName(some: Item): Promise<void> {
-    await this._DB.updateItemName(some);
-  }
-
-  public async updateMessage(some: Item): Promise<void> {
-    await this._DB.updateItemName(some);
-  }
-
-  public async updateTitle(some: Item): Promise<void> {
-    await this._DB.updateItemName(some);
-  }
-
-  public async deleteMessage(mainId: number) {
-    await this._DB.deleteMessage(mainId);
+  public async updateItem(item: Item): Promise<void> {
+    await this._DB.updateItem(item);
   }
 
   public async deleteGroup(eachgroup: MainGroup) {
     await this._DB.deleteMainGroup(eachgroup.id);
   }
 
-  public async deleteMain(mainId: number) {
-    await this._DB.deleteMain(mainId);
+  public async deleteMain(itemId: number): Promise<void> {
+    await this._DB.deleteMain(itemId);
   }
 
-  public async deleteSection(sectionId: number): Promise<void> {
-    await this._DB.deleteSection(sectionId);
+  public async deleteItem(itemId: number): Promise<void> {
+    await this._DB.deleteItem(itemId);
   }
 
-  public async messageUp(section: Item, messageIndex: number): Promise<void> {
-    if (section.childrenIds[messageIndex] == null || messageIndex == null) {
+  public async itemUp(section: Item, itemIndex: number): Promise<void> {
+    if (section.childrenIds[itemIndex] == null || itemIndex == null) {
       return;
     }
     let swap: number;
-    if (messageIndex > 0) {
-      swap = section.childrenIds[messageIndex];
-      section.childrenIds[messageIndex] = section.childrenIds[messageIndex - 1];
-      section.childrenIds[messageIndex - 1] = swap;
+    if (itemIndex > 0) {
+      swap = section.childrenIds[itemIndex];
+      section.childrenIds[itemIndex] = section.childrenIds[itemIndex - 1];
+      section.childrenIds[itemIndex - 1] = swap;
     }
-    await this._DB.updateSection(section);
+    await this._DB.updateItem(section);
   }
 
-  public async messageDown(section: Item, messageIndex: number): Promise<void> {
-    if (section.childrenIds[messageIndex] == null || messageIndex == null) {
+  public async itemDown(section: Item, itemIndex: number): Promise<void> {
+    if (section.childrenIds[itemIndex] == null || itemIndex == null) {
       return;
     }
     let swap: number;
-    if (messageIndex < section.childrenIds.length - 1) {
-      swap = section.childrenIds[messageIndex];
-      section.childrenIds[messageIndex] = section.childrenIds[messageIndex + 1];
-      section.childrenIds[messageIndex + 1] = swap;
+    if (itemIndex < section.childrenIds.length - 1) {
+      swap = section.childrenIds[itemIndex];
+      section.childrenIds[itemIndex] = section.childrenIds[itemIndex + 1];
+      section.childrenIds[itemIndex + 1] = swap;
     }
-    await this._DB.updateSection(section);
+    await this._DB.updateItem(section);
   }
 
   /**

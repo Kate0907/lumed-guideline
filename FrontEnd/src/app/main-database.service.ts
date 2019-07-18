@@ -62,15 +62,15 @@ export class MainDatabaseService {
    }
 
    /** POST: create a new item and add to item's (id = sectionId) childrenIds */
-   public createItemToChildren(itemId: number, type: ItemType): Promise<any> {
-      const url = `${this.itemUrl}/${itemId}`;
-      return this.http.post(url, type,  httpOptions).toPromise();
+   public createItemToChildren(parentId: number, type: ItemType): Promise<any> {
+      const url = `${this.itemUrl}/${parentId}`;
+      return this.http.post(url, type, httpOptions).toPromise();
    }
 
    /** PUT: update the main section on the server and return a message; */
-   public updateItemName(some: Item ): Promise<any> {
-      const url = `${this.itemUrl}/${some.id}`;
-      return this.http.put(url, some, httpOptions).toPromise();
+   public updateItem(item: Item ): Promise<any> {
+      const url = `${this.itemUrl}/${item.id}`;
+      return this.http.put(url, item, httpOptions).toPromise();
    }
 
    /** PUT: update the maingroup on the server and return a message; */
@@ -85,18 +85,6 @@ export class MainDatabaseService {
       return this.http.post(url, some, httpOptions).toPromise();
    }
 
-   /** PUT: update the section on the server and return a message */
-   public updateSection(some: Item): Promise<any> {
-      const url = `${this.itemUrl}/${some.id}`;
-      return this.http.put(url, some, httpOptions).toPromise();
-   }
-
-   /** PUT: update the message on the server and return a message */
-   public updateMessage(some: Item): Promise<any> {
-      const url = `${this.itemUrl}/${some.id}`;
-      return this.http.put(url, some, httpOptions).toPromise();
-   }
-
    /** DELETE: delete a main section from MainSectionDB */
    public deleteMain(id: number): Promise<MainSection> {
       const url = `${this.guidelineUrl}/${id}`;
@@ -109,14 +97,8 @@ export class MainDatabaseService {
       return this.http.delete<MainGroup>(url, httpOptions).toPromise();
    }
 
-   /** DELETE: delete section from SectionDB */
-   public async deleteSection(id: number): Promise<Item> {
-      const url = `${this.itemUrl}/${id}`;
-      return this.http.delete<Item>(url, httpOptions).toPromise();
-   }
-
-   /** DELETE: delete message from MessageDB */
-   public async deleteMessage(id: number): Promise<Item> {
+   /** DELETE: delete item from itemDB */
+   public async deleteItem(id: number): Promise<Item> {
       const url = `${this.itemUrl}/${id}`;
       return this.http.delete<Item>(url, httpOptions).toPromise();
    }

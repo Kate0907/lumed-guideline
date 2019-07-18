@@ -1,35 +1,35 @@
 <div class="div" *ngIf="main">
 
   <h2><textarea rows="1" cols="45" [(ngModel)]="main.name"></textarea></h2>
-  <button (click)="updateMainName(main)">Save Title</button>
-  <button (click)="addSection()">Add A New Section</button>
+  <button (click)="updateItem(main)">Save Title</button>
+  <button (click)="addItem(main.id,this.itemType.Link)">Add A New Section</button>
 
   <ul *ngFor="let id of main.childrenIds; let sectionIndex = index">
       <h2  *ngIf="getMainById(id) != null">
         <textarea rows="1" cols="60"
           [(ngModel)]="getMainById(id).name">
         </textarea>
-        <button (click)="addMessage(id)">Add A New Message</button>
-        <button (click)="addLink(id)">Add A New Link</button>
-        <button (click)="updateTitle(getMainById(id))">Save</button>
-        <button (click)="deleteSection(id)">Delete Section</button>
+        <button (click)="addItem(id,this.itemType.Message)">Add A New Message</button>
+        <button (click)="addItem(id,this.itemType.Link)">Add A New Link</button>
+        <button (click)="updateItem(getMainById(id))">Save</button>
+        <button (click)="deleteItem(id)">Delete Section</button>
       </h2>
 
-  <li *ngFor="let x of getMainById(id)?.childrenIds; let messageIndex = index">
+  <li *ngFor="let x of getMainById(id)?.childrenIds; let itemIndex = index">
 
       <div *ngIf="getMainById(x)?.type === itemType.Message">        
         <textarea rows="4" cols="50" [(ngModel)]="getMainById(x).name"></textarea>
-        <button (click)="updateMessage(getMainById(x))">save</button>
-        <button (click)="deleteMessage(x)">delete</button>
-        <button (click)="messageUp(id,messageIndex)">up</button>
-        <button (click)="messageDown(id,messageIndex)">down</button>
+        <button (click)="updateItem(getMainById(x))">save</button>
+        <button (click)="deleteItem(x)">delete</button>
+        <button (click)="itemUp(id,itemIndex)">up</button>
+        <button (click)="itemDown(id,itemIndex)">down</button>
       </div>
       
       <div  *ngIf="getMainById(x)?.type === itemType.Link">{{getMainById(x).id}}
         <a style="text-decoration:none" routerLink="/detail/{{getMainById(x).id}}">{{getMainById(x).name}}</a>
-        <button (click)="deleteLink(x)">delete link</button>
-        <button (click)="messageUp(id,messageIndex)">up</button>
-        <button (click)="messageDown(id,messageIndex)">down</button>
+        <button (click)="deleteItem(x)">delete link</button>
+        <button (click)="itemUp(id,itemIndex)">up</button>
+        <button (click)="itemDown(id,itemIndex)">down</button>
       </div>
   </li>
 
