@@ -105,7 +105,7 @@ export class MainDatabaseService {
    }
 
    /** PUT: update the main section on the server and return a message; */
-   public updateItemName(some: Item ): Promise<any> {
+   public updateItem(some: Item ): Promise<any> {
       const url = `${this.itemUrl}/${some.id}`;
       return this.http.put(url, some, httpOptions).toPromise();
    }

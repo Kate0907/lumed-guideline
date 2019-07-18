@@ -52,30 +52,30 @@ namespace Guideline.Services
             item.name = "New Item";
             ItemDb.ITEMS.Add(item);
 
-            var s = ItemDb.ITEMS.FirstOrDefault(v => v.id == id);
-            if(s.childrenIds == null)
+            var parentItem = ItemDb.ITEMS.FirstOrDefault(v => v.id == id);
+            if(parentItem.childrenIds == null)
             {
-                s.childrenIds = new List<int> { item.id };
+                   parentItem.childrenIds = new List<int> { item.id };
             }
             else
             {
-                s.childrenIds.Add(item.id);
+                   parentItem.childrenIds.Add(item.id);
             }
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
         // PUT api/values/5
-        public HttpResponseMessage Put(Item some)
+        public HttpResponseMessage Put(Item newItem)
         {
-            var m = ItemDb.ITEMS.FirstOrDefault(v => v.id == some.id);
-            if(m == null)
+            var oldItem = ItemDb.ITEMS.FirstOrDefault(v => v.id == newItem.id);
+            if(oldItem == null)
             {
                 throw (new NullReferenceException());
             }
             else
             {
-                m.name = some.name;
-                //m.childrenIds = item.childrenIds;
+                oldItem.name = newItem.name;
+                oldItem.childrenIds = newItem.childrenIds;
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }           
         }

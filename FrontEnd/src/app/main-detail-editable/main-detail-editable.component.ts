@@ -54,35 +54,13 @@ export class MainDetailEditableComponent implements OnInit {
     return this.mains.find(main => main.id === id);
   }
 
-  public async addSection(): Promise<void> {
-    const type = this.itemType.Link;
-    await this.mainService.addSection(this.main.id, type);
+  public async addItem(parentId: number, type: ItemType): Promise<void> {
+    await this.mainService.addItem(parentId, type);
     await this.refresh();
   }
 
-  public async addLink(id: number): Promise<void> {
-    const type = this.itemType.Link;
-    await this.mainService.addLink(id, type);
-    await this.refresh();
-  }
-
-  public async addMessage(id: number): Promise<void> {
-    const type = this.itemType.Message;
-    await this.mainService.addMessage(id, type);
-    await this.refresh();
-  }
-
-  public async updateMainName(item: Item): Promise<void> {
-    await this.mainService.updateMainName(item);
-    await this.refresh();
-  }
-
-  public async updateTitle(item: Item): Promise<void> {
-    await this.mainService.updateTitle(item);
-  }
-
-  public async updateMessage(item: Item): Promise<void> {
-    await this.mainService.updateMessage(item);
+  public async updateItem(item: Item): Promise<void> {
+    await this.mainService.updateItem(item);
     await this.refresh();
   }
 
@@ -101,15 +79,15 @@ export class MainDetailEditableComponent implements OnInit {
     await this.refresh();
   }
 
-    public async messageUp(sectionId: number, messageIndex: number): Promise<void> {
+    public async itemUp(sectionId: number, messageIndex: number): Promise<void> {
       const section = this.getMainById(sectionId);
-      await this.mainService.messageUp(section, messageIndex);
+      await this.mainService.itemUp(section, messageIndex);
       this.getMain();
     }
 
-    public async messageDown(sectionId: number, messageIndex: number): Promise<void> {
+    public async itemDown(sectionId: number, messageIndex: number): Promise<void> {
       const section = this.getMainById(sectionId);
-      await this.mainService.messageDown(section, messageIndex);
+      await this.mainService.itemDown(section, messageIndex);
       this.getMain();
     }
 
