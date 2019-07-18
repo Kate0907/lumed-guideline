@@ -2,7 +2,7 @@
 <div>
   <ul class="group" *ngFor="let eachgroup of maingroup">
     <h2 class="group">{{eachgroup.name}}</h2>
-    <li *ngFor="let id of eachgroup.samemainsIds ">
+    <li *ngFor="let id of eachgroup.childrenIds ">
       <a style="text-decoration:none" routerLink="/detail/{{id}}">{{getMainById(id).name}}
       </a>
     </li>

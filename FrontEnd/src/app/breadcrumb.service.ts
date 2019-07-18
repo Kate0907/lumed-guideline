@@ -19,9 +19,9 @@ export class BreadcrumbService {
   constructor(private _DB: MainDatabaseService,
   ) { }
 
-  public async getBreadcrumbs(Url: string = '', breadcrumbs: IBreadcrumb[] = []): Promise<IBreadcrumb[]> {
+  public async getBreadcrumbs(currentUrl: string = '', breadcrumbs: IBreadcrumb[] = []): Promise<IBreadcrumb[]> {
 
-    const urls = Url.split('/');
+    const urls = currentUrl.split('/');
     const urlId = urls[urls.length - 1];
     const currentId = Number(urlId);
     let currentName = 'no name';
@@ -44,13 +44,13 @@ export class BreadcrumbService {
     // add breadcrumb
     const breadcrumb: IBreadcrumb = {
       label: currentName,
-      url: Url
+      url: currentUrl
     };
     breadcrumbs.push(breadcrumb);
 
     for (let i = 0; i < breadcrumbs.length; i++) {
       const bread = breadcrumbs[i];
-      if (bread.url === Url) {
+      if (bread.url === currentUrl) {
         return breadcrumbs.slice(0, i + 1);
       }
     }

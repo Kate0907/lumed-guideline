@@ -30,12 +30,13 @@ namespace Guideline.Services
             }          
         }
         
-        public Item Post()
+        public Item Post(ItemType type)
         {
             var itemToAdd = new Item();
             itemToAdd.id = ItemDb.LastId++;
+            itemToAdd.type = type;
             itemToAdd.childrenIds = new List<int> { };
-            itemToAdd.name = "New Main Section";
+            itemToAdd.name = "New Group";
             ItemDb.ITEMS.Add(itemToAdd);
             return itemToAdd;
         }
@@ -48,16 +49,16 @@ namespace Guideline.Services
             itemToAdd.childrenIds = new List<int> { };
             itemToAdd.name = "New Item";
             ItemDb.ITEMS.Add(itemToAdd);
-
-            var parentItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
-            if(parentItem.childrenIds == null)
-            {
-                   parentItem.childrenIds = new List<int> { itemToAdd.id };
-            }
-            else
-            {
-                   parentItem.childrenIds.Add(itemToAdd.id);
-            }
+            
+          var parentItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
+        if (parentItem.childrenIds == null)
+        {
+          parentItem.childrenIds = new List<int> { itemToAdd.id };
+        }
+        else
+        {
+          parentItem.childrenIds.Add(itemToAdd.id);
+        }           
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
        

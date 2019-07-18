@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainGroup } from '../mainGroup';
 import { MainService } from '../main.service';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
@@ -11,7 +10,7 @@ import { ItemType } from '../ItemType';
 })
 export class MainEditableComponent implements OnInit {
   @Input() public mains: Item[];
-  @Input() public maingroup: MainGroup[];
+  @Input() public maingroup: Item[];
 
   public readonly itemType = ItemType;
 
@@ -28,31 +27,27 @@ export class MainEditableComponent implements OnInit {
     return this.mains.find(main => main.id === id);
   }
 
-  public async getMainGroup(): Promise<void>  {
-    this.maingroup = await this.mainService.getMainGroup();
+  public  getMainGroup(): void  {
+    this.maingroup = this.mains.filter(main => main.type === this.itemType.Group);
   }
 
   public async getMains(): Promise<void> {
     this.mains = await this.mainService.getMains();
   }
 
-  public updateGroupName(maingroup: MainGroup, newname: string) {
-    this.mainService.updateGroupName(maingroup, newname);
+  public async updateItem(maingroup: Item): Promise<void> {
+    await this.mainService.updateItem(maingroup);
   }
 
   public async addMain(groupId: number, type: ItemType): Promise<void> {
     await this.mainService.addItem(groupId, type);
-    this.getMains();
+    await this.getMains();
     this.getMainGroup();
   }
 
-  public async addMainGroup(): Promise<void> {
-    await this.mainService.addMainGroup();
-    this.getMainGroup();
-  }
-
-  public async deleteGroup(eachgroup: MainGroup): Promise<void> {
-    await this.mainService.deleteGroup(eachgroup);
+  public async addMainGroup(type: ItemType): Promise<void> {
+    await this.mainService.addItemNoParent(type);
+    await this.getMains();
     this.getMainGroup();
   }
 

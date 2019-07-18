@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainGroup } from '../mainGroup';
 import { MainService } from '../main.service';
 import { Item } from '../item';
+import { ItemType } from '../ItemType';
 
 @Component({
   selector: 'app-main-readonly',
@@ -10,7 +10,9 @@ import { Item } from '../item';
 })
 export class MainReadonlyComponent implements OnInit {
   @Input() public mains: Item[];
-  @Input() public maingroup: MainGroup[];
+  @Input() public maingroup: Item[];
+
+  public readonly itemType = ItemType;
 
   constructor(
     private mainService: MainService,
@@ -21,9 +23,10 @@ export class MainReadonlyComponent implements OnInit {
     this.getMainGroup();
   }
 
-  public async getMainGroup(): Promise<void> {
-    this.maingroup = await this.mainService.getMainGroup();
+  public  getMainGroup(): void  {
+    this.maingroup = this.mains.filter(main => main.type === this.itemType.Group);
   }
+
 
   public async getMains(): Promise<void> {
     this.mains = await this.mainService.getMains();
