@@ -38,7 +38,7 @@ export class MainDetailComponent implements OnInit {
    }
 
   public async getMain(): Promise<void> {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = Number(this.route.snapshot.paramMap.get('id'));
     this.main = await this.mainService.getMain(id);
   }
 
@@ -49,7 +49,6 @@ export class MainDetailComponent implements OnInit {
   public getMainById(id: number): Item {
     return this.mains.find(main => main.id === id);
   }
-
 
   public goBack(): void {
     this.location.back();

@@ -23,7 +23,6 @@ export class MainDetailEditableComponent implements OnInit {
     private mainService: MainService,
     private location: Location) {
     this.router.events.subscribe(navigation => {
-      console.log(navigation);
       if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
         this.refresh();
       }
@@ -36,9 +35,8 @@ export class MainDetailEditableComponent implements OnInit {
 
   public async refresh(): Promise<void> {
     this.mains = await this.mainService.getMains();
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = Number(this.route.snapshot.paramMap.get('id'));
     this.main = await this.mainService.getMain(id);
-    console.log(id, this.main);
   }
 
   public getMainById(id: number): Item {
