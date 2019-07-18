@@ -28,26 +28,5 @@ namespace Guideline.Models
 }
         // TODO mainId => linkIds
         public List<int> mainIds { get; set; } = new List<int>();
-        public List<Message> messages
-        {
-            get
-            {
-                var newList = new List<Message>();
-                foreach (var id in messageIds ?? new List<int>())
-                {                      
-                        foreach (var message in MessageDb.MESSAGES)
-                        {
-                            if (message.id == id)
-                            {
-                                newList.Add(message);
-                            }
-                        }
-                }
-                return newList;
-            }
-        }
-
-        // TODO messageIds
-        public List<int> messageIds { get; set; } = new List<int>();
     }
 }

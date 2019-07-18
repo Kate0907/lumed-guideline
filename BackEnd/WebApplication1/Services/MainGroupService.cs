@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -60,7 +60,7 @@ namespace Guideline.Services
             }
         }
 
-        public HttpResponseMessage Post(int id, MainSection item)
+        public HttpResponseMessage Post(int id, Item item)
         {
             var g = MainGroupDb.MAINGROUP.FirstOrDefault(v => v.id == id);
             if(g.samemainsIds == null)

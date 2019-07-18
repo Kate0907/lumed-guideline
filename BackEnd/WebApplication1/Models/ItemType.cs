@@ -9,5 +9,6 @@ namespace Guideline.Models
   {
     Message,
     Link,
+    Group,
   }
 }

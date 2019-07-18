@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -45,7 +45,7 @@ namespace Guideline.Controllers
             }
         }
 
-        public HttpResponseMessage Post(int id, [FromBody]MainSection item)
+        public HttpResponseMessage Post(int id, [FromBody]Item item)
         {
             if (ModelState.IsValid)
             {

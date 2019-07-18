@@ -30,7 +30,6 @@ namespace Guideline.Services
             t.id = SectionDb.LastId++;
             t.mainIds = new List<int> { };
             t.title = "New Section";
-            t.messageIds = new List<int> { };
             SectionDb.SECTIONS.Add(t);
 
             var m = MainDb.MAINS.FirstOrDefault(v => v.id == item.id);
@@ -58,7 +57,6 @@ namespace Guideline.Services
             {
                 s.title = item.title;
                 s.mainIds = item.mainIds;
-                s.messageIds = item.messageIds;
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }                    
         }
