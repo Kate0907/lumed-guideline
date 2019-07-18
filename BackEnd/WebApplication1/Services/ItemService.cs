@@ -12,7 +12,7 @@ namespace Guideline.Services
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ItemService
     {
-        // GET api/values
+       
         public IEnumerable<Item> GetAllItems()
         {
             return ItemDb.ITEMS;
