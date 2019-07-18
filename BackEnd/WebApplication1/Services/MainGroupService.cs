@@ -20,14 +20,14 @@ namespace Guideline.Services
         
         public MainGroup Get(int id)
         {
-            var group = MainGroupDb.MAINGROUP.FirstOrDefault(item => item.id == id);
-            if (group == null)
+            var groupToGet = MainGroupDb.MAINGROUP.FirstOrDefault(item => item.id == id);
+            if (groupToGet == null)
             {
                 throw (new NullReferenceException());
             }
             else
             {
-                return group;
+                return groupToGet;
             }
         }
        
@@ -58,14 +58,14 @@ namespace Guideline.Services
 
         public HttpResponseMessage Post(int id, Item item)
         {
-            var group = MainGroupDb.MAINGROUP.FirstOrDefault(mainGroup => mainGroup.id == id);
-            if(group.samemainsIds == null)
+            var parentGroup = MainGroupDb.MAINGROUP.FirstOrDefault(mainGroup => mainGroup.id == id);
+            if(parentGroup.samemainsIds == null)
             {
-                  group.samemainsIds = new List<int> { item.id };
+                parentGroup.samemainsIds = new List<int> { item.id };
             }
             else
             {
-                  group.samemainsIds.Add(item.id);
+               parentGroup.samemainsIds.Add(item.id);
             }
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
