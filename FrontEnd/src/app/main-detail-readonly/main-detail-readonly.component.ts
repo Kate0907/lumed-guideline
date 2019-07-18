@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainSection } from '../main';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { MainService } from '../main.service';
@@ -25,7 +24,6 @@ export class MainDetailReadonlyComponent implements OnInit {
     private mainService: MainService,
     private location: Location) {
     this.router.events.subscribe(navigation => {
-      console.log(navigation);
       if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
         this.getMain();
       }
@@ -37,9 +35,8 @@ export class MainDetailReadonlyComponent implements OnInit {
   }
 
   public async getMain(): Promise<void> {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = Number(this.route.snapshot.paramMap.get('id'));
     this.main = await this.mainService.getMain(id);
-    console.log(id, this.main);
   }
 
   public async getMains(): Promise<void> {

@@ -3,11 +3,10 @@
 
   <ul *ngFor="let id of main.childrenIds">
     <h3 class="mainsection" *ngIf="getMainById(id).name != null">{{getMainById(id).name}}</h3>
-
-    <!-- <ul class="msg" *ngIf="section.messages != null">-->
       <li *ngFor="let x of getMainById(id).childrenIds">
        <div  *ngIf="getMainById(x).type === itemType.Message">{{getMainById(x).name}} 
        </div>
+       
        <div  *ngIf="getMainById(x).type === itemType.Link">
           <a style="text-decoration:none" routerLink="/detail/{{x}}">{{getMainById(x).name}}
           </a>
@@ -15,12 +14,4 @@
       </li>
   </ul>
 
-    <!--<ul class="mainsection" *ngIf="section.mains != null">
-      <li *ngFor="let main of section.mains">
-        <a style="text-decoration:none" routerLink="/detail/{{main.id}}">{{main.name}}
-        </a>
-      </li>
-    </ul>
-  
-  </ul>-->
  </div>

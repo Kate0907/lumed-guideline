@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainSection } from '../main';
 import { MainGroup } from '../mainGroup';
 import { MainService } from '../main.service';
 import { Item } from '../item';
+import { ItemType } from '../ItemType';
 
 @Component({
   selector: 'app-main-editable',
@@ -12,6 +12,8 @@ import { Item } from '../item';
 export class MainEditableComponent implements OnInit {
   @Input() public mains: Item[];
   @Input() public maingroup: MainGroup[];
+
+  public readonly itemType = ItemType;
 
   constructor(
     private mainService: MainService,
@@ -26,7 +28,7 @@ export class MainEditableComponent implements OnInit {
     return this.mains.find(main => main.id === id);
   }
 
-  public async getMainGroup(): Promise<void> {
+  public async getMainGroup(): Promise<void>  {
     this.maingroup = await this.mainService.getMainGroup();
   }
 
@@ -36,29 +38,26 @@ export class MainEditableComponent implements OnInit {
 
   public updateGroupName(maingroup: MainGroup, newname: string) {
     this.mainService.updateGroupName(maingroup, newname);
-
   }
 
-  public async addMain(maingroup: MainGroup): Promise<void> {
-    const newMain = await this.mainService.addMain(maingroup);
-    console.log(newMain);
-    this.getMains();
-    this.getMainGroup();
+  public async addMain(groupId: number, type: ItemType): Promise<void> {
+    await this.mainService.addItem(groupId, type);
+    await this.getMains();
+    await this.getMainGroup();
   }
 
   public async addMainGroup(): Promise<void> {
     await this.mainService.addMainGroup();
-    this.getMainGroup();
-
+    await this.getMainGroup();
   }
 
   public async deleteGroup(eachgroup: MainGroup): Promise<void> {
     await this.mainService.deleteGroup(eachgroup);
-    this.getMainGroup();
+    await this.getMainGroup();
   }
 
-  public async deleteMain(main: MainSection) {
-    await this.mainService.deleteMain(main.id);
-    this.getMainGroup();
+  public async deleteMain(mainId: number) {
+    await this.mainService.deleteItem(mainId);
+    await this.getMainGroup();
   }
 }

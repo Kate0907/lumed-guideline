@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainSection } from '../main';
 import { MainService } from '../main.service';
 import { MainGroup } from '../mainGroup';
 import { Item } from '../item';
@@ -13,7 +12,7 @@ import { Item } from '../item';
 export class MainComponent implements OnInit {
   @Input() public mains: Item[];
   @Input() public maingroup: MainGroup[];
-  isAdmin = false;
+  public isAdmin = false;
 
   constructor(private mainService: MainService) { }
 

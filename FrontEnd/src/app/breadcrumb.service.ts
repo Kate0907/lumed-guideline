@@ -19,13 +19,13 @@ export class BreadcrumbService {
   constructor(private _DB: MainDatabaseService,
   ) { }
 
-  public async getBreadcrumbs(url: string = '', breadcrumbs: IBreadcrumb[] = []): Promise<IBreadcrumb[]> {
+  public async getBreadcrumbs(currentUrl: string = '', breadcrumbs: IBreadcrumb[] = []): Promise<IBreadcrumb[]> {
 
-    const urls = url.split('/');
+    const urls = currentUrl.split('/');
     const urlId = urls[urls.length - 1];
-    const suchid = Number(urlId);
-    let suchname = 'no name';
-    if (Number.isNaN(suchid) === true || urlId === '') {
+    const currentId = Number(urlId);
+    let currentName = 'no name';
+    if (Number.isNaN(currentId) === true || urlId === '') {
       return this.reinitBreadcrumbs();
     }
 
@@ -33,24 +33,24 @@ export class BreadcrumbService {
       breadcrumbs = this.reinitBreadcrumbs();
     }
 
-    const suchmain = await this._DB.getMain(suchid);
-    const name = suchmain.name;
-    if (suchmain == null) {
-      suchname = 'No Data';
+    const currentMain = await this._DB.getMain(currentId);
+    const name = currentMain.name;
+    if (currentMain == null) {
+      currentName = 'No Data';
     } else {
-      suchname = name;
+      currentName = name;
     }
 
     // add breadcrumb
     const breadcrumb: IBreadcrumb = {
-      label: suchname,
-      url: url
+      label: currentName,
+      url: currentUrl
     };
     breadcrumbs.push(breadcrumb);
 
     for (let i = 0; i < breadcrumbs.length; i++) {
       const bread = breadcrumbs[i];
-      if (bread.url === url) {
+      if (bread.url === currentUrl) {
         return breadcrumbs.slice(0, i + 1);
       }
     }
