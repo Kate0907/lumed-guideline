@@ -14,25 +14,22 @@ namespace Guideline.Controllers
     public class MainGroupController : ApiController
     {
         private MainGroupService service = new MainGroupService();
-        // GET api/values
+
         public IEnumerable<MainGroup> GetAllMainGroup()
         {
             return service.GetAllMainGroup();
         }
 
-        // GET api/values/5
         public MainGroup Get(int id)
         {
             return service.Get(id);
         }
 
-        // POST api/<controller>
         public MainGroup Post()
         {
             return service.Post();
         }
 
-        // PUT api/values/5
         public HttpResponseMessage Put(int id, [FromBody]MainGroup item)
         {
             if (ModelState.IsValid)
@@ -57,7 +54,6 @@ namespace Guideline.Controllers
             }
         }
 
-        // DELETE api/values/5
         public void Delete(int id)
         {
             service.Delete(id);

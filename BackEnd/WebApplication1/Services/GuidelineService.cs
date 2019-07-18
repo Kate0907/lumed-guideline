@@ -12,37 +12,35 @@ namespace Guideline.Services
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class GuidelineService
     {
-        // GET api/values
+
         public IEnumerable<MainSection> GetAllMainSections()
         {
             return MainDb.MAINS;
         }
 
-        // GET api/values/5
         public MainSection Get(int id)
         {
-            var m = MainDb.MAINS.FirstOrDefault(v => v.id == id);
-            if(m == null)
+            var mainSection = MainDb.MAINS.FirstOrDefault(main => main.id == id);
+            if(mainSection == null)
             {
                 throw(new NullReferenceException());
             }
             else
             {
-                return m;
+                return mainSection;
             }          
         }
 
-        // POST api/<controller>
         public MainSection Post()
         {
-            var item = new MainSection();
-            item.id = MainDb.LastId++;
-            item.sectionIds = new List<int> { };
-            item.name = "New Main Section";
-            MainDb.MAINS.Add(item);
-            return item;
+            var newMain = new MainSection();
+            newMain.id = MainDb.LastId++;
+            newMain.sectionIds = new List<int> { };
+            newMain.name = "New Main Section";
+            MainDb.MAINS.Add(newMain);
+            return newMain;
         }
-        // POST add a new main section to current section's mainIds
+        
         public HttpResponseMessage Post(int id)
         {
             var item = new MainSection();
@@ -51,55 +49,52 @@ namespace Guideline.Services
             item.name = "New Main Section";
             MainDb.MAINS.Add(item);
 
-            var s = ItemDb.ITEMS.FirstOrDefault(v => v.id == id);
-            if(s.childrenIds == null)
+            var group = ItemDb.ITEMS.FirstOrDefault(v => v.id == id);
+            if(group.childrenIds == null)
             {
-                s.childrenIds = new List<int> { item.id };
+               group.childrenIds = new List<int> { item.id };
             }
             else
             {
-                s.childrenIds.Add(item.id);
+              group.childrenIds.Add(item.id);
             }
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        // PUT api/values/5
         public HttpResponseMessage Put(int id, MainSection item)
         {
-            var m = MainDb.MAINS.FirstOrDefault(v => v.id == id);
-            if(m == null)
+            var itemToUpdate = MainDb.MAINS.FirstOrDefault(main => main.id == id);
+            if(itemToUpdate == null)
             {
                 throw (new NullReferenceException());
             }
             else
             {
-                m.name = item.name;
-                m.sectionIds = item.sectionIds;
+                itemToUpdate.name = item.name;
+                itemToUpdate.sectionIds = item.sectionIds;
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }           
         }
-
-         //DELETE api/values/5
+        
          public void Delete(int id)
          {
-             var m = ItemDb.ITEMS.FirstOrDefault(v => v.id == id);
-             if(m == null)
+             var itemToDelete = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
+             if(itemToDelete == null)
              {
                  throw (new NullReferenceException());
              }
              else
              {
-               ItemDb.ITEMS.ForEach(section =>
+               ItemDb.ITEMS.ForEach(item =>
                  {
-                     if (section.childrenIds == null)
+                     if (item.childrenIds == null)
                      {
-                     section.childrenIds = new List<int> { };
+                     item.childrenIds = new List<int> { };
                      }
-                   section.childrenIds = section.childrenIds.Where(linkId => linkId != id).ToList();
+                   item.childrenIds = item.childrenIds.Where(childrenIds => childrenIds != id).ToList();
                  });
-        ItemDb.ITEMS.Remove(m);
-             }
-             
+               ItemDb.ITEMS.Remove(itemToDelete);
+             }            
          }
      }
 }

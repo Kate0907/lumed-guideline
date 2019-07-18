@@ -15,14 +15,11 @@ namespace Guideline.Controllers
     {
     private ItemService service = new ItemService();
 
-
-    // GET api/values
     public IEnumerable<Item> GetAllMainSections()
     {
       return service.GetAllItems();
     }
 
-    // GET api/values/5
     public Item Get(int id)
     {
       return service.Get(id);
@@ -40,7 +37,6 @@ namespace Guideline.Controllers
       }
     }
 
-    // PUT api/values/5
     public HttpResponseMessage Put( [FromBody]Item some)
     {
       // if (ModelState.IsValid)

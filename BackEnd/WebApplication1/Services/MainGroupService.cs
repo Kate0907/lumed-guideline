@@ -12,79 +12,74 @@ namespace Guideline.Services
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MainGroupService
     {
-        // GET api/values
+        
         public IEnumerable<MainGroup> GetAllMainGroup()
         {
             return MainGroupDb.MAINGROUP;
-
         }
-
-        // GET api/values/5
+        
         public MainGroup Get(int id)
         {
-            var g = MainGroupDb.MAINGROUP.FirstOrDefault(v => v.id == id);
-            if (g == null)
+            var group = MainGroupDb.MAINGROUP.FirstOrDefault(item => item.id == id);
+            if (group == null)
             {
                 throw (new NullReferenceException());
             }
             else
             {
-                return g;
+                return group;
             }
         }
-
-        // POST api/<controller>
+       
         public MainGroup Post()
         {
-            var item = new MainGroup();
-            item.id = MainGroupDb.LastId++;
-            item.samemainsIds = new List<int> { };
-            item.name = "New Group";
-            MainGroupDb.MAINGROUP.Add(item);
-            return item;
+            var newGroup = new MainGroup();
+            newGroup.id = MainGroupDb.LastId++;
+            newGroup.samemainsIds = new List<int> { };
+            newGroup.name = "New Group";
+            MainGroupDb.MAINGROUP.Add(newGroup);
+            return newGroup;
         }
-
-        // PUT api/values/5
+        
         public HttpResponseMessage Put(int id, MainGroup item)
         {
-            var g = MainGroupDb.MAINGROUP.FirstOrDefault(v => v.id == id);
-            if (g == null)
+            var groupToUpdate = MainGroupDb.MAINGROUP.FirstOrDefault(group => group.id == id);
+            if (groupToUpdate == null)
             {
                 throw (new NullReferenceException());
             }
             else
             {
-                g.name = item.name;
-                g.samemainsIds = item.samemainsIds;
+                groupToUpdate.name = item.name;
+                groupToUpdate.samemainsIds = item.samemainsIds;
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
         }
 
         public HttpResponseMessage Post(int id, Item item)
         {
-            var g = MainGroupDb.MAINGROUP.FirstOrDefault(v => v.id == id);
-            if(g.samemainsIds == null)
+            var group = MainGroupDb.MAINGROUP.FirstOrDefault(mainGroup => mainGroup.id == id);
+            if(group.samemainsIds == null)
             {
-                g.samemainsIds = new List<int> { item.id };
+                  group.samemainsIds = new List<int> { item.id };
             }
             else
             {
-                g.samemainsIds.Add(item.id);
+                  group.samemainsIds.Add(item.id);
             }
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        // DELETE api/values/5
         public void Delete(int id)
         {
-            var g = MainGroupDb.MAINGROUP.FirstOrDefault(v => v.id == id);
-            if (g == null)
+            var groupToDelete = MainGroupDb.MAINGROUP.FirstOrDefault(item => item.id == id);
+            if (groupToDelete == null)
             {
                 throw (new NullReferenceException());
             }
             else
             {
-                MainGroupDb.MAINGROUP.Remove(g);
+                MainGroupDb.MAINGROUP.Remove(groupToDelete);
             }
         }
     }
