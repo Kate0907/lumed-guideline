@@ -64,32 +64,22 @@ export class MainDetailEditableComponent implements OnInit {
     await this.refresh();
   }
 
-  public async deleteMessage(mainId: number): Promise<void> {
-    await this.mainService.deleteMessage(mainId);
+  public async deleteItem(itemId: number): Promise<void> {
+    await this.mainService.deleteItem(itemId);
     await this.refresh();
   }
 
-  public async deleteLink(mainId: number): Promise<void> {
-    await this.mainService.deleteMain(mainId);
-    await this.refresh();
+  public async itemUp(sectionId: number, messageIndex: number): Promise<void> {
+    const section = this.getMainById(sectionId);
+    await this.mainService.itemUp(section, messageIndex);
+    this.getMain();
   }
 
-  public async deleteSection(sectionId: number): Promise<void> {
-    await this.mainService.deleteSection(sectionId);
-    await this.refresh();
+  public async itemDown(sectionId: number, messageIndex: number): Promise<void> {
+    const section = this.getMainById(sectionId);
+    await this.mainService.itemDown(section, messageIndex);
+    this.getMain();
   }
-
-    public async itemUp(sectionId: number, messageIndex: number): Promise<void> {
-      const section = this.getMainById(sectionId);
-      await this.mainService.itemUp(section, messageIndex);
-      this.getMain();
-    }
-
-    public async itemDown(sectionId: number, messageIndex: number): Promise<void> {
-      const section = this.getMainById(sectionId);
-      await this.mainService.itemDown(section, messageIndex);
-      this.getMain();
-    }
 
   public goBack(): void {
     this.location.back();
