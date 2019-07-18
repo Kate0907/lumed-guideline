@@ -26,29 +26,23 @@ export class MainDetailEditableComponent implements OnInit {
     this.router.events.subscribe(navigation => {
       console.log(navigation);
       if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
-        this.getMain();
+        this.refresh();
       }
     });
   }
 
   public ngOnInit(): void {
-    this.getMains();
+    this.refresh();
   }
 
   public async refresh(): Promise<void> {
-    await this.getMains();
-    await this.getMain();
-  }
-
-  public async getMain(): Promise<void> {
+    this.mains = await this.mainService.getMains();
     const id = +this.route.snapshot.paramMap.get('id');
     this.main = await this.mainService.getMain(id);
     console.log(id, this.main);
   }
 
-  public async getMains(): Promise<void> {
-    this.mains = await this.mainService.getMains();
-  }
+
 
   public getMainById(id: number): Item {
     return this.mains.find(main => main.id === id);
@@ -72,13 +66,13 @@ export class MainDetailEditableComponent implements OnInit {
   public async itemUp(sectionId: number, messageIndex: number): Promise<void> {
     const section = this.getMainById(sectionId);
     await this.mainService.itemUp(section, messageIndex);
-    this.getMain();
+    await this.refresh();
   }
 
   public async itemDown(sectionId: number, messageIndex: number): Promise<void> {
     const section = this.getMainById(sectionId);
     await this.mainService.itemDown(section, messageIndex);
-    this.getMain();
+    await this.refresh();
   }
 
   public goBack(): void {
