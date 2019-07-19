@@ -8,43 +8,43 @@ import { ItemType } from '../ItemType';
 
 
 @Component({
-  selector: 'app-main-detail-readonly',
+  selector: 'lumed-guideline-item-readonly',
   templateUrl: './main-detail-readonly.component.html',
   styleUrls: ['./main-detail-readonly.component.css']
 })
-export class MainDetailReadonlyComponent implements OnInit {
-  @Input() public main: Item;
-  @Input() public mains: Item[];
+export class ItemReadonlyComponent implements OnInit {
+  @Input() public item: Item;
+  @Input() public items: Item[];
 
   public readonly itemType = ItemType;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private mainService: GuidelineItemService,
+    private itemService: GuidelineItemService,
     private location: Location) {
     this.router.events.subscribe(navigation => {
       if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
-        this.getMain();
+        this.getItem();
       }
     });
   }
 
   public ngOnInit(): void {
-    this.getMains();
+    this.getItems();
   }
 
-  public async getMain(): Promise<void> {
+  public async getItem(): Promise<void> {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.main = await this.mainService.getOneItem(id);
+    this.item = await this.itemService.getOneItem(id);
   }
 
-  public async getMains(): Promise<void> {
-    this.mains = await this.mainService.getAllItems();
+  public async getItems(): Promise<void> {
+    this.items = await this.itemService.getAllItems();
   }
 
-  public getMainById(id: number): Item {
-    return this.mains.find(main => main.id === id);
+  public getItemById(id: number): Item {
+    return this.items.find(main => main.id === id);
   }
 
   goBack(): void {

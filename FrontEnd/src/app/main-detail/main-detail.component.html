@@ -3,11 +3,11 @@
 <span><button (click)="goBack()">Back</button></span>
 
 <div *ngIf="!isAdmin">
-    <app-main-detail-readonly [main]="main"></app-main-detail-readonly> 
+    <lumed-guideline-item-readonly [item]="item"></lumed-guideline-item-readonly> 
 </div>
 
 <div *ngIf="isAdmin">
-    <app-main-detail-editable [main]="main"></app-main-detail-editable> 
+    <lumed-guideline-item-editable [item]="item"></lumed-guideline-item-editable> 
 </div>
 
 <button (click)="goBack()">Back</button>
