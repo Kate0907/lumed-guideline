@@ -3,12 +3,14 @@
   <h2><textarea rows="1" cols="45" [(ngModel)]="main.name"></textarea></h2>
   <button (click)="updateItem(main)">Save Title</button>
   <button (click)="addItem(main.id,this.itemType.Link)">Add A New Section</button>
-
+  
+  
   <ul *ngFor="let id of main.childrenIds; let sectionIndex = index">
-      <h2  *ngIf="getMainById(id) != null">
-        <textarea rows="1" cols="60"
-          [(ngModel)]="getMainById(id).name">
-        </textarea>
+      <fieldset>
+        <legend>Section {{sectionIndex+1}}</legend>
+          <h2  *ngIf="getMainById(id) != null">
+              <textarea rows="1" cols="60"[(ngModel)]="getMainById(id).name">
+              </textarea>
         <button (click)="addItem(id,this.itemType.Message)">Add A New Message</button>
         <button (click)="addItem(id,this.itemType.Link)">Add A New Link</button>
         <button (click)="updateItem(getMainById(id))">Save</button>
@@ -17,23 +19,26 @@
 
   <li *ngFor="let x of getMainById(id)?.childrenIds; let itemIndex = index">
 
-      <div *ngIf="getMainById(x)?.type === itemType.Message">        
+      <fieldset>
+        <div *ngIf="getMainById(x)?.type === itemType.Message">        
         <textarea rows="4" cols="50" [(ngModel)]="getMainById(x).name"></textarea>
         <button (click)="updateItem(getMainById(x))">save</button>
         <button (click)="deleteItem(x)">delete</button>
         <button (click)="itemUp(id,itemIndex)">up</button>
         <button (click)="itemDown(id,itemIndex)">down</button>
-      </div>
+        </div>
       
-      <div  *ngIf="getMainById(x)?.type === itemType.Link">{{getMainById(x).id}}
+        <div  *ngIf="getMainById(x)?.type === itemType.Link">{{getMainById(x).id}}
         <a style="text-decoration:none" routerLink="/detail/{{getMainById(x).id}}">{{getMainById(x).name}}</a>
         <button (click)="deleteItem(x)">delete link</button>
         <button (click)="itemUp(id,itemIndex)">up</button>
         <button (click)="itemDown(id,itemIndex)">down</button>
-      </div>
+        </div>
+      </fieldset>
   </li>
-
+      </fieldset>
   </ul>
+
   <div><span>item id: </span>{{main.id}}</div>
   <div><span>item name: </span>{{main.name}}</div>
 </div>

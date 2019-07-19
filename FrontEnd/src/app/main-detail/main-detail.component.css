@@ -3,6 +3,10 @@ span {
   display: block;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .selected {
   background-color: #CFD8DC !important;
   color: white;
