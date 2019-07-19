@@ -9,10 +9,10 @@ import { ItemType } from '../ItemType';
 
 @Component({
   selector: 'lumed-guideline-item-readonly',
-  templateUrl: './main-detail-readonly.component.html',
-  styleUrls: ['./main-detail-readonly.component.css']
+  templateUrl: 'lumed-guideline-item-readonly.component.html',
+  styleUrls: ['./lumed-guideline-item-readonly.component.css']
 })
-export class ItemReadonlyComponent implements OnInit {
+export class ItemReadonlyComponent extends GuidelineItemBase implements OnInit {
   @Input() public item: Item;
   @Input() public items: Item[];
 
@@ -23,6 +23,7 @@ export class ItemReadonlyComponent implements OnInit {
     private router: Router,
     private itemService: GuidelineItemService,
     private location: Location) {
+      super();
     this.router.events.subscribe(navigation => {
       if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
         this.getItem();

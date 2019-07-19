@@ -6,8 +6,8 @@ import { Item } from '../item';
 
 @Component({
   selector: 'lumed-guideline-item',
-  templateUrl: './main-detail.component.html',
-  styleUrls: ['./main-detail.component.css']
+  templateUrl: './lumed-guideline-item.component.html',
+  styleUrls: ['./lumed-guideline-item.component.css']
 })
 export class GuidelineItemComponent implements OnInit {
   @Input() public item: Item;

@@ -4,14 +4,15 @@ import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
+import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-base';
 
 
 @Component({
   selector: 'lumed-guideline-item-editable',
-  templateUrl: './main-detail-editable.component.html',
-  styleUrls: ['./main-detail-editable.component.css']
+  templateUrl: './lumed-guideline-item-editable.component.html',
+  styleUrls: ['./lumed-guideline-item-editable.component.css']
 })
-export class ItemEditableComponent implements OnInit {
+export class ItemEditableComponent extends GuidelineItemBase implements OnInit {
   @Input() public item: Item;
   @Input() public items: Item[];
 
@@ -22,6 +23,7 @@ export class ItemEditableComponent implements OnInit {
     private router: Router,
     private itemService: GuidelineItemService,
     private location: Location) {
+      super();
     this.router.events.subscribe(navigation => {
       if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
         this.refresh();
@@ -74,4 +76,3 @@ export class ItemEditableComponent implements OnInit {
     this.location.back();
   }
 }
-

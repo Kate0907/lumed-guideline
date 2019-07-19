@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GuidelineGroupComponent } from './main/main.component';
-import { GuidelineItemComponent } from './main-detail/main-detail.component';
+import { GuidelineItemComponent } from './lumed-guideline-item/lumed-guideline-item.component';
 
 const routes: Routes = [
   {

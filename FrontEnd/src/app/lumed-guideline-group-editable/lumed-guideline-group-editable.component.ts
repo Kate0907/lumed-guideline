@@ -5,8 +5,8 @@ import { ItemType } from '../ItemType';
 
 @Component({
   selector: 'lumed-guideline-group-editable',
-  templateUrl: './main-editable.component.html',
-  styleUrls: ['./main-editable.component.css']
+  templateUrl: './lumed-guideline-group-editable.component.html',
+  styleUrls: ['./lumed-guideline-group-editable.component.css']
 })
 export class GuidelineGroupEditableComponent implements OnInit {
   @Input() public items: Item[];

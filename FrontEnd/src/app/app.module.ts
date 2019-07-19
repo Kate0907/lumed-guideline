@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { GuidelineGroupComponent } from './main/main.component';
-import { GuidelineItemComponent } from './main-detail/main-detail.component';
+import { GuidelineItemComponent } from './lumed-guideline-item/lumed-guideline-item.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ItemReadonlyComponent } from './main-detail-readonly/main-detail-readonly.component';
-import { ItemEditableComponent } from './main-detail-editable/main-detail-editable.component';
+import { ItemReadonlyComponent } from './lumed-guideline-item-readonly/lumed-guideline-item-readonly.component';
+import { ItemEditableComponent } from './lumed-guideline-item-editable/lumed-guideline-item-editable.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
-import { GuidelineGroupEditableComponent } from './main-editable/main-editable.component';
+import { GuidelineGroupEditableComponent } from './lumed-guideline-group-editable/lumed-guideline-group-editable.component';
 import { GuidelineGroupReadonlyComponent } from './main-readonly/main-readonly.component';
 
 
