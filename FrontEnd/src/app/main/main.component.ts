@@ -1,31 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainService } from '../main.service';
-import { MainGroup } from '../mainGroup';
+import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
+import { ItemType } from '../ItemType';
 
 @Component({
-  selector: 'app-main',
+  selector: 'lumed-guideline-group',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
 
-export class MainComponent implements OnInit {
-  @Input() public mains: Item[];
-  @Input() public maingroup: MainGroup[];
+export class GuidelineGroupComponent implements OnInit {
+  @Input() public items: Item[];
+  @Input() public itemGroup: Item[];
   public isAdmin = false;
+  public readonly itemType = ItemType;
 
-  constructor(private mainService: MainService) { }
+  constructor(private itemService: GuidelineItemService) { }
 
-  public ngOnInit() {
-    this.getMains();
-    this.getMainGroup();
+  public  ngOnInit() {
+      this.refresh();
   }
 
-  public async getMainGroup(): Promise<void> {
-    this.maingroup = await this.mainService.getMainGroup();
-  }
-
-  public async getMains(): Promise<void> {
-    this.mains = await this.mainService.getMains();
+  public async refresh(): Promise<void>  {
+    this.items = await this.itemService.getAllItems();
+    this.itemGroup = this.items.filter(main => main.type === this.itemType.Group);
   }
 }

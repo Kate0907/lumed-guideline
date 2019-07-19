@@ -1,20 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MainService } from './main.service';
+import { GuidelineItemService } from './main.service';
 
 
-import { MainDatabaseService } from './main-database.service';
+import { GuidelineHttpService } from './main-database.service';
 
 describe('IllnessService', () => {
-  let service: MainService;
+  let service: GuidelineItemService;
 
   beforeEach(() => {
-    service = new MainService(new MainDatabaseService());
+    service = new GuidelineItemService(new GuidelineHttpService());
   });
 
 
   it('getIllness(5) - expect illness (Intra-Abdominal Infections) ', ( async () => {
-    service.getMain(5).subscribe(result => {
+    service.getOneItem(5).subscribe(result => {
       expect(result).toBeDefined();
       expect(result.name).toBe('Intra-Abdominal Infections');
       expect(result.section.length).toBe(1);
@@ -22,19 +22,19 @@ describe('IllnessService', () => {
   }));
 
   it('getIllness(100) - expect null', ( async () => {
-    service.getMain(100).subscribe(result => {
+    service.getOneItem(100).subscribe(result => {
       expect(result).not.toBeDefined();
     });
   }));
 
   it('getIllness(null) - expect null', ( async () => {
-    service.getMain(null).subscribe(result => {
+    service.getOneItem(null).subscribe(result => {
       expect(result).not.toBeDefined();
     });
   }));
 
   it('total number of illness in getMAINS() - expect 14', ( async () => {
-    service.getMains().subscribe(result => {
+    service.getAllItems().subscribe(result => {
       expect(result.length).toBe(14);
     });
   }));

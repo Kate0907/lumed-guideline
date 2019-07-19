@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Item } from './item';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError,  } from 'rxjs/operators';
-import { MainGroup } from './mainGroup';
+import { catchError, } from 'rxjs/operators';
 import { ItemType } from './ItemType';
 
 const httpOptions = {
@@ -13,39 +12,25 @@ const httpOptions = {
 @Injectable({
    providedIn: 'root'
 })
-export class MainDatabaseService {
-   private groupUrl = 'http://localhost:61291/api/MainGroup';
+export class GuidelineHttpService {
    private itemUrl = 'http://localhost:61291/api/Item';
 
    constructor(
       private http: HttpClient,
    ) { }
-   /** GET maingroup from the server */
-   public async getMainGroup(): Promise<MainGroup[]> {
-      return this.http.get<MainGroup[]>(this.groupUrl)
-         .pipe(catchError(this.handleError<MainGroup[]>('getMaingroup', []))
-         ).toPromise();
-   }
 
-   /** GET all items from the server */ 
-   public async getMains(): Promise<Item[]> {
+   /** GET all items from the server */
+   public async getAllItems(): Promise<Item[]> {
       return this.http.get<Item[]>(this.itemUrl)
          .pipe(catchError(this.handleError<Item[]>('getItems', []))
          ).toPromise();
    }
 
    /** GET item by id. Will 404 if id not found */
-   public getMain(id: number): Promise<Item> {
+   public getOneItem(id: number): Promise<Item> {
       const url = `${this.itemUrl}/${id}`;
       return this.http.get<Item>(url).pipe(
          catchError(this.handleError<Item>(`getMain id=${id}`))
-      ).toPromise();
-   }
-
-   /** POST create a new maingroup and add to MainGroupDB, return the new maingroup */
-   public async createMainGroup(): Promise<MainGroup> {
-      return this.http.post<MainGroup>(this.groupUrl, httpOptions).pipe(
-         catchError(this.handleError<MainGroup>('createNewSection'))
       ).toPromise();
    }
 
@@ -55,28 +40,15 @@ export class MainDatabaseService {
       return this.http.post(url, type, httpOptions).toPromise();
    }
 
+   /** POST: create a new item and add to parent item's (id = parentId) childrenIds */
+   public createItem(type: ItemType): Promise<any> {
+      return this.http.post(this.itemUrl, type, httpOptions).toPromise();
+   }
+
    /** PUT: update the main section on the server and return a message; */
-   public updateItem(item: Item ): Promise<any> {
+   public updateItem(item: Item): Promise<any> {
       const url = `${this.itemUrl}/${item.id}`;
       return this.http.put(url, item, httpOptions).toPromise();
-   }
-
-   /** PUT: update the maingroup on the server and return a message; */
-   public updateMainGroup(some: MainGroup): Promise<any> {
-      const url = `${this.groupUrl}/${some.id}`;
-      return this.http.put(url, some, httpOptions).toPromise();
-   }
-
-   /** POST: add a main section to current maingroup ; */
-   public updateMainToGroup(particular: MainGroup, some: Item): Promise<any> {
-      const url = `${this.groupUrl}/${particular.id}`;
-      return this.http.post(url, some, httpOptions).toPromise();
-   }
-
-   /** DELETE: delete a main group from MainGroupDB */
-   public deleteMainGroup(id: number): Promise<MainGroup> {
-      const url = `${this.groupUrl}/${id}`;
-      return this.http.delete<MainGroup>(url, httpOptions).toPromise();
    }
 
    /** DELETE: delete item from itemDB */
