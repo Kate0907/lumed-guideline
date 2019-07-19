@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { MainDatabaseService } from './main-database.service';
+import { GuidelineHttpService } from './main-database.service';
 import { Item } from './item';
 import { ItemType } from './ItemType';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MainService {
-  constructor(private _DB: MainDatabaseService, ) { }
+export class GuidelineItemService {
+  constructor(private _DB: GuidelineHttpService, ) { }
 
-  public getMains(): Promise<Item[]> {
-    return this._DB.getMains();
+  public getAllItems(): Promise<Item[]> {
+    return this._DB.getAllItems();
   }
 
-  public getMain(id: number): Promise<Item> {
-    return this._DB.getMain(id);
+  public getOneItem(id: number): Promise<Item> {
+    return this._DB.getOneItem(id);
   }
 
   public async addItemNoParent(type: ItemType): Promise<void> {
@@ -58,20 +57,5 @@ export class MainService {
       section.childrenIds[itemIndex + 1] = swap;
     }
     await this._DB.updateItem(section);
-  }
-
-  /**
- * Handle Http operation that failed.
- * Let the app continue.
- * @param operation - name of the operation that failed
- * @param result - optional value to return as the observable result
- */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 }
