@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
-import { MainService } from '../main.service';
+import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
 
 @Component({
@@ -9,7 +9,7 @@ import { Item } from '../item';
   templateUrl: './main-detail.component.html',
   styleUrls: ['./main-detail.component.css']
 })
-export class MainDetailComponent implements OnInit {
+export class GuidelineItemComponent implements OnInit {
   @Input() public main: Item;
   @Input() public mains: Item[];
   isAdmin = true;
@@ -19,7 +19,7 @@ export class MainDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private mainService: MainService,
+    private mainService: GuidelineItemService,
     private location: Location
   ) {
     this.router.events.subscribe(navigation => {
@@ -39,11 +39,11 @@ export class MainDetailComponent implements OnInit {
 
   public async getMain(): Promise<void> {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.main = await this.mainService.getMain(id);
+    this.main = await this.mainService.getOneItem(id);
   }
 
   public async getMains(): Promise<void> {
-    this.mains = await this.mainService.getMains();
+    this.mains = await this.mainService.getAllItems();
   }
 
   public getMainById(id: number): Item {

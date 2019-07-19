@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IBreadcrumb } from './IBreadcrumb';
-import { MainDatabaseService } from './main-database.service';
+import { GuidelineHttpService } from './main-database.service';
 
 
 @Injectable({
@@ -16,7 +16,7 @@ export class BreadcrumbService {
     } as IBreadcrumb];
   }
 
-  constructor(private _DB: MainDatabaseService,
+  constructor(private _DB: GuidelineHttpService,
   ) { }
 
   public async getBreadcrumbs(currentUrl: string = '', breadcrumbs: IBreadcrumb[] = []): Promise<IBreadcrumb[]> {
@@ -33,7 +33,7 @@ export class BreadcrumbService {
       breadcrumbs = this.reinitBreadcrumbs();
     }
 
-    const currentMain = await this._DB.getMain(currentId);
+    const currentMain = await this._DB.getOneItem(currentId);
     const name = currentMain.name;
     if (currentMain == null) {
       currentName = 'No Data';

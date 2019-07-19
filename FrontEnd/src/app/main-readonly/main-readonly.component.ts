@@ -1,21 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainService } from '../main.service';
+import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
 
 @Component({
-  selector: 'app-main-readonly',
+  selector: 'app-lumed-guideline-group-readonly',
   templateUrl: './main-readonly.component.html',
   styleUrls: ['./main-readonly.component.css']
 })
-export class MainReadonlyComponent implements OnInit {
+export class GuidelineGroupReadonlyComponent implements OnInit {
   @Input() public mains: Item[];
   @Input() public maingroup: Item[];
 
   public readonly itemType = ItemType;
 
   constructor(
-    private mainService: MainService,
+    private mainService: GuidelineItemService,
   ) { }
 
   public async ngOnInit(): Promise<void> {
@@ -29,7 +29,7 @@ export class MainReadonlyComponent implements OnInit {
 
 
   public async getMains(): Promise<void> {
-    this.mains = await this.mainService.getMains();
+    this.mains = await this.mainService.getAllItems();
   }
 
   public getMainById(id: number): Item {

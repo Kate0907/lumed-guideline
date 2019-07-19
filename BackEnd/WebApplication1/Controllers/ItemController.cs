@@ -12,7 +12,7 @@ namespace Guideline.Controllers
 {
   [EnableCors(origins: "*", headers: "*", methods: "*")]
   public class ItemController : ApiController
-    {
+   {
     private ItemService service = new ItemService();
 
     public IEnumerable<Item> GetAllMainSections()
@@ -25,21 +25,14 @@ namespace Guideline.Controllers
       return service.Get(id);
     }
 
-    public HttpResponseMessage Post(int id, [FromBody]ItemType type)
+    public Item Post(int id, [FromBody]ItemType type)
     {
-      if (ModelState.IsValid)
-      {
-        return service.Post(id,type);
-      }
-      else
-      {
-        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-      }
+        return service.createNewItemAndAddTo(id,type); 
     }
 
     public Item Post([FromBody]ItemType type)
     {
-        return service.Post(type);
+        return service.createNewItem(type);
     }
 
     public HttpResponseMessage Put( [FromBody]Item some)
@@ -54,12 +47,9 @@ namespace Guideline.Controllers
       }
     }
 
-    // DELETE api/values/5
     public void Delete(int id)
     {
       service.Delete(id);
     }
-  
-
-}
+   }
 }

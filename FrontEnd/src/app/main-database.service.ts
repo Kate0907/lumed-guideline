@@ -12,7 +12,7 @@ const httpOptions = {
 @Injectable({
    providedIn: 'root'
 })
-export class MainDatabaseService {
+export class GuidelineHttpService {
    private itemUrl = 'http://localhost:61291/api/Item';
 
    constructor(
@@ -20,14 +20,14 @@ export class MainDatabaseService {
    ) { }
 
    /** GET all items from the server */
-   public async getMains(): Promise<Item[]> {
+   public async getAllItems(): Promise<Item[]> {
       return this.http.get<Item[]>(this.itemUrl)
          .pipe(catchError(this.handleError<Item[]>('getItems', []))
          ).toPromise();
    }
 
    /** GET item by id. Will 404 if id not found */
-   public getMain(id: number): Promise<Item> {
+   public getOneItem(id: number): Promise<Item> {
       const url = `${this.itemUrl}/${id}`;
       return this.http.get<Item>(url).pipe(
          catchError(this.handleError<Item>(`getMain id=${id}`))

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
-import { MainService } from '../main.service';
+import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
 
@@ -21,7 +21,7 @@ export class MainDetailReadonlyComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private mainService: MainService,
+    private mainService: GuidelineItemService,
     private location: Location) {
     this.router.events.subscribe(navigation => {
       if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
@@ -36,11 +36,11 @@ export class MainDetailReadonlyComponent implements OnInit {
 
   public async getMain(): Promise<void> {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.main = await this.mainService.getMain(id);
+    this.main = await this.mainService.getOneItem(id);
   }
 
   public async getMains(): Promise<void> {
-    this.mains = await this.mainService.getMains();
+    this.mains = await this.mainService.getAllItems();
   }
 
   public getMainById(id: number): Item {

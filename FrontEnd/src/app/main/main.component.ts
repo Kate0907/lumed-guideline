@@ -1,32 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainService } from '../main.service';
+import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-guideline-group',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
 
-export class MainComponent implements OnInit {
+export class GuidelineGroupComponent implements OnInit {
   @Input() public mains: Item[];
   @Input() public maingroup: Item[];
   isAdmin = false;
   public readonly itemType = ItemType;
 
-  constructor(private mainService: MainService) { }
+  constructor(private mainService: GuidelineItemService) { }
 
   public  ngOnInit() {
-      this.getMains();
-      this.getMainGroup();
+      this.refresh();
   }
 
-  public  getMainGroup(): void  {
+  public async refresh(): Promise<void>  {
+    this.mains = await this.mainService.getAllItems();
     this.maingroup = this.mains.filter(main => main.type === this.itemType.Group);
-  }
-
-  public async getMains(): Promise<void> {
-    this.mains = await this.mainService.getMains();
   }
 }

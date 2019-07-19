@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Cors;
 using Guideline.Models;
 
 namespace Guideline.Services
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ItemService
     {       
         public IEnumerable<Item> GetAllItems()
@@ -30,7 +27,7 @@ namespace Guideline.Services
             }          
         }
         
-        public Item Post(ItemType type)
+        public Item createNewItem(ItemType type)
         {
             var itemToAdd = new Item();
             itemToAdd.id = ItemDb.LastId++;
@@ -41,7 +38,7 @@ namespace Guideline.Services
             return itemToAdd;
         }
         
-        public HttpResponseMessage Post(int id,ItemType type)
+        public Item createNewItemAndAddTo(int id,ItemType type)
         {
             var itemToAdd = new Item();
             itemToAdd.id = ItemDb.LastId++;
@@ -50,7 +47,7 @@ namespace Guideline.Services
             itemToAdd.name = "New Item";
             ItemDb.ITEMS.Add(itemToAdd);
             
-          var parentItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
+           var parentItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
         if (parentItem.childrenIds == null)
         {
           parentItem.childrenIds = new List<int> { itemToAdd.id };
@@ -59,20 +56,20 @@ namespace Guideline.Services
         {
           parentItem.childrenIds.Add(itemToAdd.id);
         }           
-            return new HttpResponseMessage(HttpStatusCode.OK);
+           return itemToAdd;
         }
        
-        public HttpResponseMessage Put(Item newItem)
+        public HttpResponseMessage Put(Item itemToUpdate)
         {
-            var oldItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == newItem.id);
+      var oldItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == itemToUpdate.id);
             if(oldItem == null)
-            {
-                throw (new NullReferenceException());
-            }
+      {
+        throw (new NullReferenceException());
+      }
             else
             {
-                oldItem.name = newItem.name;
-                oldItem.childrenIds = newItem.childrenIds;
+                oldItem.name = itemToUpdate.name;
+                oldItem.childrenIds = itemToUpdate.childrenIds;
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }           
         }
@@ -92,9 +89,9 @@ namespace Guideline.Services
                     {
                       item.childrenIds = new List<int> { };
                     }
-                  item.childrenIds = item.childrenIds.Where(childId => childId != id).ToList();
+                    item.childrenIds = item.childrenIds.Where(childId => childId != id).ToList();
                 });
-             ItemDb.ITEMS.Remove(itemToDelete);
+                ItemDb.ITEMS.Remove(itemToDelete);
             }     
         }
     }
