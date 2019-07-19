@@ -18,8 +18,8 @@ export class MainReadonlyComponent implements OnInit {
     private mainService: MainService,
   ) { }
 
-  public ngOnInit() {
-    this.getMains();
+  public async ngOnInit(): Promise<void> {
+    await this.getMains();
     this.getMainGroup();
   }
 

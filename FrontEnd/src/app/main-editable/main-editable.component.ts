@@ -18,7 +18,7 @@ export class MainEditableComponent implements OnInit {
     private mainService: MainService,
   ) { }
 
-  public async ngOnInit() {
+  public async ngOnInit(): Promise<void> {
     await this.getMains();
     this.getMainGroup();
   }
