@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GuidelineGroupComponent } from './main/main.component';
+import { GuidelineGroupComponent } from './lumed-guideline-group/lumed-guideline-group.component';
 import { GuidelineItemComponent } from './lumed-guideline-item/lumed-guideline-item.component';
 
 const routes: Routes = [

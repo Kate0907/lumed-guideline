@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
+import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-base';
 
 
 
@@ -12,30 +13,22 @@ import { ItemType } from '../ItemType';
   templateUrl: 'lumed-guideline-item-readonly.component.html',
   styleUrls: ['./lumed-guideline-item-readonly.component.css']
 })
-export class ItemReadonlyComponent extends GuidelineItemBase implements OnInit {
-  @Input() public item: Item;
-  @Input() public items: Item[];
-
-  public readonly itemType = ItemType;
+export class ItemReadonlyComponent extends GuidelineItemBase {
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private itemService: GuidelineItemService,
-    private location: Location) {
-      super();
-    this.router.events.subscribe(navigation => {
-      if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
-        this.getItem();
-      }
-    });
+    protected route: ActivatedRoute,
+    protected router: Router,
+    protected itemService: GuidelineItemService,
+    protected location: Location) {
+      super(route, router, itemService, location);
   }
 
-  public ngOnInit(): void {
-    this.getItems();
-  }
 
-  public async getItem(): Promise<void> {
+  // public ngOnInit(): void {
+  //  this.getItems();
+  // }
+
+  /** public async getItem(): Promise<void> {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.item = await this.itemService.getOneItem(id);
   }
@@ -46,10 +39,8 @@ export class ItemReadonlyComponent extends GuidelineItemBase implements OnInit {
 
   public getItemById(id: number): Item {
     return this.items.find(main => main.id === id);
-  }
+  }*/
 
-  goBack(): void {
-    this.location.back();
-  }
+
 }
 
