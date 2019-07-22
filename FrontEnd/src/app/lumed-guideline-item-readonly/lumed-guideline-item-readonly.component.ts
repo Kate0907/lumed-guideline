@@ -22,25 +22,4 @@ export class ItemReadonlyComponent extends GuidelineItemBase {
     protected location: Location) {
       super(route, router, itemService, location);
   }
-
-
-  // public ngOnInit(): void {
-  //  this.getItems();
-  // }
-
-  /** public async getItem(): Promise<void> {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.item = await this.itemService.getOneItem(id);
-  }
-
-  public async getItems(): Promise<void> {
-    this.items = await this.itemService.getAllItems();
-  }
-
-  public getItemById(id: number): Item {
-    return this.items.find(main => main.id === id);
-  }*/
-
-
 }
-

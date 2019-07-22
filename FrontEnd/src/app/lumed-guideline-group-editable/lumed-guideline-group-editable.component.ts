@@ -31,7 +31,7 @@ export class GuidelineGroupEditableComponent extends GuidelineGroupBase {
     await this.refresh();
   }
 
-  public async deleteMain(mainId: number) {
+  public async deleteMain(mainId: number): Promise<void> {
     await this.itemService.deleteItem(mainId);
     await this.refresh();
   }
