@@ -2,16 +2,7 @@
   <h2>{{item.name | uppercase}}</h2>
 
   <ul *ngFor="let id of item.childrenIds">
-    <h3 class="mainsection" *ngIf="getItemById(id).name != null">{{getItemById(id).name}}</h3>
-      <li *ngFor="let childId of getItemById(id).childrenIds">
-       <div  *ngIf="getItemById(childId).type === itemType.Message">{{getItemById(childId).name}} 
-       </div>
-       
-       <div  *ngIf="getItemById(childId).type === itemType.Link">
-          <a style="text-decoration:none" routerLink="/detail/{{childId}}">{{getItemById(childId).name}}
-          </a>
-       </div>
-      </li>
+      <lumed-display-section [Sid]="id"></lumed-display-section>
   </ul>
 
  </div>

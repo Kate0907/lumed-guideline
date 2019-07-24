@@ -1,60 +1,66 @@
 .selected {
-    background-color: #CFD8DC !important;
-    color: white;
-  }
-  
-  .group {
-    margin: 0 0 0 0;
-    list-style-type: none;
-    padding: 0;
-    width: 20em;
-    border-color: #dfdfdf;
-    border-style: solid;
-    border-width: 1px 0 0 0;
-  }
-  
-  .group li {
-    
+  background-color: #CFD8DC !important;
+  color: white;
+}
+
+.group {
+  box-sizing: border-box;
+  margin: 0 0 0 0;
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  border-color: #dfdfdf;
+  border-style: solid;
+  border-width: 1px 0 0 0;
+}
+
+.group li {
   background: #fff;
   border-color: #dfdfdf;
   border-style: solid;
   border-width: 1px 0 0 0;
   height: 1.6em;
   padding: .3em 0;
-  /**padding-left: 0.5rem;*/
   font-weight: 300;
   margin: 0.4em;
-  width: 20em;
-  }
+  margin-left: 0em;
+  margin-top: 0em;
+  margin-bottom: 0.9em;
+  width: 100%;
+}
 
-  .group li.selected:hover {
-    background-color: #BBD8DC !important;
-    color: white;
-  }
+.group li.selected:hover {
+  background-color: #BBD8DC !important;
+  color: white;
+}
+
+.group li:hover {
+  color: #607D8B;
   
-  .group li:hover {
-    color: #607D8B;
-    background-color: #E1B7B7;
-    left: .1em;
-  }
-  
-  .group .text {
-    position: relative;
-    /**top: -3px;*/
-  }
-  
-  h2.group {
+  left: .1em;
+}
+
+.group .text {
+  position: relative;
+}
+
+h2.group {
   color: #000;
   padding-bottom: 0;
   font-size: 1.4em;
   font-weight: bold;
-  line-height: 1.6em;
+  line-height: 2.2em;
   margin-bottom: 0rem;
   text-indent: .4em;
   margin-top: 1.5em;
-  }
+  background-color: #f2f2f2;
+}
 
-  div {
-    display: block;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+div {
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+* {
+  box-sizing: border-box;
 }

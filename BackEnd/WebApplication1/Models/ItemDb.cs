@@ -28,7 +28,7 @@ namespace Guideline.Models
             new Item { id = 19, name = "The Butterfly", childrenIds = new List<int>{22}, type = ItemType.Link},
 
             new Item { id = 20, name = "Key Messages", childrenIds = new List<int> {40,41,42,43}, type = ItemType.Link },
-            new Item { id = 21, name = "Type of Reaction to Penicillin",childrenIds = new List<int>{16,17,18,19,40,44}, type = ItemType.Link},
+            new Item { id = 21, name = "Type of Reaction to Penicillin sssss sssss ssssss ssssss",childrenIds = new List<int>{16,17,18,19,40,44}, type = ItemType.Link},
             new Item { id = 22, name = "Key Messages",childrenIds = new List<int> {11,12,13,14,45,46}, type = ItemType.Link},
             new Item { id = 23, name = "Key Messages", childrenIds = new List<int> {10,11,47}, type = ItemType.Link},
             new Item { id = 24, name = "Test",childrenIds = null, type = ItemType.Link},

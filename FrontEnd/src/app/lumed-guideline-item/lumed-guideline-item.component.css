@@ -1,4 +1,4 @@
-/* illness detail Component's private CSS styles */
+/*
 span {
   display: block;
 }
@@ -16,45 +16,29 @@ ul {
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
-  width: 20em;
-
+  width: 100%;
 }
 
 .msg {
   margin: 0 0 0 0;
   list-style-type: none;
   padding: 0;
-  width: 20em;
+  width: 100%;
   border-color: #dfdfdf;
   border-style: solid;
   border-width: 1px 0 0 0;
-  /*margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 40em;  */
 }
 
 .msg li {
-
   background: #fff;
   border-color: #dfdfdf;
   border-style: solid;
   border-width: 1px 0 0 0;
   height: 1.6em;
   padding: .3em 0;
-  /**padding-left: 0.5rem;*/
   font-weight: 300;
   margin: 0.4em;
-  width: 20em;
-
-  /*position: relative;
-    left: 0;
-    background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
-    height: 4.1em;
-    border-radius: 4px;*/
-
+  width: 100%;
 }
 
 .msg li:hover {
@@ -72,8 +56,7 @@ ul {
   padding: .3em 0;
   height: 1.6em;
   border-radius: 4px;
-  width: 27em;
-
+  width: 100%;
 }
 
 .mainsection li.selected:hover {
@@ -112,11 +95,11 @@ h2.mainsection {
   margin: .5em;
   padding: .3em;
   height: 1.6em;
-  width: 20em;
+  width: 100%;
   border-radius: 4px;
-
 }
 
 .checkbox {
   font: 8px arial, sans-serif;
 }
+*/

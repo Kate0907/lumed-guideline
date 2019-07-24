@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 })
 
 export class GuidelineGroupComponent {
-  public isAdmin = false;
+  public isAdmin = true;
 }

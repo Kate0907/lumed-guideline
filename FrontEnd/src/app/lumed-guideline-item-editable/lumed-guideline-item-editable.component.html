@@ -1,14 +1,14 @@
 <div class="div" *ngIf="item">
 
-  <h2><textarea rows="1" cols="45" [(ngModel)]="item.name"></textarea></h2>
+  <h2><textarea class="title" [(ngModel)]="item.name"></textarea></h2>
   <button (click)="updateItem(item)">Save Title</button>
   <button (click)="addItem(item.id,this.itemType.Link)">Add A New Section</button>
 
   <ul *ngFor="let id of item.childrenIds; let sectionIndex = index">
-      <fieldset>
+      <fieldset class="fieldset" >
         <legend>Section {{sectionIndex+1}}</legend>
       <h2  *ngIf="getItemById(id) != null">
-        <textarea rows="1" cols="60"
+        <textarea class="title" 
           [(ngModel)]="getItemById(id).name">
         </textarea>
         <button (click)="addItem(id,this.itemType.Message)">Add A New Message</button>
@@ -18,21 +18,21 @@
       </h2>
 
   <li *ngFor="let x of getItemById(id)?.childrenIds; let itemIndex = index">
-      <fieldset>
-      <div *ngIf="getItemById(x)?.type === itemType.Message">        
-        <textarea rows="4" cols="50" [(ngModel)]="getItemById(x).name"></textarea>
+      <fieldset >
+      <div id="forMessage" *ngIf="getItemById(x)?.type === itemType.Message">        
+        <textarea class="message" [(ngModel)]="getItemById(x).name"></textarea>
         <button (click)="updateItem(getItemById(x))">save</button>
         <button (click)="deleteItem(x)">delete</button>
         <button (click)="itemUp(id,itemIndex)">up</button>
         <button (click)="itemDown(id,itemIndex)">down</button>
-        </div>
+      </div>
       
-      <div  *ngIf="getItemById(x)?.type === itemType.Link">{{getItemById(x).id}}
-        <a style="text-decoration:none" routerLink="/detail/{{getItemById(x).id}}">{{getItemById(x).name}}</a>
+      <div id="forLink" *ngIf="getItemById(x)?.type === itemType.Link">{{getItemById(x).id}}
+        <a style="text-decoration:none" routerLink="/detail/{{getItemById(x).id}}">{{getItemById(x).name}}</a><br>
         <button (click)="deleteItem(x)">delete link</button>
         <button (click)="itemUp(id,itemIndex)">up</button>
         <button (click)="itemDown(id,itemIndex)">down</button>
-        </div>
+      </div>
       </fieldset>
   </li>
       </fieldset>
