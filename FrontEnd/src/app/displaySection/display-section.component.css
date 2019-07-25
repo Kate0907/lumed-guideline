@@ -1,0 +1,64 @@
+   .messageClass {
+     color: #797979;
+     padding: 1rem 1rem .3rem 0;
+     font-size: 1.2em;
+     margin-right: 7px;
+     list-style-type: disc;
+   }
+
+   .linkClass {
+     line-height: 1.6em;
+     list-style-type: none;
+     padding: 0.5rem 0;
+     border-top: 1px solid #797979;
+     border-color: #dfdfdf;
+     border-style: solid;
+     border-width: 1px 0 0 0;
+     color: #45A2D8;
+   }
+
+   .arrow {
+     border: solid #797979;
+     border-width: 0 3px 3px 0;
+     display: inline-block;
+     padding: 3px;
+     right: 20%;
+     align-self: center;
+     margin-top: 6px;
+   }
+
+   .right {
+     transform: rotate(-45deg);
+     -webkit-transform: rotate(-45deg);
+     align-self: center;
+     float: right;
+     margin-right: 10px;
+   }
+
+   .down {
+     transform: rotate(45deg);
+     -webkit-transform: rotate(45deg);
+     align-self: center;
+     float: right;
+     margin-right: 10px;
+   }
+
+   .collapsable {
+     background-color: white;
+     cursor: pointer;
+     padding: 18px;
+     padding-left: 0px;
+     width: 100%;
+     border: none;
+     text-align: left;
+     outline: none;
+     font-size: 19px;
+     margin-right: 4px;
+   }
+
+   .title {
+     position: relative;
+     left: 20px;
+     bottom: 10px;
+
+   }

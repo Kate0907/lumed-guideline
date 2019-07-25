@@ -11,6 +11,7 @@ export class GuidelineItemBase implements OnInit {
     public url: string[];
     public ID: number;
     public readonly itemType = ItemType;
+    public show = true;
 
     constructor(
         protected route: ActivatedRoute,

@@ -1,107 +1,42 @@
-p span {
-  display: block;
+.h2 {
+  text-align: center;
 }
 
-
-ul {
-  list-style-type: none;
-}
-
-div {
-  display: block;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-.selected {
-  background-color: #CFD8DC !important;
-  color: white;
-}
-
-.mainsection {
+.fieldset {
   margin: 0 0 0 0;
   list-style-type: none;
   padding: 0;
-  width: 26em;
   border-color: #dfdfdf;
   border-style: solid;
   border-width: 1px 0 0 0;
-
 }
 
-.msg {
-  /*font-family:Arial;*/
-  margin: 0 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: auto;
-}
-
-.msg li {
-
-  position: relative;
-  left: 0;
-  background-color:FFFFFF;
-  margin: .5em;
-  padding: .3em 0;
-  height: auto;
-  border-radius: 4px;
-}
-
-.msg li:hover {
-  color: #607D8B;
-  background-color: rgb(235, 191, 191);
-  left: .1em;
-}
-
-.mainsection li {
+.fieldset li {
   cursor: pointer;
   position: relative;
   left: 0;
   background-color: #EEE;
   margin: .5em;
   padding: .3em 0;
-  height: 1.6em;
+  height: 5em;
   border-radius: 4px;
-  width: 24em;
-
+  width: 100%;
+  height: auto;
 }
 
-.mainsection li.selected:hover {
-  background-color: #BBD8DC !important;
-  color: white;
+.title {
+  box-sizing: border-box;
+  width: 100%;
+  width: 80%;
+  height: 2em;
 }
 
-.mainsection li:hover {
-  color: #607D8B;
-  background-color: rgb(235, 191, 191);
-  left: .1em;
+.message {
+  box-sizing: border-box;
+  width: 100%;
+  height: 7em;
 }
 
-.mainsection .text {
-  position: relative;
-  top: -3px;
-}
-
-.mainsection .badge {
-  display: inline-block;
-  font-size: small;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color: #607D8B;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 1.8em;
-  margin-right: .8em;
-  border-radius: 4px 0 0 4px;
-}
-
-h2.mainsection {
-  background-color: mistyrose;
-  margin: .5em;
-  padding: .3em;
-  height: 1.6em;
-  width: 14em;
-  border-radius: 4px;
+#forLink {
+  height: 3em;
 }

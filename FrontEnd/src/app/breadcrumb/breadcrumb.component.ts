@@ -13,15 +13,15 @@ export class BreadcrumbComponent implements OnInit {
 
   public breadcrumbs: IBreadcrumb[] = [];
 
-  constructor(private router: Router, private service: BreadcrumbService) {}
+  constructor(private router: Router, private service: BreadcrumbService) { }
 
-  public async ngOnInit() : Promise<void> {
+  public async ngOnInit(): Promise<void> {
     // subscribe to the NavigationEnd event
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
       // set breadcrumbs, breadcrumbs increase each time function is called
-     this.service
-         .getBreadcrumbs((event as NavigationEnd).urlAfterRedirects, this.breadcrumbs)
-         .then(newBreadcrumb => this.breadcrumbs = newBreadcrumb);
+      this.service
+        .getBreadcrumbs((event as NavigationEnd).urlAfterRedirects, this.breadcrumbs)
+        .then(newBreadcrumb => this.breadcrumbs = newBreadcrumb);
     });
   }
 }

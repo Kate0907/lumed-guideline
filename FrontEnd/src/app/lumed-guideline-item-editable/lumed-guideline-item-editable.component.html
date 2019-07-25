@@ -1,15 +1,15 @@
-<div class="div" *ngIf="item">
+<div *ngIf="item">
+  <span>item id : {{url}}</span>
 
-  <h2><textarea rows="1" cols="45" [(ngModel)]="item.name"></textarea></h2>
+  <h2 class="h2"><textarea class="title" [(ngModel)]="item.name"></textarea></h2>
   <button (click)="updateItem(item)">Save Title</button>
   <button (click)="addItem(item.id,this.itemType.Link)">Add A New Section</button>
 
   <ul *ngFor="let id of item.childrenIds; let sectionIndex = index">
-      <fieldset>
-        <legend>Section {{sectionIndex+1}}</legend>
-      <h2  *ngIf="getItemById(id) != null">
-        <textarea rows="1" cols="60"
-          [(ngModel)]="getItemById(id).name">
+    <fieldset class="fieldset">
+      <legend>Section {{sectionIndex+1}}</legend>
+      <h2 class="h2" *ngIf="getItemById(id) != null">
+        <textarea class="title" [(ngModel)]="getItemById(id).name">
         </textarea>
         <button (click)="addItem(id,this.itemType.Message)">Add A New Message</button>
         <button (click)="addItem(id,this.itemType.Link)">Add A New Link</button>
@@ -17,25 +17,25 @@
         <button (click)="deleteItem(id)">Delete Section</button>
       </h2>
 
-  <li *ngFor="let x of getItemById(id)?.childrenIds; let itemIndex = index">
-      <fieldset>
-      <div *ngIf="getItemById(x)?.type === itemType.Message">        
-        <textarea rows="4" cols="50" [(ngModel)]="getItemById(x).name"></textarea>
-        <button (click)="updateItem(getItemById(x))">save</button>
-        <button (click)="deleteItem(x)">delete</button>
-        <button (click)="itemUp(id,itemIndex)">up</button>
-        <button (click)="itemDown(id,itemIndex)">down</button>
-        </div>
-      
-      <div  *ngIf="getItemById(x)?.type === itemType.Link">{{getItemById(x).id}}
-        <a style="text-decoration:none" routerLink="/detail/{{getItemById(x).id}}">{{getItemById(x).name}}</a>
-        <button (click)="deleteItem(x)">delete link</button>
-        <button (click)="itemUp(id,itemIndex)">up</button>
-        <button (click)="itemDown(id,itemIndex)">down</button>
-        </div>
-      </fieldset>
-  </li>
-      </fieldset>
+      <li *ngFor="let x of getItemById(id)?.childrenIds; let itemIndex = index">
+        <fieldset>
+          <div id="forMessage" *ngIf="getItemById(x)?.type === itemType.Message">
+            <textarea class="message" [(ngModel)]="getItemById(x).name"></textarea>
+            <button (click)="updateItem(getItemById(x))">save</button>
+            <button (click)="deleteItem(x)">delete</button>
+            <button (click)="itemUp(id,itemIndex)">up</button>
+            <button (click)="itemDown(id,itemIndex)">down</button>
+          </div>
+
+          <div id="forLink" *ngIf="getItemById(x)?.type === itemType.Link">{{getItemById(x).id}}
+            <a style="text-decoration:none" routerLink="/detail/{{getItemById(x).id}}">{{getItemById(x).name}}</a><br>
+            <button (click)="deleteItem(x)">delete link</button>
+            <button (click)="itemUp(id,itemIndex)">up</button>
+            <button (click)="itemDown(id,itemIndex)">down</button>
+          </div>
+        </fieldset>
+      </li>
+    </fieldset>
   </ul>
   <div><span>item id: </span>{{item.id}}</div>
   <div><span>item name: </span>{{item.name}}</div>

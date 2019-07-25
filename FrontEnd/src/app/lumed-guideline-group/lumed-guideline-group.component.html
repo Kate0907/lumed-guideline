@@ -1,3 +1,7 @@
 <span class="checkbox"><input type="checkbox" [(ngModel)]="isAdmin">is Admin</span>
-<div class="mainsection" *ngIf="!isAdmin"><lumed-guideline-group-readonly ></lumed-guideline-group-readonly> </div>
-<div class="mainsection" *ngIf="isAdmin"><lumed-guideline-group-editable ></lumed-guideline-group-editable> </div>
+<div *ngIf="!isAdmin">
+    <lumed-guideline-group-readonly></lumed-guideline-group-readonly>
+</div>
+<div *ngIf="isAdmin">
+    <lumed-guideline-group-editable></lumed-guideline-group-editable>
+</div>

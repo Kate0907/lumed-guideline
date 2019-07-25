@@ -11,7 +11,7 @@ import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-
 })
 export class GuidelineItemComponent extends GuidelineItemBase {
 
-  public isAdmin = true;
+  public isAdmin = false;
 
   constructor(
     protected route: ActivatedRoute,
