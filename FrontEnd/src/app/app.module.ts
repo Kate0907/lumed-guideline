@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GuidelineGroupEditableComponent } from './lumed-guideline-group-editable/lumed-guideline-group-editable.component';
 import { GuidelineGroupReadonlyComponent } from './lumed-guideline-group-readonly/lumed-guideline-group-readonly.component';
 import { DisplaySectionComponent } from './displaySection/display-section.component';
+import { QuestionComponent } from './question/question.component';
 
 
 
@@ -27,6 +28,7 @@ import { DisplaySectionComponent } from './displaySection/display-section.compon
     GuidelineGroupEditableComponent,
     GuidelineGroupReadonlyComponent,
     DisplaySectionComponent,
+    QuestionComponent,
   ],
   imports: [
     BrowserModule,

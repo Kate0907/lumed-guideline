@@ -1,7 +1,7 @@
 <div>
   <h2 class="h2">{{item.name | uppercase}}</h2>
 
-  <ul *ngFor="let id of item.childrenIds">
+  <ul class="section" *ngFor="let id of item.childrenIds">
     <lumed-display-section [Sid]="id"></lumed-display-section>
   </ul>
 

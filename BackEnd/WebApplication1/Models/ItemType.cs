@@ -10,5 +10,7 @@ namespace Guideline.Models
     Message,
     Link,
     Group,
+    Question,
+    Checkbox
   }
 }
