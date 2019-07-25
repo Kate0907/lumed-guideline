@@ -1,4 +1,4 @@
-import {Input, OnInit } from '@angular/core';
+import { Input, OnInit } from '@angular/core';
 import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
@@ -12,9 +12,9 @@ export class GuidelineGroupBase implements OnInit {
         protected itemService: GuidelineItemService,
     ) { }
 
-     public ngOnInit(): void {
+    public ngOnInit(): void {
         this.refresh();
-     }
+    }
 
     public async refresh(): Promise<void> {
         this.items = await this.itemService.getAllItems();

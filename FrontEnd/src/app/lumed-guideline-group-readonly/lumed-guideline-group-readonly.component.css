@@ -1,8 +1,3 @@
-.selected {
-  background-color: #CFD8DC !important;
-  color: white;
-}
-
 .group {
   box-sizing: border-box;
   margin: 0 0 0 0;
@@ -36,12 +31,7 @@
 
 .group li:hover {
   color: #607D8B;
-  
   left: .1em;
-}
-
-.group .text {
-  position: relative;
 }
 
 h2.group {
@@ -56,11 +46,7 @@ h2.group {
   background-color: #f2f2f2;
 }
 
-div {
+.menu {
   display: block;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-* {
-  box-sizing: border-box;
 }

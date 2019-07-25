@@ -1,25 +1,23 @@
-<button  class="collapsible" 
-    (click)="changeShow()"
-    *ngIf="getItemById(Sid).name != null">
-    {{getItemById(Sid).name}}
-  <span  *ngIf="show === true; else hide"> 
-    <i  class="arrow down align-self-center"></i>
+<button class="collapsable" (click)="changeShow()" *ngIf="getItemById(Sid).name != null">
+  {{getItemById(Sid).name}}
+  <span *ngIf="show === true; else hide">
+    <i class="arrow down"></i>
   </span>
 
   <ng-template #hide>
-    <i  class="arrow right align-self-center"></i>
+    <i class="arrow right"></i>
   </ng-template>
 </button>
-      <div *ngFor="let childId of getItemById(Sid).childrenIds">
-          <li  class ="messageClass" *ngIf="getItemById(childId).type === itemType.Message && show === true">{{getItemById(childId).name}}   
-            </li>
-            
-            <li  class ="linkClass" *ngIf="getItemById(childId).type === itemType.Link">
-               <a style="text-decoration:none" routerLink="/detail/{{childId}}">{{getItemById(childId).name}}
-                 <i class="arrow right align-self-center"></i>
-               </a>
-            </li>
-        
+<div *ngFor="let childId of getItemById(Sid).childrenIds">
+  <li class="messageClass" *ngIf="getItemById(childId).type === itemType.Message && show === true">
+    {{getItemById(childId).name}}
+  </li>
 
-      </div>
+  <li class="linkClass" *ngIf="getItemById(childId).type === itemType.Link">
+    <a style="text-decoration:none" routerLink="/detail/{{childId}}">{{getItemById(childId).name}}
+      <i class="arrow right"></i>
+    </a>
+  </li>
 
+
+</div>
