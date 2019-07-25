@@ -4,7 +4,7 @@
   <button (click)="updateItem(eachgroup)">Save Group Name</button>
   <button (click)="addMain(eachgroup.id,this.itemType.Link)">Add New Main Section</button>
   <button (click)="deleteMain(eachgroup.id)">Delete Group</button>
-  <li class="groupList" *ngFor="let id of eachgroup.childrenIds">{{id}}
+  <li class="groupList" *ngFor="let id of eachgroup.childrenIds">
     <a style="text-decoration:none" routerLink="/detail/{{id}}">{{getItemById(id).name}}</a>
     <button id="delete" (click)="deleteMain(id)">Delete</button>
   </li>
