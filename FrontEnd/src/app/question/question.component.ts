@@ -19,11 +19,5 @@ export class QuestionComponent extends GuidelineItemBase {
     protected location: Location) {
     super(route, router, itemService, location);
   }
-  public changeShow() {
-    if (this.show === true) {
-      this.show = false;
-    } else {
-      this.show = true;
-    }
-  }
+
 }

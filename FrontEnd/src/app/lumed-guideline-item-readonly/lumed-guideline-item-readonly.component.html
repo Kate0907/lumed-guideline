@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="item!=null">
   <h2 class="h2">{{item.name | uppercase}}</h2>
 
   <ul class="section" *ngFor="let id of item.childrenIds">

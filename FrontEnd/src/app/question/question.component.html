@@ -1,3 +1,21 @@
-<p>
-  question works!
-</p>
+<div>
+  <h2 class="h2">{{item.name | uppercase}}</h2>
+
+  <ul class="section" *ngFor="let id of item.childrenIds">
+    <div class="title">{{getItemById(id).name}}</div>
+
+    <div *ngFor="let childId of getItemById(id).childrenIds">
+      <li class="messageClass" *ngIf="getItemById(childId).type === itemType.Message">
+        {{getItemById(childId).name}}
+      </li>
+
+      <li class="linkClass" *ngIf="getItemById(childId).type === itemType.Checkbox">
+        {{getItemById(childId).name}}<input class="checkbox" type="checkbox">
+      </li>
+    </div>
+    <li class="buttonList">
+      <div class="buttonDiv"><button class="button">Done</button></div>
+    </li>
+  </ul>
+
+</div>

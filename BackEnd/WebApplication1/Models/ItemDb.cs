@@ -52,22 +52,22 @@ namespace Guideline.Models
             new Item { id = 50, name = "Hare And The Tortoise – Everyone is aware about this story where the hare is defeated by the tortoise in a race proving the proverb “Slow and steady wins the race”. But the story doesn’t end there as they eventually have another race! And it consists of a number of morals your child should learn about.", type = ItemType.Message},
 
             new Item { id = 51, name = "Who told you that you have a penicillin allergy(more than one may apply)?", type = ItemType.Message},
-            new Item { id = 52, name = "Have you ever had a penicillin allergy skin test??", type = ItemType.Message},
+            new Item { id = 52, name = "Have you ever had a penicillin allergy skin test?", type = ItemType.Message},
             new Item { id = 53, name = "If YES to #2, the test result was:", type = ItemType.Message},
             new Item { id = 54, name = "When did you last receive penicillin??", type = ItemType.Message},
             new Item { id = 55, name = "When was your last allergic reaction to pencillin?", type = ItemType.Message},
 
-            new Item { id = 61, name = "Stories for 0-2 years", childrenIds = new List<int> {0,1} , type = ItemType.Group},
+            new Item { id = 61, name = "Stories for 0-2 years", childrenIds = new List<int> {0,1,100} , type = ItemType.Group},
             new Item { id = 62, name = "Stories for 3-6 years", childrenIds = new List<int>{2,3}, type = ItemType.Group},
             new Item { id = 63, name = "Stories for 7-10 years", childrenIds = new List<int>{4,5,6}, type = ItemType.Group},
             new Item { id = 64, name = "Stories for 11-16 years", childrenIds = new List<int>{7,8,9}, type = ItemType.Group},
             new Item { id = 65, name = "test", childrenIds = null,type = ItemType.Group},
 
-            new Item { id = 70, name = "Question 1", childrenIds = new List<int> {89,90,91,92,82,93,94} , type = ItemType.Question},
-            new Item { id = 71, name = "Question 2", childrenIds = new List<int>{80,81}, type = ItemType.Question},
-            new Item { id = 72, name = "Question 3", childrenIds = new List<int>{83,84,82}, type = ItemType.Question},
-            new Item { id = 73, name = "Question 4", childrenIds = new List<int>{85,86,87,88,82}, type = ItemType.Question},
-            new Item { id = 74, name = "Question 5", childrenIds = new List<int>{85,86,87,88,82,95},type = ItemType.Question},
+            new Item { id = 70, name = "Question 1", childrenIds = new List<int> {51,89,90,91,92,82,93,94} , type = ItemType.Question},
+            new Item { id = 71, name = "Question 2", childrenIds = new List<int>{52,80,81}, type = ItemType.Question},
+            new Item { id = 72, name = "Question 3", childrenIds = new List<int>{53,83,84,82}, type = ItemType.Question},
+            new Item { id = 73, name = "Question 4", childrenIds = new List<int>{54,85,86,87,88,82}, type = ItemType.Question},
+            new Item { id = 74, name = "Question 5", childrenIds = new List<int>{55,85,86,87,88,82,95},type = ItemType.Question},
 
             new Item { id = 80, name = "Yes", type = ItemType.Checkbox},
             new Item { id = 81, name = "No", type = ItemType.Checkbox},
@@ -85,6 +85,8 @@ namespace Guideline.Models
             new Item { id = 93, name = "No one told me", type = ItemType.Checkbox},
             new Item { id = 94, name = "I know I have an allergy", type = ItemType.Checkbox},
             new Item { id = 95, name = "Rash", type = ItemType.Checkbox},
+
+            new Item { id = 100, name = "Beauty and the Beast Questionnaire", childrenIds = new List<int>{70,71,72,73,74}, type = ItemType.Question},
     };
 
     public static int LastId = 70;

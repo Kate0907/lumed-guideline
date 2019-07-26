@@ -1,19 +1,7 @@
-<button class="collapsable" (click)="changeShow()" *ngIf="getItemById(Sid).name =='Key Messages'; else elseButton">
-  <img style="height: 30px; width: 30px" src="./assets/exclam.jpg">
-  <span class="title">{{getItemById(Sid).name}}</span>
-  <span *ngIf="show === true; else hide">
-    <i class="arrow down"></i>
-  </span>
-
-  <ng-template #hide>
-    <i class="arrow right"></i>
-  </ng-template>
-</button>
-
-<ng-template #elseButton>
-  <button class="collapsable" (click)="changeShow()" *ngIf="getItemById(Sid).name !=null">
-
-    {{getItemById(Sid).name}}
+<div *ngIf="item!=null">
+  <button class="collapsable" (click)="changeShow()" *ngIf="getItemById(Sid).name =='Key Messages'; else elseButton">
+    <img style="height: 30px; width: 30px" src="./assets/exclam.jpg">
+    <span class="title">{{getItemById(Sid).name}}</span>
     <span *ngIf="show === true; else hide">
       <i class="arrow down"></i>
     </span>
@@ -22,18 +10,32 @@
       <i class="arrow right"></i>
     </ng-template>
   </button>
-</ng-template>
 
-<div *ngFor="let childId of getItemById(Sid).childrenIds">
-  <li class="messageClass" *ngIf="getItemById(childId).type === itemType.Message && show === true">
-    {{getItemById(childId).name}}
-  </li>
+  <ng-template #elseButton>
+    <button class="collapsable" (click)="changeShow()" *ngIf="getItemById(Sid).name !=null">
 
-  <li class="linkClass" *ngIf="getItemById(childId).type === itemType.Link">
-    <a style="text-decoration:none" routerLink="/detail/{{childId}}">{{getItemById(childId).name}}
-      <i class="arrow right"></i>
-    </a>
-  </li>
+      {{getItemById(Sid).name}}
+      <span *ngIf="show === true; else hide">
+        <i class="arrow down"></i>
+      </span>
+
+      <ng-template #hide>
+        <i class="arrow right"></i>
+      </ng-template>
+    </button>
+  </ng-template>
+
+  <div *ngFor="let childId of getItemById(Sid).childrenIds">
+    <li class="messageClass" *ngIf="getItemById(childId).type === itemType.Message && show === true">
+      {{getItemById(childId).name}}
+    </li>
+
+    <li class="linkClass" *ngIf="getItemById(childId).type === itemType.Link">
+      <a style="text-decoration:none" routerLink="/detail/{{childId}}">{{getItemById(childId).name}}
+        <i class="arrow right"></i>
+      </a>
+    </li>
 
 
+  </div>
 </div>
