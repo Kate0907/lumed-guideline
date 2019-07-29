@@ -9,16 +9,17 @@ import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-
   templateUrl: './lumed-guideline-item.component.html',
   styleUrls: ['./lumed-guideline-item.component.css']
 })
-export class GuidelineItemComponent extends GuidelineItemBase {
+export class GuidelineItemComponent {
 
   public isAdmin = false;
 
   constructor(
-    protected route: ActivatedRoute,
-    protected router: Router,
-    protected itemService: GuidelineItemService,
-    protected location: Location
-  ) {
-    super(route, router, itemService, location);
+    protected location: Location) { }
+
+  public goBack(): void {
+    this.location.back();
   }
+
+
+
 }

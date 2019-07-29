@@ -2,8 +2,15 @@
   <ul class="group" *ngFor="let eachgroup of itemGroup">
     <h2 class="group">{{eachgroup.name}}</h2>
     <li *ngFor="let id of eachgroup.childrenIds ">
-      <a style="text-decoration:none" routerLink="/detail/{{id}}">{{getItemById(id).name}}
-      </a>
+      <span *ngIf="getItemById(id).type !== itemType.Questionnaire; else question">
+        <a style="text-decoration:none" routerLink="/detail/{{id}}">{{getItemById(id).name}}
+        </a>
+      </span>
+
+      <ng-template #question>
+        <a style="text-decoration:none" routerLink="/question/{{id}}">{{getItemById(id).name}}
+        </a>
+      </ng-template>
     </li>
   </ul>
 </div>

@@ -14,6 +14,7 @@ import { GuidelineGroupEditableComponent } from './lumed-guideline-group-editabl
 import { GuidelineGroupReadonlyComponent } from './lumed-guideline-group-readonly/lumed-guideline-group-readonly.component';
 import { DisplaySectionComponent } from './displaySection/display-section.component';
 import { QuestionComponent } from './question/question.component';
+import { ResultComponent } from './result/result.component';
 
 
 
@@ -29,6 +30,7 @@ import { QuestionComponent } from './question/question.component';
     GuidelineGroupReadonlyComponent,
     DisplaySectionComponent,
     QuestionComponent,
+    ResultComponent,
   ],
   imports: [
     BrowserModule,

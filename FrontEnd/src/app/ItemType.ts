@@ -1,6 +1,9 @@
-export enum ItemType
- {
+export enum ItemType {
     Message,
     Link,
-    Group
+    Group,
+    Question,
+    Checkbox,
+    Questionnaire,
+    Result
 }

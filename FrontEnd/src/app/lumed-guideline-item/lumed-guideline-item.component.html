@@ -2,11 +2,11 @@
 <div><button (click)="goBack()">Back</button></div>
 
 <div *ngIf="!isAdmin">
-    <lumed-guideline-item-readonly [item]="item"></lumed-guideline-item-readonly>
+    <lumed-guideline-item-readonly></lumed-guideline-item-readonly>
 </div>
 
 <div *ngIf="isAdmin">
-    <lumed-guideline-item-editable [item]="item"></lumed-guideline-item-editable>
+    <lumed-guideline-item-editable></lumed-guideline-item-editable>
 </div>
 
 <button (click)="goBack()">Back</button>
