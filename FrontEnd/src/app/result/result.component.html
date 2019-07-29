@@ -1,0 +1,9 @@
+<div *ngIf="item != null">
+  <h2>{{item.name}} result</h2>
+  <ul class="group" *ngFor="let result of results">
+    <h3 class="group">{{result.name}}</h3>
+    <li *ngFor="let id of result.childrenIds ">
+      {{getItemById(id).name}}
+    </li>
+  </ul>
+</div>

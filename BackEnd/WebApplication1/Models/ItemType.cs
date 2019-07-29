@@ -11,6 +11,9 @@ namespace Guideline.Models
     Link,
     Group,
     Question,
-    Checkbox
+    Checkbox,
+    Questionnaire,
+    Result
+
   }
 }

@@ -3,5 +3,7 @@ export enum ItemType {
     Link,
     Group,
     Question,
-    Checkbox
+    Checkbox,
+    Questionnaire,
+    Result
 }

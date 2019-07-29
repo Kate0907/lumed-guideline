@@ -23,6 +23,7 @@ export class BreadcrumbService {
 
     const urls = currentUrl.split('/');
     const urlId = urls[urls.length - 1];
+    const type = urls[urls.length - 2];
     const currentId = Number(urlId);
     let currentName = 'no name';
     if (Number.isNaN(currentId) === true || urlId === '') {
@@ -33,12 +34,17 @@ export class BreadcrumbService {
       breadcrumbs = this.reinitBreadcrumbs();
     }
 
-    const currentMain = await this._DB.getOneItem(currentId);
-    const name = currentMain.name;
-    if (currentMain == null) {
+    const currentItem = await this._DB.getOneItem(currentId);
+    const name = currentItem.name;
+    if (currentItem == null) {
       currentName = 'No Data';
     } else {
-      currentName = name;
+      if (type === 'result') {
+        currentName = name + ' Result';
+      } else {
+        currentName = name;
+      }
+
     }
 
     // add breadcrumb

@@ -5,4 +5,5 @@ export class Item {
     name: string;
     type: ItemType;
     childrenIds?: Array<number>;
+    isChecked: boolean;
 }
