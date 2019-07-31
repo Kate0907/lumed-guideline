@@ -14,6 +14,7 @@ const httpOptions = {
 })
 export class GuidelineHttpService {
    private itemUrl = 'http://localhost:61291/api/Item';
+   private jsonUrl = 'http://localhost:61291/api/Json';
 
    constructor(
       private http: HttpClient,
@@ -49,6 +50,10 @@ export class GuidelineHttpService {
    public updateItem(item: Item): Promise<any> {
       const url = `${this.itemUrl}/${item.id}`;
       return this.http.put(url, item, httpOptions).toPromise();
+   }
+
+   public async saveToJson(): Promise<Item> {
+      return this.http.get<Item>(this.jsonUrl, httpOptions).toPromise();
    }
 
    /** DELETE: delete item from itemDB */

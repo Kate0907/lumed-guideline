@@ -1,9 +1,12 @@
 <span class="checkbox">
     <input type="checkbox" [(ngModel)]="isAdmin">is Admin
+    <button *ngIf="isAdmin" (click)="saveToJson()">save to json</button>
 </span>
+
 <div *ngIf="!isAdmin">
     <lumed-guideline-group-readonly></lumed-guideline-group-readonly>
 </div>
 <div *ngIf="isAdmin">
+
     <lumed-guideline-group-editable></lumed-guideline-group-editable>
 </div>

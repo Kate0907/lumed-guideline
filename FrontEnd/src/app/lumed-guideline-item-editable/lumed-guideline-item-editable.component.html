@@ -29,7 +29,7 @@
 
           <div id="forLink" *ngIf="getItemById(x)?.type === itemType.Link">{{getItemById(x).id}}
             <a style="text-decoration:none" routerLink="/detail/{{getItemById(x).id}}">{{getItemById(x).name}}</a><br>
-            <button (click)="deleteItem(x)">delete link</button>
+            <button (click)="deleteItem(x)">delete</button>
             <button (click)="itemUp(id,itemIndex)">up</button>
             <button (click)="itemDown(id,itemIndex)">down</button>
           </div>

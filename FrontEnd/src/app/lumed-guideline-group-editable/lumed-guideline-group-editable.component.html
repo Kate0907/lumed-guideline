@@ -1,4 +1,5 @@
-<div> <button (click)="addMainGroup(this.itemType.Group)">Add New Group</button></div>
+<div> <button (click)="addMainGroup(this.itemType.Group)">Add New Group</button>
+</div>
 <ul class="group" *ngFor="let eachgroup of itemGroup; let groupIndex = index;">
   <h2 class="group"><textarea class="textarea" [(ngModel)]="eachgroup.name"></textarea></h2>
   <button (click)="updateItem(eachgroup)">Save Group Name</button>

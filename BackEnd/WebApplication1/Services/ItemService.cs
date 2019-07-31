@@ -9,12 +9,12 @@ namespace Guideline.Services
   {
     public IEnumerable<Item> GetAllItems()
     {
-      return ItemDb.DeItems;
+      return ItemDb.ITEMS;
     }
 
     public Item Get(int id)
     {
-      var item = ItemDb.DeItems.FirstOrDefault(Item => Item.id == id);
+      var item = ItemDb.ITEMS.FirstOrDefault(Item => Item.id == id);
       if (item == null)
       {
         throw (new NullReferenceException());
@@ -32,7 +32,7 @@ namespace Guideline.Services
       itemToAdd.type = type;
       itemToAdd.childrenIds = new List<int> { };
       itemToAdd.name = "New Group";
-      ItemDb.DeItems.Add(itemToAdd);
+      ItemDb.ITEMS.Add(itemToAdd);
       //ItemDb.Dump();
 
       return itemToAdd;
@@ -45,7 +45,7 @@ namespace Guideline.Services
       itemToAdd.type = type;
       itemToAdd.childrenIds = new List<int> { };
       itemToAdd.name = "New Item";
-      ItemDb.DeItems.Add(itemToAdd);
+      ItemDb.ITEMS.Add(itemToAdd);
 
       var parentItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
       if (parentItem.childrenIds == null)
@@ -62,7 +62,7 @@ namespace Guideline.Services
 
     public Item Update(Item itemToUpdate)
     {
-      var oldItem = ItemDb.DeItems.FirstOrDefault(item => item.id == itemToUpdate.id);
+      var oldItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == itemToUpdate.id);
       if (oldItem == null)
       {
         throw (new NullReferenceException());
@@ -76,16 +76,21 @@ namespace Guideline.Services
       }
     }
 
+    public void SaveToJson()
+    {
+        ItemDb.Serialize(); 
+    }
+
     public void Delete(int id)
     {
-      var itemToDelete = ItemDb.DeItems.FirstOrDefault(item => item.id == id);
+      var itemToDelete = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
       if (itemToDelete == null)
       {
         throw (new NullReferenceException());
       }
       else
       {
-        ItemDb.DeItems.ForEach(item =>
+        ItemDb.ITEMS.ForEach(item =>
         {
           if (item.childrenIds == null)
           {
@@ -93,7 +98,7 @@ namespace Guideline.Services
           }
           item.childrenIds = item.childrenIds.Where(childId => childId != id).ToList();
         });
-        ItemDb.DeItems.Remove(itemToDelete);
+        ItemDb.ITEMS.Remove(itemToDelete);
         //ItemDb.Dump();
       }
     }

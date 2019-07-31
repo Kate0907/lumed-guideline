@@ -13,8 +13,8 @@ export class GuidelineGroupEditableComponent extends GuidelineGroupBase {
 
   constructor(
     protected itemService: GuidelineItemService,
-    ) {
-      super(itemService);
+  ) {
+    super(itemService);
   }
 
   public async updateItem(maingroup: Item): Promise<void> {
@@ -34,5 +34,9 @@ export class GuidelineGroupEditableComponent extends GuidelineGroupBase {
   public async deleteMain(mainId: number): Promise<void> {
     await this.itemService.deleteItem(mainId);
     await this.refresh();
+  }
+
+  public async saveToJson(): Promise<void> {
+    await this.itemService.saveToJson();
   }
 }

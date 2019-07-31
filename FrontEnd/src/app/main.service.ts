@@ -33,6 +33,10 @@ export class GuidelineItemService {
     await this._DB.deleteItem(itemId);
   }
 
+  public async saveToJson(): Promise<void> {
+    await this._DB.saveToJson();
+  }
+
   public async itemUp(section: Item, itemIndex: number): Promise<void> {
     if (section.childrenIds[itemIndex] == null || itemIndex == null) {
       return;

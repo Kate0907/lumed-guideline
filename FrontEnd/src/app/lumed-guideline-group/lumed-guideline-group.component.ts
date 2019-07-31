@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GuidelineItemService } from '../main.service';
 
 
 @Component({
@@ -8,5 +9,16 @@ import { Component } from '@angular/core';
 })
 
 export class GuidelineGroupComponent {
+
   public isAdmin = false;
+
+  constructor(
+    protected itemService: GuidelineItemService,
+  ) { }
+
+  public async saveToJson(): Promise<void> {
+    await this.itemService.saveToJson();
+  }
+
+
 }

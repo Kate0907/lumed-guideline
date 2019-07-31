@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
+import { GuidelineItemService } from '../main.service';
 
 
 @Component({
@@ -12,10 +13,14 @@ export class GuidelineItemComponent {
   public isAdmin = false;
 
   constructor(
+    protected itemService: GuidelineItemService,
     protected location: Location) { }
 
   public goBack(): void {
     this.location.back();
+  }
+  public async saveToJson(): Promise<void> {
+    await this.itemService.saveToJson();
   }
 
 

@@ -34,24 +34,16 @@ export class QuestionComponent extends GuidelineItemBase implements OnInit {
     this.refresh();
   }
 
-  /*public async saveResult(id: number): Promise<void> {
-    this.result = this.items.find(item => item.name === this.getItemById(id).name && item.type === ItemType.Result);
-    this.checkedId = this.getItemById(id).childrenIds.filter(ID => this.getItemById(ID).isChecked === true);
-    this.result.childrenIds = this.checkedId;
-    await this.itemService.updateItem(this.result);
-  }*/
-
   public async saveResult(): Promise<void> {
     this.checkedItemIds = [];
     const questionnaire = this.getItemById(this.item.id);
-    for (let id of questionnaire.childrenIds) {
-      for (let checkboxId of this.getItemById(id).childrenIds) {
+    for (const id of questionnaire.childrenIds) {
+      for (const checkboxId of this.getItemById(id).childrenIds) {
         if (this.getItemById(checkboxId).isChecked === true) {
           if (this.checkedItemIds === null) {
             this.checkedItemIds = [checkboxId];
           } else {
             this.checkedItemIds.push(checkboxId);
-
           }
         }
       }
@@ -62,6 +54,4 @@ export class QuestionComponent extends GuidelineItemBase implements OnInit {
     this.checkedItemList.name = this.item.name;
     await this.itemService.updateItem(this.checkedItemList);
   }
-
-
 }
