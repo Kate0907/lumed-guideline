@@ -1,3 +1,10 @@
 .checkbox {
   font: 8px arial, sans-serif;
+  margin-top: 0px;
+  margin-bottom: 10em;
+}
+
+.button {
+  float: right;
+  margin-right: 10px;
 }

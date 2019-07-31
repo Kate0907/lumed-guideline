@@ -20,11 +20,11 @@
       color: white;
     }
 
-    .group li:hover {
+    /*  .group li:hover {
       color: #607D8B;
       background-color: #E1B7B7;
       left: .1em;
-    }
+    }*/
 
     .group .text {
       position: relative;
@@ -32,7 +32,7 @@
     }
 
     h2.group {
-      background-color: mistyrose;
+      /*background-color: mistyrose;*/
       margin: .5em;
       padding: .3em;
       height: 1.6em;

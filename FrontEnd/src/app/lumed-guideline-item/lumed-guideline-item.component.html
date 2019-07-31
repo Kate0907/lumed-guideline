@@ -1,7 +1,7 @@
-<span class="checkbox">
+<div class="checkbox">
     <input type="checkbox" [(ngModel)]="isAdmin">is Admin
-    <button *ngIf="isAdmin" (click)="saveToJson()">save to json</button>
-</span>
+    <button class="button" *ngIf="isAdmin" (click)="saveToJson()">Save To Json</button>
+</div>
 <div><button (click)="goBack()">Back</button></div>
 
 <div *ngIf="!isAdmin">

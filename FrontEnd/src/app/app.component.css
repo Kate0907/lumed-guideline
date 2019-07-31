@@ -1,4 +1,9 @@
 .root {
-  margin: auto;
+  /*margin: auto;
+  margin-bottom: 0px;*/
   padding: 10px;
+}
+
+.menu {
+  margin-bottom: 0px;
 }
