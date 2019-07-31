@@ -17,8 +17,8 @@ export class GuidelineItemService {
     return this._DB.getOneItem(id);
   }
 
-  public async addItemNoParent(type: ItemType): Promise<void> {
-    await this._DB.createItem(type);
+  public async addItemNoParent(type: ItemType): Promise<Item> {
+    return await this._DB.createItem(type);
   }
 
   public async addItem(parentId: number, type: ItemType): Promise<void> {

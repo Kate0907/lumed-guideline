@@ -14,11 +14,14 @@
           [(ngModel)]="getItemById(childId).isChecked">
       </li>
     </div>
-
-    <li class="buttonList">
-      <div class="buttonDiv"><button class="button" (click)="saveResult(id)">DONE</button></div>
-    </li>
   </ul>
-  <a routerLink="{{ '/result/' + item.id }}">submit</a>
+
+  <div class="buttonDiv">
+    <button class="button" (click)="saveResult()">
+      DONE
+    </button>
+  </div>
+  <a class="a" routerLink="/result/{{newResultId}}">Result
+  </a>
 
 </div>

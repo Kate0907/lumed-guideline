@@ -84,3 +84,12 @@
 ul {
   margin-top: 0;
 }
+
+.a {
+  text-decoration: none;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  display: inline-block;
+  cursor: pointer;
+}

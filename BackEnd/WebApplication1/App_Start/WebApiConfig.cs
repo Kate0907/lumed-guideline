@@ -1,4 +1,5 @@
-﻿using System;
+using Guideline.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -10,6 +11,8 @@ namespace Guideline
     {
         public static void Register(HttpConfiguration config)
         {
+
+
             // Web API configuration and services
             var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
@@ -22,6 +25,9 @@ namespace Guideline
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-        }
+
+      //ItemDb.Serialize();
+           ItemDb.Deserialize();
     }
+  }
 }

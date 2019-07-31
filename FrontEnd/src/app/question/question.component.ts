@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, } from '@angular/router';
 import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
@@ -13,11 +13,14 @@ import { Item } from '../item';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
-export class QuestionComponent extends GuidelineItemBase {
+export class QuestionComponent extends GuidelineItemBase implements OnInit {
   @Input() public items: Item[];
   public result: Item;
   public checkedId: number[];
   public readonly itemType = ItemType;
+  public checkedItemList: Item;
+  public checkedItemIds: number[];
+  public newResultId: number;
 
   constructor(
     protected route: ActivatedRoute,
@@ -27,13 +30,38 @@ export class QuestionComponent extends GuidelineItemBase {
     super(route, router, itemService, location);
   }
 
-  public async saveResult(id: number): Promise<void> {
+  public ngOnInit(): void {
+    this.refresh();
+  }
+
+  /*public async saveResult(id: number): Promise<void> {
     this.result = this.items.find(item => item.name === this.getItemById(id).name && item.type === ItemType.Result);
     this.checkedId = this.getItemById(id).childrenIds.filter(ID => this.getItemById(ID).isChecked === true);
     this.result.childrenIds = this.checkedId;
     await this.itemService.updateItem(this.result);
-  }
+  }*/
 
+  public async saveResult(): Promise<void> {
+    this.checkedItemIds = [];
+    const questionnaire = this.getItemById(this.item.id);
+    for (let id of questionnaire.childrenIds) {
+      for (let checkboxId of this.getItemById(id).childrenIds) {
+        if (this.getItemById(checkboxId).isChecked === true) {
+          if (this.checkedItemIds === null) {
+            this.checkedItemIds = [checkboxId];
+          } else {
+            this.checkedItemIds.push(checkboxId);
+
+          }
+        }
+      }
+    }
+    this.checkedItemList = await this.itemService.addItemNoParent(ItemType.Result);
+    this.newResultId = this.checkedItemList.id;
+    this.checkedItemList.childrenIds = this.checkedItemIds;
+    this.checkedItemList.name = this.item.name;
+    await this.itemService.updateItem(this.checkedItemList);
+  }
 
 
 }

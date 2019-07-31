@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Guideline.Models
 {
@@ -88,13 +91,21 @@ namespace Guideline.Models
 
             new Item { id = 100, name = "Beauty and the Beast Questionnaire", childrenIds = new List<int>{70,71,72,73,74}, type = ItemType.Questionnaire},
 
-            new Item { id = 110, name = "Question 1", childrenIds = new List<int>{} , type = ItemType.Result},
-            new Item { id = 111, name = "Question 2", childrenIds = new List<int>{}, type = ItemType.Result},
-            new Item { id = 112, name = "Question 3", childrenIds = new List<int>{}, type = ItemType.Result},
-            new Item { id = 113, name = "Question 4", childrenIds = new List<int>{}, type = ItemType.Result},
-            new Item { id = 114, name = "Question 5", childrenIds = new List<int>{},type = ItemType.Result},
     };
 
-    public static int LastId = 70;
+    public static void Serialize()
+    {
+      string jsonResult = JsonConvert.SerializeObject(ITEMS, Formatting.Indented);
+      File.WriteAllText(@"c:\Source\guideline.json", jsonResult);
+    }
+
+    public static void Deserialize()
+    {
+       DeItems = JsonConvert.DeserializeObject<List<Item>>(File.ReadAllText(@"c:\Source\guideline.json"));
+    }
+    public static List<Item> DeItems; 
+    public static int LastId = 101;
   }
 }
+
+

@@ -40,9 +40,9 @@ export class GuidelineHttpService {
       return this.http.post(url, type, httpOptions).toPromise();
    }
 
-   /** POST: create a new item and add to parent item's (id = parentId) childrenIds */
-   public createItem(type: ItemType): Promise<any> {
-      return this.http.post(this.itemUrl, type, httpOptions).toPromise();
+   /** POST: create a new item without parent  */
+   public createItem(type: ItemType): Promise<Item> {
+      return this.http.post<Item>(this.itemUrl, type, httpOptions).toPromise<Item>();
    }
 
    /** PUT: update the main section on the server and return a message; */

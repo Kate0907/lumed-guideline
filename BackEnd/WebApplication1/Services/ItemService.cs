@@ -9,12 +9,12 @@ namespace Guideline.Services
   {
     public IEnumerable<Item> GetAllItems()
     {
-      return ItemDb.ITEMS;
+      return ItemDb.DeItems;
     }
 
     public Item Get(int id)
     {
-      var item = ItemDb.ITEMS.FirstOrDefault(Item => Item.id == id);
+      var item = ItemDb.DeItems.FirstOrDefault(Item => Item.id == id);
       if (item == null)
       {
         throw (new NullReferenceException());
@@ -32,7 +32,9 @@ namespace Guideline.Services
       itemToAdd.type = type;
       itemToAdd.childrenIds = new List<int> { };
       itemToAdd.name = "New Group";
-      ItemDb.ITEMS.Add(itemToAdd);
+      ItemDb.DeItems.Add(itemToAdd);
+      //ItemDb.Dump();
+
       return itemToAdd;
     }
 
@@ -43,7 +45,7 @@ namespace Guideline.Services
       itemToAdd.type = type;
       itemToAdd.childrenIds = new List<int> { };
       itemToAdd.name = "New Item";
-      ItemDb.ITEMS.Add(itemToAdd);
+      ItemDb.DeItems.Add(itemToAdd);
 
       var parentItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
       if (parentItem.childrenIds == null)
@@ -54,12 +56,13 @@ namespace Guideline.Services
       {
         parentItem.childrenIds.Add(itemToAdd.id);
       }
+      //ItemDb.Dump();
       return itemToAdd;
     }
 
     public Item Update(Item itemToUpdate)
     {
-      var oldItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == itemToUpdate.id);
+      var oldItem = ItemDb.DeItems.FirstOrDefault(item => item.id == itemToUpdate.id);
       if (oldItem == null)
       {
         throw (new NullReferenceException());
@@ -68,20 +71,21 @@ namespace Guideline.Services
       {
         oldItem.name = itemToUpdate.name;
         oldItem.childrenIds = itemToUpdate.childrenIds;
+        //ItemDb.Dump();
         return oldItem;
       }
     }
 
     public void Delete(int id)
     {
-      var itemToDelete = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
+      var itemToDelete = ItemDb.DeItems.FirstOrDefault(item => item.id == id);
       if (itemToDelete == null)
       {
         throw (new NullReferenceException());
       }
       else
       {
-        ItemDb.ITEMS.ForEach(item =>
+        ItemDb.DeItems.ForEach(item =>
         {
           if (item.childrenIds == null)
           {
@@ -89,7 +93,8 @@ namespace Guideline.Services
           }
           item.childrenIds = item.childrenIds.Where(childId => childId != id).ToList();
         });
-        ItemDb.ITEMS.Remove(itemToDelete);
+        ItemDb.DeItems.Remove(itemToDelete);
+        //ItemDb.Dump();
       }
     }
   }

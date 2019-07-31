@@ -6,6 +6,7 @@ import { GuidelineItemService } from '../main.service';
 import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-base';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
+import { QuestionComponent } from '../question/question.component';
 
 @Component({
   selector: 'lumed-result',
@@ -14,6 +15,7 @@ import { ItemType } from '../ItemType';
 })
 export class ResultComponent extends GuidelineItemBase implements OnInit {
   @Input() public items: Item[];
+  @Input() public result: Item;
   @Input() public results: Item[];
 
   public readonly itemType = ItemType;
@@ -26,13 +28,17 @@ export class ResultComponent extends GuidelineItemBase implements OnInit {
     super(route, router, itemService, location);
   }
 
-  public ngOnInit(): void {
-    this.refresh();
-    this.getResult();
+  public async ngOnInit(): Promise<void> {
+    await this.getResult();
+    console.log(this.item.id);
+    console.log(this.items.length);
   }
+
 
   public async getResult(): Promise<void> {
     this.items = await this.itemService.getAllItems();
-    this.results = this.items.filter(item => item.type === this.itemType.Result);
+    this.results = this.items.filter(item => item.type = ItemType.Result);
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.item = await this.itemService.getOneItem(id);
   }
 }
