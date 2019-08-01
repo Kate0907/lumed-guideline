@@ -1,11 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, } from '@angular/router';
+import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
-import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-base';
-import { ItemType } from '../ItemType';
-import { Item } from '../item';
-
 
 
 @Component({
@@ -13,45 +8,18 @@ import { Item } from '../item';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
-export class QuestionComponent extends GuidelineItemBase implements OnInit {
-  @Input() public items: Item[];
-  public result: Item;
-  public checkedId: number[];
-  public readonly itemType = ItemType;
-  public checkedItemList: Item;
-  public checkedItemIds: number[];
-  public newResultId: number;
+export class QuestionComponent {
+
+  public isAdmin = false;
 
   constructor(
-    protected route: ActivatedRoute,
-    protected router: Router,
     protected itemService: GuidelineItemService,
-    protected location: Location) {
-    super(route, router, itemService, location);
-  }
+    protected location: Location) { }
 
-  public ngOnInit(): void {
-    this.refresh();
+  public goBack(): void {
+    this.location.back();
   }
-
-  public async saveResult(): Promise<void> {
-    this.checkedItemIds = [];
-    const questionnaire = this.getItemById(this.item.id);
-    for (const id of questionnaire.childrenIds) {
-      for (const checkboxId of this.getItemById(id).childrenIds) {
-        if (this.getItemById(checkboxId).isChecked === true) {
-          if (this.checkedItemIds === null) {
-            this.checkedItemIds = [checkboxId];
-          } else {
-            this.checkedItemIds.push(checkboxId);
-          }
-        }
-      }
-    }
-    this.checkedItemList = await this.itemService.addItemNoParent(ItemType.Result);
-    this.newResultId = this.checkedItemList.id;
-    this.checkedItemList.childrenIds = this.checkedItemIds;
-    this.checkedItemList.name = this.item.name;
-    await this.itemService.updateItem(this.checkedItemList);
+  public async saveToJson(): Promise<void> {
+    await this.itemService.saveToJson();
   }
 }

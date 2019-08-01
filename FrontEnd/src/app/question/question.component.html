@@ -1,27 +1,11 @@
-<div *ngIf="item != null">
-  <h2 class="h2">{{item.name | uppercase}}</h2>
+<div class="checkbox">
+  <input type="checkbox" [(ngModel)]="isAdmin">is Admin
+  <button class="button" *ngIf="isAdmin" (click)="saveToJson()">Save To Json</button>
+</div>
 
-  <ul class="section" *ngFor="let id of item.childrenIds">
-    <div class="title">{{getItemById(id).name}}</div>
-
-    <div *ngFor="let childId of getItemById(id).childrenIds">
-      <li class="messageClass" *ngIf="getItemById(childId).type === itemType.Message">
-        {{getItemById(childId).name}}
-      </li>
-
-      <li class="linkClass" *ngIf="getItemById(childId).type === itemType.Checkbox">
-        {{getItemById(childId).name}}<input class="checkbox" type="checkbox"
-          [(ngModel)]="getItemById(childId).isChecked">
-      </li>
-    </div>
-  </ul>
-
-  <div class="buttonDiv">
-    <button class="button" (click)="saveResult()">
-      DONE
-    </button>
-  </div>
-  <a class="a" routerLink="/result/{{newResultId}}">Result
-  </a>
-
+<div *ngIf="!isAdmin">
+  <lumed-guideline-question-readonly></lumed-guideline-question-readonly>
+</div>
+<div *ngIf="isAdmin">
+  <lumed-guideline-question-editable></lumed-guideline-question-editable>
 </div>

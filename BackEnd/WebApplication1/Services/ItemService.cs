@@ -33,8 +33,6 @@ namespace Guideline.Services
       itemToAdd.childrenIds = new List<int> { };
       itemToAdd.name = "New Group";
       ItemDb.ITEMS.Add(itemToAdd);
-      //ItemDb.Dump();
-
       return itemToAdd;
     }
 
@@ -56,7 +54,7 @@ namespace Guideline.Services
       {
         parentItem.childrenIds.Add(itemToAdd.id);
       }
-      //ItemDb.Dump();
+
       return itemToAdd;
     }
 
@@ -71,7 +69,7 @@ namespace Guideline.Services
       {
         oldItem.name = itemToUpdate.name;
         oldItem.childrenIds = itemToUpdate.childrenIds;
-        //ItemDb.Dump();
+
         return oldItem;
       }
     }
@@ -99,7 +97,6 @@ namespace Guideline.Services
           item.childrenIds = item.childrenIds.Where(childId => childId != id).ToList();
         });
         ItemDb.ITEMS.Remove(itemToDelete);
-        //ItemDb.Dump();
       }
     }
   }

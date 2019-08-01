@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Guideline.Services;
 using System;
 using System.Collections.Generic;
@@ -10,24 +10,26 @@ using Guideline.Models;
 namespace Guideline.Services.Tests
 {
 
-    [TestClass()]
-    public class GuidelineServiceTests
+  [TestClass()]
+  public class ItemServiceTests
+  {
+    private ItemService _Service;
+
+    [TestInitialize]
+    public void BeforeEach()
     {
-        private GuidelineService _Service;
+      _Service = new ItemService();
+      string filename = "guideline";
+      ItemDb.DeserializeFromFile(filename);
+    }
 
-        [TestInitialize]
-        public void BeforeEach()
-        {
-            _Service = new GuidelineService();
-        }
-
-        [TestMethod()]
-        public void GetAllMainSectionsTest()
-        {
-            var result = _Service.GetAllMainSections();
-            Assert.AreEqual(result.Count(), 20);
-        }
-
+    [TestMethod()]
+    public void GetAllItemTest()
+    {
+      var result = _Service.GetAllItems();
+      Assert.AreEqual(ItemDb.ITEMS.Count, result.Count());
+    }
+    /*
         [TestMethod()]
         public void GetTest()
         {
@@ -41,7 +43,6 @@ namespace Guideline.Services.Tests
         {
              _Service.Get(77);
         }
-
 
 
         [TestMethod()]
@@ -113,6 +114,6 @@ namespace Guideline.Services.Tests
         public void DeleteAnUnexistMainSectionTest()
         {
             _Service.Delete(90);
-        }
-    }
+        }*/
+  }
 }

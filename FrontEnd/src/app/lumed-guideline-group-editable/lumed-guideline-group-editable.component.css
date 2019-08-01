@@ -20,19 +20,12 @@
       color: white;
     }
 
-    /*  .group li:hover {
-      color: #607D8B;
-      background-color: #E1B7B7;
-      left: .1em;
-    }*/
-
     .group .text {
       position: relative;
       top: -3px;
     }
 
     h2.group {
-      /*background-color: mistyrose;*/
       margin: .5em;
       padding: .3em;
       height: 1.6em;
@@ -43,6 +36,7 @@
     .textarea {
       width: 80%;
       height: 1.5em;
+      font-size: 1em;
     }
 
     .groupList {
@@ -51,11 +45,48 @@
       display: table;
     }
 
-    .groupList>* {
+    /*  .groupList>* {
       display: table-cell;
-    }
+    }*/
 
     #delete {
       float: right;
       margin-right: 2%;
+    }
+
+    input[type=text],
+    textarea {
+      -webkit-transition: all 0.30s ease-in-out;
+      -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+      -o-transition: all 0.30s ease-in-out;
+      outline: none;
+      padding: 3px 0px 3px 3px;
+      margin: 5px 1px 3px 0px;
+      border: 1px solid #DDDDDD;
+      border-radius: 0.25rem;
+    }
+
+    input[type=text]:focus,
+    textarea:focus {
+      box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+      padding: 3px 0px 3px 3px;
+      margin: 5px 1px 3px 0px;
+      border: 1px solid rgba(81, 203, 238, 1);
+    }
+
+    .button {
+
+      background: #45a2d8;
+      color: #f6f5fc;
+      border: 1px solid transparent;
+      padding: 0.2rem 0.5rem;
+      margin: 0.2rem;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .link {
+      padding-left: 0.5em;
     }

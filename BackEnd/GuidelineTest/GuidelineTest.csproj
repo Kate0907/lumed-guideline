@@ -50,10 +50,8 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ItemDbTest.cs" />
     <Compile Include="Services\GuidelineServiceTests.cs" />
-    <Compile Include="Services\MainGroupServiceTests.cs" />
-    <Compile Include="Services\SectionServiceTests.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
