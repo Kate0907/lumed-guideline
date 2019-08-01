@@ -45,10 +45,6 @@
       display: table;
     }
 
-    /*  .groupList>* {
-      display: table-cell;
-    }*/
-
     #delete {
       float: right;
       margin-right: 2%;

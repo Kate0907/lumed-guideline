@@ -12,6 +12,7 @@ import { Item } from '../item';
   styleUrls: ['./lumed-guideline-question-readonly.component.css']
 })
 export class LumedGuidelineQuestionReadonlyComponent extends GuidelineItemBase implements OnInit {
+
   @Input() public items: Item[];
   public result: Item;
   public checkedId: number[];
@@ -19,6 +20,7 @@ export class LumedGuidelineQuestionReadonlyComponent extends GuidelineItemBase i
   public checkedItemList: Item;
   public checkedItemIds: number[];
   public newResultId: number;
+
   constructor(
     protected route: ActivatedRoute,
     protected router: Router,
