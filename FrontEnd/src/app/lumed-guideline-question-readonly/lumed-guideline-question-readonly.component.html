@@ -10,8 +10,8 @@
       </li>
 
       <li class="linkClass" *ngIf="getItemById(childId).type === itemType.Checkbox">
-        {{getItemById(childId).name}}<input class="checkbox" type="checkbox"
-          [(ngModel)]="getItemById(childId).isChecked">
+        {{getItemById(childId).name}}
+        <input class="checkbox" type="checkbox" [(ngModel)]="getItemById(childId).isChecked">
       </li>
     </div>
   </ul>

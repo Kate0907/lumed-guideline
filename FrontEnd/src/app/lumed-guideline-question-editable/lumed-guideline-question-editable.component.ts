@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, } from '@angular/router';
 import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
@@ -11,9 +11,8 @@ import { Item } from '../item';
   templateUrl: './lumed-guideline-question-editable.component.html',
   styleUrls: ['./lumed-guideline-question-editable.component.css']
 })
-export class LumedGuidelineQuestionEditableComponent extends GuidelineItemBase {
+export class LumedGuidelineQuestionEditableComponent extends GuidelineItemBase implements OnInit {
 
-  @Input() public items: Item[];
   public result: Item;
   public checkedId: number[];
   public readonly itemType = ItemType;
@@ -27,6 +26,10 @@ export class LumedGuidelineQuestionEditableComponent extends GuidelineItemBase {
     protected itemService: GuidelineItemService,
     protected location: Location) {
     super(route, router, itemService, location);
+  }
+
+  public ngOnInit(): void {
+    this.refresh();
   }
 
   public async saveResult(): Promise<void> {

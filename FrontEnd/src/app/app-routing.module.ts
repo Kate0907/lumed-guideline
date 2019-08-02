@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GuidelineGroupComponent } from './lumed-guideline-group/lumed-guideline-group.component';
 import { GuidelineItemComponent } from './lumed-guideline-item/lumed-guideline-item.component';
-import { QuestionComponent } from './question/question.component';
-import { ResultComponent } from './result/result.component';
+import { LumedGuidelineQuestionComponent } from './lumed-guideline-question/lumed-guideline-question.component';
+import { LumedGuidelineResultComponent } from './lumed-guideline-result/lumed-guideline-result.component';
 
 const routes: Routes = [
   {
@@ -22,14 +22,14 @@ const routes: Routes = [
   },
   {
     path: 'question/:id',
-    component: QuestionComponent,
+    component: LumedGuidelineQuestionComponent,
     data: {
       breadcrumb: 'Detail'
     }
   },
   {
     path: 'result/:id',
-    component: ResultComponent,
+    component: LumedGuidelineResultComponent,
     data: {
       breadcrumb: 'Detail'
     }

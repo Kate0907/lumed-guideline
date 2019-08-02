@@ -6,6 +6,7 @@ import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-
 import { ItemType } from '../ItemType';
 import { Item } from '../item';
 
+
 @Component({
   selector: 'lumed-guideline-question-readonly',
   templateUrl: './lumed-guideline-question-readonly.component.html',
@@ -13,7 +14,6 @@ import { Item } from '../item';
 })
 export class LumedGuidelineQuestionReadonlyComponent extends GuidelineItemBase implements OnInit {
 
-  @Input() public items: Item[];
   public result: Item;
   public checkedId: number[];
   public readonly itemType = ItemType;
@@ -53,4 +53,5 @@ export class LumedGuidelineQuestionReadonlyComponent extends GuidelineItemBase i
     this.checkedItemList.name = this.item.name + ' Result';
     await this.itemService.updateItem(this.checkedItemList);
   }
+
 }

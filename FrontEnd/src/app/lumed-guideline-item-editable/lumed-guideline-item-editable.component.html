@@ -1,37 +1,43 @@
 <div *ngIf="item">
   <span>item id : {{url}}</span>
 
-  <h2 class="h2"><textarea class="title" [(ngModel)]="item.name"></textarea></h2>
-  <button (click)="updateItem(item)">Save Title</button>
-  <button (click)="addItem(item.id,this.itemType.Link)">Add A New Section</button>
+  <h2 class="h2"><textarea class="title" [(ngModel)]="item.name"></textarea>
+    <button class="button" (click)="updateItem(item)">Save Title</button>
+    <button class="button" (click)="addItem(item.id,this.itemType.Link)">Add A New Section</button>
+  </h2>
 
   <ul *ngFor="let id of item.childrenIds; let sectionIndex = index">
     <fieldset class="fieldset">
-      <legend>Section {{sectionIndex+1}}</legend>
+      <!--<legend class="legend">Section {{sectionIndex+1}}</legend>-->
       <h2 class="h2" *ngIf="getItemById(id) != null">
         <textarea class="title" [(ngModel)]="getItemById(id).name">
         </textarea>
-        <button (click)="addItem(id,this.itemType.Message)">Add A New Message</button>
-        <button (click)="addItem(id,this.itemType.Link)">Add A New Link</button>
-        <button (click)="updateItem(getItemById(id))">Save</button>
-        <button (click)="deleteItem(id)">Delete Section</button>
+        <button class="button" (click)="addItem(id,this.itemType.Message)">Add A New Message</button>
+        <button class="button" (click)="addItem(id,this.itemType.Link)">Add A New Link</button>
+        <button class="button" (click)="updateItem(getItemById(id))">Save</button>
+        <button class="button" (click)="deleteItem(id)">Delete Section</button>
       </h2>
 
       <li *ngFor="let x of getItemById(id)?.childrenIds; let itemIndex = index">
-        <fieldset>
+        <fieldset class="fieldset">
           <div id="forMessage" *ngIf="getItemById(x)?.type === itemType.Message">
             <textarea class="message" [(ngModel)]="getItemById(x).name"></textarea>
-            <button (click)="updateItem(getItemById(x))">save</button>
-            <button (click)="deleteItem(x)">delete</button>
-            <button (click)="itemUp(id,itemIndex)">up</button>
-            <button (click)="itemDown(id,itemIndex)">down</button>
+            <div class="button1Div">
+              <button class="button2" (click)="updateItem(getItemById(x))">save</button>
+              <button class="button2" (click)="deleteItem(x)">delete</button>
+              <button class="button2" (click)="itemUp(id,itemIndex)">up</button>
+              <button class="button2" (click)="itemDown(id,itemIndex)">down</button>
+            </div>
           </div>
 
-          <div id="forLink" *ngIf="getItemById(x)?.type === itemType.Link">{{getItemById(x).id}}
-            <a style="text-decoration:none" routerLink="/detail/{{getItemById(x).id}}">{{getItemById(x).name}}</a><br>
-            <button (click)="deleteItem(x)">delete</button>
-            <button (click)="itemUp(id,itemIndex)">up</button>
-            <button (click)="itemDown(id,itemIndex)">down</button>
+          <div id="forLink" *ngIf="getItemById(x)?.type === itemType.Link">
+            <a class="a" style="text-decoration:none"
+              routerLink="/detail/{{getItemById(x).id}}">{{getItemById(x).name}}</a>
+            <div class="button2Div">
+              <button class="button2" (click)="deleteItem(x)">delete</button>
+              <button class="button2" (click)="itemUp(id,itemIndex)">up</button>
+              <button class="button2" (click)="itemDown(id,itemIndex)">down</button>
+            </div>
           </div>
         </fieldset>
       </li>

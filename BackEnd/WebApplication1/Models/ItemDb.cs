@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Guideline.Models
@@ -10,25 +11,45 @@ namespace Guideline.Models
   {
     public static List<Item> ITEMS;
     public static int LastId;
+
     public static void Serialize()
     {
-      string jsonResult = JsonConvert.SerializeObject(ITEMS, Formatting.Indented);
-      File.WriteAllText(@ConfigurationManager.AppSettings["SavePath"], jsonResult);
+      var filepath = @ConfigurationManager.AppSettings["SavePath"];
+      string json = JsonConvert.SerializeObject(ITEMS, Formatting.Indented);
+      File.WriteAllText(filepath, json);
     }
+
     public static void Deserialize()
     {
-      ITEMS = JsonConvert.DeserializeObject<List<Item>>(File.ReadAllText(@ConfigurationManager.AppSettings["GuidelinePath"]));
-      LastId = ITEMS[ITEMS.Count - 1].id + 1;
+      var filepath = @ConfigurationManager.AppSettings["GuidelinePath"];
+      if (File.Exists(filepath) == false)
+      {
+        throw new FileNotFoundException($"can't find the file");
+      }
+      var json = File.ReadAllText(filepath);
+      var data = JsonConvert.DeserializeObject<List<Item>>(json);
+      ITEMS = data;
+      ItemDb.LastId = ITEMS[ITEMS.Count - 1].id + 1;
     }
+
     public static void SerializeToFile(string filename)
     {
-      string jsonResult = JsonConvert.SerializeObject(ITEMS, Formatting.Indented);
-      File.WriteAllText(@"c:\Source\lumed-guidelines\" + filename + ".json", jsonResult);
+      var filepath = $"c:\\Source\\lumed-guidelines\\{filename}.json";
+      var json = JsonConvert.SerializeObject(ITEMS, Formatting.Indented);
+      File.WriteAllText(filepath, json);
     }
+
     public static void DeserializeFromFile(string filename)
     {
-      ITEMS = JsonConvert.DeserializeObject<List<Item>>(File.ReadAllText(@"c:\Source\lumed-guidelines\" + filename + ".json"));
-      LastId = ITEMS[ITEMS.Count - 1].id + 1;
+      var filepath = $"c:\\Source\\lumed-guidelines\\{filename}.json";
+      if (File.Exists(filepath) == false)
+      {
+        throw new FileNotFoundException($"can't find the file");
+      }
+      var json = File.ReadAllText(filepath);
+      var data = JsonConvert.DeserializeObject<List<Item>>(json);
+      ITEMS = data;
+      var LastId = ITEMS[ITEMS.Count - 1].id + 1;
     }
   }
 }

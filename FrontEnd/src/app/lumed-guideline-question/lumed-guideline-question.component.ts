@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
 
-
 @Component({
-  selector: 'lumed-question',
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.css']
+  selector: 'lumed-guideline-question',
+  templateUrl: './lumed-guideline-question.component.html',
+  styleUrls: ['./lumed-guideline-question.component.css']
 })
-export class QuestionComponent {
+export class LumedGuidelineQuestionComponent {
 
   public isAdmin = false;
 

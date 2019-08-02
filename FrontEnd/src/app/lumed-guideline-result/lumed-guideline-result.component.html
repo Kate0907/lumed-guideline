@@ -1,8 +1,7 @@
-<div *ngIf="item != null">
-
+<div *ngIf="item">
   <ul class="group">
     <h3 class="group">{{item.name}}</h3>
-    <li *ngFor="let id of item.childrenIds ">
+    <li *ngFor="let id of item.childrenIds">
       {{getItemById(id).name}}
     </li>
   </ul>

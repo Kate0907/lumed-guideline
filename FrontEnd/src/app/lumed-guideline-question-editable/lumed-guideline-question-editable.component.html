@@ -5,11 +5,11 @@
     <button class="button" (click)="addItem(item.id,this.itemType.Question)">Add A New Question</button>
   </h2>
 
-  <ul class="section" *ngFor="let id of item.childrenIds; let sectionIndex = index">
+  <ul *ngFor="let id of item.childrenIds; let sectionIndex = index">
     <fieldset class="myfieldset">
       <h2 class="h2" *ngIf="getItemById(id) != null">
         <textarea class="title" [(ngModel)]="getItemById(id).name">
-            </textarea>
+        </textarea>
         <button class="button" (click)="addItem(id,this.itemType.Message)">Add A New Question</button>
         <button class="button" (click)="addItem(id,this.itemType.Checkbox)">Add A New Checkbox</button>
         <button class="button" (click)="updateItem(getItemById(id))">Save</button>
@@ -17,32 +17,39 @@
       </h2>
 
       <li *ngFor="let x of getItemById(id)?.childrenIds; let itemIndex = index">
-        <fieldset>
+        <fieldset class="fieldset">
           <div id="forMessage" *ngIf="getItemById(x)?.type === itemType.Message">
             <textarea class="message" [(ngModel)]="getItemById(x).name"></textarea>
-            <button (click)="updateItem(getItemById(x))">save</button>
-            <button (click)="deleteItem(x)">delete</button>
-            <button (click)="itemUp(id,itemIndex)">up</button>
-            <button (click)="itemDown(id,itemIndex)">down</button>
+            <div class="button1Div">
+              <button class="button2" (click)="updateItem(getItemById(x))">save</button>
+              <button class="button2" (click)="deleteItem(x)">delete</button>
+              <button class="button2" (click)="itemUp(id,itemIndex)">up</button>
+              <button class="button2" (click)="itemDown(id,itemIndex)">down</button>
+            </div>
           </div>
 
-          <div id="forLink" *ngIf="getItemById(x)?.type === itemType.Checkbox">{{getItemById(x).name}}
-            <input class="checkbox" type="checkbox" [(ngModel)]="getItemById(x).isChecked"><br>
-            <button (click)="deleteItem(x)">delete</button>
-            <button (click)="itemUp(id,itemIndex)">up</button>
-            <button (click)="itemDown(id,itemIndex)">down</button>
+          <div id="forCheckbox" *ngIf="getItemById(x)?.type === itemType.Checkbox">
+            <textarea class="checkboxName" [(ngModel)]="getItemById(x).name"></textarea>
+            <input class="checkbox" type="checkbox" [(ngModel)]="getItemById(x).isChecked">
+            <div class="button2Div">
+              <button class="button2" (click)="updateItem(getItemById(x))">save</button>
+              <button class="button2" (click)="deleteItem(x)">delete</button>
+              <button class="button2" (click)="itemUp(id,itemIndex)">up</button>
+              <button class="button2" (click)="itemDown(id,itemIndex)">down</button>
+            </div>
           </div>
         </fieldset>
       </li>
     </fieldset>
   </ul>
 
-  <div class="buttonDiv">
-    <button class="button" (click)="saveResult()">
+  <div class="button3Div">
+    <button class="button3" (click)="saveResult()">
       DONE
     </button>
+
+    <a class="a" routerLink="/result/{{newResultId}}">Result
+    </a>
   </div>
-  <a class="a" routerLink="/result/{{newResultId}}">Result
-  </a>
 
 </div>

@@ -17,12 +17,9 @@ namespace Guideline.Services
       var item = ItemDb.ITEMS.FirstOrDefault(Item => Item.id == id);
       if (item == null)
       {
-        throw (new NullReferenceException());
+        throw new NullReferenceException($"Can't find the item of id {id}");
       }
-      else
-      {
-        return item;
-      }
+      return item; 
     }
 
     public Item createNewItem(ItemType type)
@@ -31,21 +28,19 @@ namespace Guideline.Services
       itemToAdd.id = ItemDb.LastId++;
       itemToAdd.type = type;
       itemToAdd.childrenIds = new List<int> { };
-      itemToAdd.name = "New Group";
+      itemToAdd.name = $"New {type}";
       ItemDb.ITEMS.Add(itemToAdd);
       return itemToAdd;
     }
 
     public Item createNewItemAndAddTo(int id, ItemType type)
     {
-      var itemToAdd = new Item();
-      itemToAdd.id = ItemDb.LastId++;
-      itemToAdd.type = type;
-      itemToAdd.childrenIds = new List<int> { };
-      itemToAdd.name = "New Item";
-      ItemDb.ITEMS.Add(itemToAdd);
-
+      var itemToAdd = createNewItem(type);
       var parentItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
+      if(parentItem == null)
+      {
+        throw new NullReferenceException($"can't find the item of id {id}");
+      }
       if (parentItem.childrenIds == null)
       {
         parentItem.childrenIds = new List<int> { itemToAdd.id };
@@ -54,7 +49,6 @@ namespace Guideline.Services
       {
         parentItem.childrenIds.Add(itemToAdd.id);
       }
-
       return itemToAdd;
     }
 
@@ -63,20 +57,16 @@ namespace Guideline.Services
       var oldItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == itemToUpdate.id);
       if (oldItem == null)
       {
-        throw (new NullReferenceException());
+        throw new NullReferenceException($"can't find the item of id {itemToUpdate.id}");
       }
-      else
-      {
-        oldItem.name = itemToUpdate.name;
-        oldItem.childrenIds = itemToUpdate.childrenIds;
-
-        return oldItem;
-      }
+      oldItem.name = itemToUpdate.name;
+      oldItem.childrenIds = itemToUpdate.childrenIds;
+      return oldItem;
     }
 
     public void SaveToJson()
     {
-        ItemDb.Serialize(); 
+      ItemDb.Serialize();
     }
 
     public void Delete(int id)
@@ -84,20 +74,17 @@ namespace Guideline.Services
       var itemToDelete = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
       if (itemToDelete == null)
       {
-        throw (new NullReferenceException());
+        return;
       }
-      else
+      ItemDb.ITEMS.ForEach(item =>
       {
-        ItemDb.ITEMS.ForEach(item =>
+        if (item.childrenIds == null)
         {
-          if (item.childrenIds == null)
-          {
-            item.childrenIds = new List<int> { };
-          }
-          item.childrenIds = item.childrenIds.Where(childId => childId != id).ToList();
-        });
-        ItemDb.ITEMS.Remove(itemToDelete);
-      }
+          item.childrenIds = new List<int> { };
+        }
+        item.childrenIds = item.childrenIds.Where(childId => childId != id).ToList();
+      });
+      ItemDb.ITEMS.Remove(itemToDelete);
     }
   }
 }

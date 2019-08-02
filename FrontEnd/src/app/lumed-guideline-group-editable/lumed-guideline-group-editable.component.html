@@ -6,7 +6,17 @@
   <button class="button" (click)="addMain(eachgroup.id,this.itemType.Link)">Add New Main Section</button>
   <button class="button" (click)="deleteMain(eachgroup.id)">Delete Group</button>
   <li class="groupList" *ngFor="let id of eachgroup.childrenIds">
-    <a class="link" style="text-decoration:none" routerLink="/detail/{{id}}">{{getItemById(id).name}}</a>
-    <button class="button" id="delete" (click)="deleteMain(id)">Delete</button>
+    <span *ngIf="getItemById(id).type !== itemType.Questionnaire; else question">
+      <a style="text-decoration:none" routerLink="/detail/{{id}}">{{getItemById(id).name}}
+      </a>
+      <button class="button" id="delete" (click)="deleteMain(id)">Delete</button>
+    </span>
+
+    <ng-template #question>
+      <a style="text-decoration:none" routerLink="/question/{{id}}">{{getItemById(id).name}}
+      </a>
+      <button class="button" id="delete" (click)="deleteMain(id)">Delete</button>
+    </ng-template>
+
   </li>
 </ul>
