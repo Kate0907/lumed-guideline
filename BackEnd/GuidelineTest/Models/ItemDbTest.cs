@@ -11,7 +11,7 @@ namespace GuidelineTest.Models
   {
     public static List<Item> ITEMS { get; set; } = new List<Item>
         {
-            new Item { id = 0, name = "Cinderella", childrenIds = new List<int>{20,21}, type = ItemType.Link},
+            new Item { id = 0, name = "Elephant and Piggie", childrenIds = new List<int>{20,21}, type = ItemType.Link},
             new Item { id = 1, name = "Beauty and the Beast",childrenIds = new List<int>{22}, type = ItemType.Link},
             new Item { id = 2, name = "Little Red Riding Hood", childrenIds = new List<int>{22}, type = ItemType.Link},
             new Item { id = 3, name = "Snow White and the Seven Dwarfs", childrenIds = new List<int>{23}, type = ItemType.Link},
@@ -72,7 +72,7 @@ namespace GuidelineTest.Models
             new Item { id = 71, name = "Question 2", childrenIds = new List<int>{52,80,81}, type = ItemType.Question},
             new Item { id = 72, name = "Question 3", childrenIds = new List<int>{53,83,84,82}, type = ItemType.Question},
             new Item { id = 73, name = "Question 4", childrenIds = new List<int>{54,85,86,87,88,82}, type = ItemType.Question},
-            new Item { id = 74, name = "Question 5", childrenIds = new List<int>{55,85,86,87,88,82,95},type = ItemType.Question},
+            new Item { id = 74, name = "Question 5", childrenIds = new List<int>{55,85,86,87,88,82,95}, type = ItemType.Question},
 
             new Item { id = 80, name = "Yes", type = ItemType.Checkbox, isChecked = true},
             new Item { id = 81, name = "No", type = ItemType.Checkbox, isChecked = false},
@@ -91,7 +91,7 @@ namespace GuidelineTest.Models
             new Item { id = 94, name = "I know I have an allergy", type = ItemType.Checkbox, isChecked = false},
             new Item { id = 95, name = "Rash", type = ItemType.Checkbox, isChecked = false},
 
-            new Item { id = 100, name = "Beauty and the Beast Questionnaire", childrenIds = new List<int>{70,71,72,73,74}, type = ItemType.Questionnaire},
+            new Item { id = 100, name = "The Magic School Bus Questionnaire", childrenIds = new List<int>{70,71,72,73,74}, type = ItemType.Questionnaire},
 
     };
   }

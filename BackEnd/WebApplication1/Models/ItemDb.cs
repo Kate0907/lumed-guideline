@@ -49,7 +49,7 @@ namespace Guideline.Models
       var json = File.ReadAllText(filepath);
       var data = JsonConvert.DeserializeObject<List<Item>>(json);
       ITEMS = data;
-      var LastId = ITEMS[ITEMS.Count - 1].id + 1;
+      ItemDb.LastId = ITEMS[ITEMS.Count - 1].id + 1;
     }
   }
 }

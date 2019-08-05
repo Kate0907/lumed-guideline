@@ -74,7 +74,7 @@ namespace Guideline.Services
       var itemToDelete = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
       if (itemToDelete == null)
       {
-        return;
+        throw new NullReferenceException($"can't find the item of id {id}");
       }
       ItemDb.ITEMS.ForEach(item =>
       {
