@@ -48,7 +48,7 @@ Set:
 <img src=".\readme.dir\addWebsite.png" width=400px >
 
 6. Click `Sites` --> `Default Web Site` -->right click `lumed-guideline-backend` --> `Convert to Application`
-7. Open Chrome, open URL: `localhost/lumed-guideline` to run the app.
+7. Open Chrome, open URL: `localhost/lumed-guideline/frontend` to run the app.
 
 > For Login <br>
 
