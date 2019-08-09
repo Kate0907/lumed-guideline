@@ -9,7 +9,7 @@
 ## How to deploy:
 > Database
 1. Copy `empty.json` and `guideline.json` to your local disk in order to read/write file. `empty.json` is an empty json file, `guideline.json` has some mock dataset in it.
-2. Edit `Web.config` in BackEnd project to read and save data in the right place: <br>
+2. Edit `Web.config` in BackEnd `Guideline` project to read and save data in the right place: <br>
 <img src=".\readme.dir\webconfig.png" >
    
 Open Web.config, under `appSettings`:
@@ -39,8 +39,7 @@ Set the Target Location. Target Location is where the published files will be sa
 <img src=".\readme.dir\publish.png" width=400px >
 4. Create a new folder in `C:\inetpub\wwwroot` called `lumed-guideline-backend`.
 Copy the files your just published from target location to new folder `C:\inetpub\wwwroot\lumed-guideline-backend`.
-5.  In IIS manager, right click on `Sites` --> `Add Website` , <br>
-Set:
+5.  In IIS manager, right click on `Sites` --> `Add Website` set:
 - Site name: `Default Web Site`
 - Application pool: `DefaultAppPool`
 - Physical path: `%SystemDrive%\inetpub\wwwroot`
