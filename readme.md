@@ -8,14 +8,14 @@
 
 ## How to deploy:
 > Database
-1. Copy `empty.json` and `guideline.json` to your local disk in order to read/write file. `empty.json` is an empty json file, `guideline.json` has the mock dataset in it.
-2. Edit `Web.config` in C# project to read and save data in the right place:
-![image](./readme.dir/webconfig.png)
+1. Copy `empty.json` and `guideline.json` to your local disk in order to read/write file. `empty.json` is an empty json file, `guideline.json` has some mock dataset in it.
+2. Edit `Web.config` in BackEnd project to read and save data in the right place:
+<img src=".\readme.dir\webconfig.png" >
    
-Open Web.config, in 'appSettings':
-*  key 'SavePath' is the path to save current data into a json file when clicking button 'save to json'. Current value is 'c:\Source\lumed-guidelines\empty.json'. Replace with a new one.
+Open Web.config, under `appSettings`:
+*  key `SavePath` is the path to save all the data when clicking `save to json` button. Replace the `value` with current location for `empty.json`.
    
-* key 'ReadPath' is the path to load data from local json file when the app start. Current value is 'c:\Source\lumed-guidelines\guideline.json'. Replace with a new one.
+* key `ReadPath` is the path to load all data when the app start. Replace the `value` with current location for `guideline.json` or `empty.json`. 
 
 
 > Frontend
