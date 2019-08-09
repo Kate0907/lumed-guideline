@@ -1,22 +1,38 @@
-<div> <button class="button" (click)="addMainGroup(this.itemType.Group)">Add New Group</button>
+<div class="newGroupButton"> <button class="button" (click)="addMainGroup(this.itemType.Group)">Add A New Group</button>
 </div>
-<ul class="group" *ngFor="let eachgroup of itemGroup; let groupIndex = index;">
-  <h2 class="group"><textarea class="textarea" [(ngModel)]="eachgroup.name"></textarea></h2>
-  <button class="button" (click)="updateItem(eachgroup)">Save Group Name</button>
-  <button class="button" (click)="addMain(eachgroup.id,this.itemType.Link)">Add New Main Section</button>
-  <button class="button" (click)="deleteMain(eachgroup.id)">Delete Group</button>
-  <li class="groupList" *ngFor="let id of eachgroup.childrenIds">
-    <span *ngIf="getItemById(id).type !== itemType.Questionnaire; else question">
-      <a style="text-decoration:none" routerLink="/detail/{{id}}">{{getItemById(id).name}}
-      </a>
-      <button class="button" id="delete" (click)="deleteMain(id)">Delete</button>
-    </span>
 
-    <ng-template #question>
-      <a style="text-decoration:none" routerLink="/question/{{id}}">{{getItemById(id).name}}
-      </a>
-      <button class="button" id="delete" (click)="deleteMain(id)">Delete</button>
-    </ng-template>
+<ul class="ul" *ngFor="let eachgroup of itemGroup; let groupIndex = index;">
+  <fieldset class="myfieldset">
+    <legend class="legend">Group {{groupIndex+1}}</legend>
+    <h2 class="h2">
+      <textarea class="title" [(ngModel)]="eachgroup.name"></textarea>
+      <button class="button" (click)="updateItem(eachgroup)">Save Group Name</button>
+      <button class="button" (click)="deleteMain(eachgroup.id)">Delete Group</button>
+      <button class="button" (click)="addMain(eachgroup.id,this.itemType.Link)">Add Main Section</button>
+      <button class="button" (click)="addMain(eachgroup.id,this.itemType.Questionnaire)">Add Questionnaire</button>
+    </h2>
 
-  </li>
+    <li *ngFor="let id of eachgroup.childrenIds; let itemIndex = index">
+      <fieldset class="fieldset">
+        <div id="forLink" *ngIf="getItemById(id).type !== itemType.Questionnaire; else question">
+          <a class="a" style="text-decoration:none" routerLink="/detail/{{id}}">{{getItemById(id).name}}
+          </a>
+          <div class="button2Div">
+            <button class="button2" (click)="deleteMain(id)">Delete</button>
+            <button class="button2" (click)="itemUp(id,itemIndex)">up</button>
+            <button class="button2" (click)="itemDown(id,itemIndex)">down</button>
+          </div>
+        </div>
+        <ng-template #question>
+          <a class="a" style="text-decoration:none" routerLink="/question/{{id}}">{{getItemById(id).name}}
+          </a>
+          <div class="button2Div">
+            <button class="button2" (click)="deleteMain(id)">Delete</button>
+            <button class="button2" (click)="itemUp(id,itemIndex)">up</button>
+            <button class="button2" (click)="itemDown(id,itemIndex)">down</button>
+          </div>
+        </ng-template>
+      </fieldset>
+    </li>
+  </fieldset>
 </ul>

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GuidelineItemService } from '../main.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -8,13 +10,22 @@ import { GuidelineItemService } from '../main.service';
   styleUrls: ['./lumed-guideline-group.component.css']
 })
 
-export class GuidelineGroupComponent {
+export class GuidelineGroupComponent implements OnInit {
 
-  public isAdmin = false;
+  public get isAdmin(): boolean {
+    if (sessionStorage.getItem('loggedIn') === 'true') {
+      return true;
+    }
+    return false;
+  }
 
   constructor(
     protected itemService: GuidelineItemService,
   ) { }
+
+  public ngOnInit(): void {
+
+  }
 
   public async saveToJson(): Promise<void> {
     await this.itemService.saveToJson();

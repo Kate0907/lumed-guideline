@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using Guideline.Models;
 
@@ -29,7 +30,14 @@ namespace Guideline.Services
       itemToAdd.type = type;
       itemToAdd.childrenIds = new List<int> { };
       itemToAdd.name = $"New {type}";
-      ItemDb.ITEMS.Add(itemToAdd);
+      if(ItemDb.ITEMS == null)
+      {
+        ItemDb.ITEMS = new List<Item> { itemToAdd };
+      }
+      else
+      {
+        ItemDb.ITEMS.Add(itemToAdd);
+      }
       return itemToAdd;
     }
 
@@ -85,6 +93,23 @@ namespace Guideline.Services
         item.childrenIds = item.childrenIds.Where(childId => childId != id).ToList();
       });
       ItemDb.ITEMS.Remove(itemToDelete);
+    }
+
+    public User createNewUser(string name, string pwd)
+    {
+      var userToAdd = new User();
+      userToAdd.name = name;
+      userToAdd.pwd = pwd;
+      UserDb.USERS.Add(userToAdd);
+      return userToAdd;
+    }
+
+    public bool login(User user)
+    {
+      if (user.name == ConfigurationManager.AppSettings["name"] && user.pwd == ConfigurationManager.AppSettings["password"])
+        return true;
+      else
+        return false; 
     }
   }
 }

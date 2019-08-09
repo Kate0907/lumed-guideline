@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, } from 'rxjs/operators';
 import { ItemType } from './ItemType';
+import { User } from './user';
+import { environment } from './../environments/environment';
 
 const httpOptions = {
    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,12 +15,14 @@ const httpOptions = {
    providedIn: 'root'
 })
 export class GuidelineHttpService {
-   private itemUrl = 'http://localhost:61291/api/Item';
-   private jsonUrl = 'http://localhost:61291/api/Json';
+
+   private itemUrl = environment.apiUrl + '/api/Item';
+   private jsonUrl = environment.apiUrl + '/api/Json';
+   private userUrl = environment.apiUrl + '/api/User';
 
    constructor(
       private http: HttpClient,
-   ) { }
+   ) { console.log(environment.apiUrl); }
 
    /** GET all items from the server */
    public async getAllItems(): Promise<Item[]> {
@@ -44,6 +48,11 @@ export class GuidelineHttpService {
    /** POST: create a new item without parent  */
    public createItem(type: ItemType): Promise<Item> {
       return this.http.post<Item>(this.itemUrl, type, httpOptions).toPromise<Item>();
+   }
+
+   /** POST: login a user */
+   public login(user: User): Promise<any> {
+      return this.http.post(this.userUrl, user, httpOptions).toPromise();
    }
 
    /** PUT: update the main section on the server and return a message; */

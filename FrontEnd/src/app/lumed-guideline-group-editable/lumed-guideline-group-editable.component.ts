@@ -36,6 +36,18 @@ export class GuidelineGroupEditableComponent extends GuidelineGroupBase {
     await this.refresh();
   }
 
+  public async itemUp(sectionId: number, messageIndex: number): Promise<void> {
+    const section = this.getItemById(sectionId);
+    await this.itemService.itemUp(section, messageIndex);
+    await this.refresh();
+  }
+
+  public async itemDown(sectionId: number, messageIndex: number): Promise<void> {
+    const section = this.getItemById(sectionId);
+    await this.itemService.itemDown(section, messageIndex);
+    await this.refresh();
+  }
+
   public async saveToJson(): Promise<void> {
     await this.itemService.saveToJson();
   }

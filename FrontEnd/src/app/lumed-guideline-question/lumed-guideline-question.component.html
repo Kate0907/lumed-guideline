@@ -1,8 +1,3 @@
-<div class="">
-  <input class="isAdmin" type="checkbox" [(ngModel)]="isAdmin">is Admin
-  <button class="button" *ngIf="isAdmin" (click)="saveToJson()">Save To Json</button>
-</div>
-
 <div *ngIf="!isAdmin">
   <lumed-guideline-question-readonly></lumed-guideline-question-readonly>
 </div>

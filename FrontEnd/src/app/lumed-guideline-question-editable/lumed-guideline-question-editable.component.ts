@@ -51,6 +51,9 @@ export class LumedGuidelineQuestionEditableComponent extends GuidelineItemBase i
     this.checkedItemList.childrenIds = this.checkedItemIds;
     this.checkedItemList.name = this.item.name + ' Result';
     await this.itemService.updateItem(this.checkedItemList);
+    var resultUrl = '/result/' + this.newResultId;
+    console.log(resultUrl);
+    this.router.navigate([resultUrl]);
   }
 
   public async addItem(parentId: number, type: ItemType): Promise<void> {

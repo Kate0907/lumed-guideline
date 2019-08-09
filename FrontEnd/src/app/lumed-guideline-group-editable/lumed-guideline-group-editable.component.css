@@ -1,88 +1,182 @@
-    .group {
-      margin: 0 0 2em 0;
-      list-style-type: none;
-      padding: 0;
-    }
+.h2 {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
 
-    .group li {
-      cursor: pointer;
-      position: relative;
-      left: 0;
-      background-color: #EEE;
-      margin: .5em;
-      padding: .3em 0;
-      height: auto;
-      border-radius: 4px;
-    }
+.newGroupButton {
+  text-align: center;
+  margin-top: 2em;
+}
 
-    .group li.selected:hover {
-      background-color: #BBD8DC !important;
-      color: white;
-    }
+.title {
+  box-sizing: border-box;
+  width: 80%;
+  height: 2em;
+  font-size: 0.8em;
+  font-weight: 300;
+}
 
-    .group .text {
-      position: relative;
-      top: -3px;
-    }
+.ul {
+  margin-right: 0;
+  padding-left: 0;
+}
 
-    h2.group {
-      margin: .5em;
-      padding: .3em;
-      height: 1.6em;
-      border-radius: 4px;
-      width: 80%;
-    }
+.group {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+}
 
-    .textarea {
-      width: 80%;
-      height: 1.5em;
-      font-size: 1em;
-    }
+.group li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  height: auto;
+  border-radius: 4px;
+}
 
-    .groupList {
-      height: 10px;
-      width: 100%;
-      display: table;
-    }
+.group li.selected:hover {
+  background-color: #BBD8DC !important;
+  color: white;
+}
 
-    #delete {
-      float: right;
-      margin-right: 2%;
-    }
+.group .text {
+  position: relative;
+  top: -3px;
+}
 
-    input[type=text],
-    textarea {
-      -webkit-transition: all 0.30s ease-in-out;
-      -moz-transition: all 0.30s ease-in-out;
-      -ms-transition: all 0.30s ease-in-out;
-      -o-transition: all 0.30s ease-in-out;
-      outline: none;
-      padding: 3px 0px 3px 3px;
-      margin: 5px 1px 3px 0px;
-      border: 1px solid #DDDDDD;
-      border-radius: 0.25rem;
-    }
+h2.group {
+  margin: .5em;
+  padding: .3em;
+  height: 1.6em;
+  border-radius: 4px;
+  width: 80%;
+}
 
-    input[type=text]:focus,
-    textarea:focus {
-      box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-      padding: 3px 0px 3px 3px;
-      margin: 5px 1px 3px 0px;
-      border: 1px solid rgba(81, 203, 238, 1);
-    }
 
-    .button {
+.fieldset {
+  margin: 0 0 0 0;
+  list-style-type: none;
+  padding: 0;
+  border-color: #f1f1f1;
+  border-style: solid;
+  border-width: 1px 0 0 0;
+  border-radius: 4px;
+  background-color: #f3f3f3;
+}
 
-      background: #45a2d8;
-      color: #f6f5fc;
-      border: 1px solid transparent;
-      padding: 0.2rem 0.5rem;
-      margin: 0.2rem;
-      border-radius: 0.25rem;
-      font-size: 1rem;
-      cursor: pointer;
-    }
+.fieldset li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  margin: .5em;
+  padding: .3em 0;
+  border-radius: 4px;
+  width: 100%;
+  height: auto;
+}
 
-    .link {
-      padding-left: 0.5em;
-    }
+fieldset {
+  border: 1px solid rgb(188, 219, 251);
+  border-radius: 0.25rem;
+  margin: 0.1em;
+}
+
+.legend {
+  color: #96C8FF;
+}
+
+#forLink {
+  height: auto;
+  width: 100%;
+  align-self: center;
+}
+
+.textarea {
+  width: 80%;
+  height: 1.5em;
+  font-size: 1em;
+}
+
+.groupList {
+  height: 10px;
+  width: 100%;
+  display: table;
+}
+
+#delete {
+  float: right;
+  margin-right: 2%;
+}
+
+input[type=text],
+textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+  border-radius: 0.25rem;
+}
+
+input[type=text]:focus,
+textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.button {
+
+  background: #96C8FF;
+  color: #f6f5fc;
+  border: 1px solid transparent;
+  padding: 0.2rem 0.4rem;
+  margin: 0.2rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+.button2 {
+  background: #96C8FF;
+  color: #f6f5fc;
+  border: 1px solid transparent;
+  padding: 0.2rem 0.5rem;
+  margin: 0.1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  float: bottom;
+}
+
+li .fieldset {
+  height: auto;
+  /* border: 1px solid rgb(168, 225, 241); */
+  border-radius: 0.25rem;
+  margin: 0.3em;
+  padding: 0.3em;
+}
+
+.link {
+  padding-left: 0.5em;
+}
+
+.a {
+  text-align: center;
+}
+
+.button2Div {
+  text-align: center;
+  margin-top: 0.5em;
+}

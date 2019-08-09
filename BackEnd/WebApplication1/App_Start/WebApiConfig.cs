@@ -11,8 +11,6 @@ namespace Guideline
   {
     public static void Register(HttpConfiguration config)
     {
-
-
       // Web API configuration and services
       var cors = new EnableCorsAttribute("*", "*", "*");
       config.EnableCors(cors);
@@ -25,7 +23,6 @@ namespace Guideline
           routeTemplate: "api/{controller}/{id}",
           defaults: new { id = RouteParameter.Optional }
       );
-
       ItemDb.Deserialize();
     }
   }

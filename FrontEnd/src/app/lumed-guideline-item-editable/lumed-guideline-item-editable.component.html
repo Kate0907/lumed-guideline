@@ -1,14 +1,12 @@
 <div *ngIf="item">
-  <span>item id : {{url}}</span>
-
   <h2 class="h2"><textarea class="title" [(ngModel)]="item.name"></textarea>
     <button class="button" (click)="updateItem(item)">Save Title</button>
     <button class="button" (click)="addItem(item.id,this.itemType.Link)">Add A New Section</button>
   </h2>
 
-  <ul *ngFor="let id of item.childrenIds; let sectionIndex = index">
-    <fieldset class="fieldset">
-      <!--<legend class="legend">Section {{sectionIndex+1}}</legend>-->
+  <ul class="ul" *ngFor="let id of item.childrenIds; let sectionIndex = index">
+    <fieldset class="myfieldset">
+      <legend class="legend">Section {{sectionIndex+1}}</legend>
       <h2 class="h2" *ngIf="getItemById(id) != null">
         <textarea class="title" [(ngModel)]="getItemById(id).name">
         </textarea>
@@ -43,6 +41,4 @@
       </li>
     </fieldset>
   </ul>
-  <div><span>item id: </span>{{item.id}}</div>
-  <div><span>item name: </span>{{item.name}}</div>
 </div>

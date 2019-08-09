@@ -13,6 +13,13 @@ export class GuidelineItemBase implements OnInit {
     public readonly itemType = ItemType;
     public show = true;
 
+    public get isAdmin(): boolean {
+        if (sessionStorage.getItem('loggedIn') === 'true') {
+            return true;
+        }
+        return false;
+    }
+
     constructor(
         protected route: ActivatedRoute,
         protected router: Router,

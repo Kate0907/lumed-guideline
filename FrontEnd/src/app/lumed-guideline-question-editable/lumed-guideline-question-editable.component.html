@@ -7,13 +7,15 @@
 
   <ul *ngFor="let id of item.childrenIds; let sectionIndex = index">
     <fieldset class="myfieldset">
+      <legend class="legend">Question {{sectionIndex+1}}</legend>
       <h2 class="h2" *ngIf="getItemById(id) != null">
         <textarea class="title" [(ngModel)]="getItemById(id).name">
         </textarea>
         <button class="button" (click)="addItem(id,this.itemType.Message)">Add A New Question</button>
+        <button class="button" (click)="deleteItem(id)">Delete Question</button>
         <button class="button" (click)="addItem(id,this.itemType.Checkbox)">Add A New Checkbox</button>
         <button class="button" (click)="updateItem(getItemById(id))">Save</button>
-        <button class="button" (click)="deleteItem(id)">Delete Question</button>
+
       </h2>
 
       <li *ngFor="let x of getItemById(id)?.childrenIds; let itemIndex = index">
@@ -47,9 +49,8 @@
     <button class="button3" (click)="saveResult()">
       DONE
     </button>
-
-    <a class="a" routerLink="/result/{{newResultId}}">Result
-    </a>
+    <!-- <a class="a" routerLink="/result/{{newResultId}}">Result
+    </a> -->
   </div>
 
 </div>

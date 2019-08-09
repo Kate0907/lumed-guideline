@@ -1,10 +1,29 @@
 .checkbox {
   font: 8px arial, sans-serif;
   margin-top: 0px;
-  margin-bottom: 10em;
+  margin-bottom: 1em;
 }
 
 .button {
   float: right;
-  margin-right: 10px;
+  background: #45a2d8;
+  color: #f6f5fc;
+  border: 1px solid transparent;
+  padding: 0.2rem 0.4rem;
+  margin: 0.2rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.buttonBack {
+  float: left;
+  background: #45a2d8;
+  color: #f6f5fc;
+  border: 1px solid transparent;
+  padding: 0.2rem 0.4rem;
+  margin: 0.2rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
 }

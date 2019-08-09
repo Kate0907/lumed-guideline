@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { GuidelineHttpService } from './main-database.service';
 import { Item } from './item';
 import { ItemType } from './ItemType';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuidelineItemService {
   constructor(private _DB: GuidelineHttpService, ) { }
+
+  public async login(user: User): Promise<boolean> {
+    return await this._DB.login(user);
+  }
 
   public getAllItems(): Promise<Item[]> {
     return this._DB.getAllItems();

@@ -17,6 +17,8 @@ import { LumedGuidelineQuestionComponent } from './lumed-guideline-question/lume
 import { LumedGuidelineResultComponent } from './lumed-guideline-result/lumed-guideline-result.component';
 import { LumedGuidelineQuestionReadonlyComponent } from './lumed-guideline-question-readonly/lumed-guideline-question-readonly.component';
 import { LumedGuidelineQuestionEditableComponent } from './lumed-guideline-question-editable/lumed-guideline-question-editable.component';
+import { LumedGuidelineLoginComponent }
+from './lumed-guideline-login/lumed-guideline-login.component';
 
 
 
@@ -35,6 +37,7 @@ import { LumedGuidelineQuestionEditableComponent } from './lumed-guideline-quest
     LumedGuidelineResultComponent,
     LumedGuidelineQuestionReadonlyComponent,
     LumedGuidelineQuestionEditableComponent,
+    LumedGuidelineLoginComponent
   ],
   imports: [
     BrowserModule,

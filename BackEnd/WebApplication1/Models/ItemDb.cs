@@ -21,7 +21,7 @@ namespace Guideline.Models
 
     public static void Deserialize()
     {
-      var filepath = @ConfigurationManager.AppSettings["GuidelinePath"];
+      var filepath = @ConfigurationManager.AppSettings["ReadPath"];
       if (File.Exists(filepath) == false)
       {
         throw new FileNotFoundException($"can't find the file");
@@ -29,7 +29,11 @@ namespace Guideline.Models
       var json = File.ReadAllText(filepath);
       var data = JsonConvert.DeserializeObject<List<Item>>(json);
       ITEMS = data;
-      ItemDb.LastId = ITEMS[ITEMS.Count - 1].id + 1;
+      if (ITEMS != null)
+      {
+        ItemDb.LastId = ITEMS[ITEMS.Count - 1].id + 1;
+      }
+      else { ItemDb.LastId = 0; }
     }
 
     public static void SerializeToFile(string filename)
@@ -49,7 +53,11 @@ namespace Guideline.Models
       var json = File.ReadAllText(filepath);
       var data = JsonConvert.DeserializeObject<List<Item>>(json);
       ITEMS = data;
-      ItemDb.LastId = ITEMS[ITEMS.Count - 1].id + 1;
+      if(ITEMS != null)
+      {
+        ItemDb.LastId = ITEMS[ITEMS.Count - 1].id + 1;
+      }
+      else { ItemDb.LastId = 0; }
     }
   }
 }
