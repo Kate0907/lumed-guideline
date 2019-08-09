@@ -26,7 +26,7 @@ Open Web.config, under `appSettings`:
    ```javascript
    ng build --base-href "/lumed-guideline-frontend/" --prod
    ```
-   "lumed-guideline-frontend" is the new folder name in `wwwroot` folder your just created 
+   `lumed-guideline-frontend` is the new folder name in `wwwroot` folder your just created 
 4. Open your project's `dist`-->`lumed-angular2-guidelines` folder, copy all the contents inside `lumed-angular2-guidelines` folder into your IIS `wwwroot\lumed-guideline-frontend` folder.<br>
 <img src=".\readme.dir\wwwroot-frontend.png" width=400px >
 
@@ -50,7 +50,8 @@ Set:
 6. Click `Sites` --> `Default Web Site` -->right click `lumed-guideline-backend` --> `Convert to Application`
 7. Open Chrome, open URL: `localhost/lumed-guideline` to run the app.
 
-# For Login
+> For Login <br>
+
 Username: abc <br>
 Password: 000000
   
