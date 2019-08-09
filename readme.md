@@ -1,14 +1,36 @@
-# For the frontend:
-1. Find your IIS defualt web root. It should be in C:\inetpub\wwwroot.
-2. Remove all files in folder 'wwwroot' and create a new folder called 'lumed-guideline-frontend'.
-3. In Angular cli write: ng build --base-href "/lumed-guideline-frontend/" --prod
-   (lumed-guideline-frontend is the new folder name in 'wwwroot' folder your just created) 
+# Lumed Guideline
+
+
+## Prerequisites
+1. Install Visual Studio Code and Visual Studio
+2. Open FrontEnd folder with Visual Studio Code
+3. Open BackEnd folder with Visual Studio
+
+## How to deploy:
+> Database
+1. Copy `empty.json` and `guideline.json` to your local disk in order to read/write file. `empty.json` is an empty json file, `guideline.json` has the mock dataset in it.
+2. Edit `Web.config` in C# project to read and save data in the right place:
+![image](./readme.dir/webconfig.png)
+   
+Open Web.config, in 'appSettings':
+*  key 'SavePath' is the path to save current data into a json file when clicking button 'save to json'. Current value is 'c:\Source\lumed-guidelines\empty.json'. Replace with a new one.
+   
+* key 'ReadPath' is the path to load data from local json file when the app start. Current value is 'c:\Source\lumed-guidelines\guideline.json'. Replace with a new one.
+
+
+> Frontend
+1. Find your IIS defualt web root. It should be in `C:\inetpub\wwwroot`.
+2. Remove all files in folder `wwwroot` and create a new folder called `lumed-guideline-frontend`.
+3. In Angular CLI write: 
+   ```javascript
+   ng build --base-href "/lumed-guideline-frontend/" --prod
+   ```
+   "lumed-guideline-frontend" is the new folder name in `wwwroot` folder your just created 
 4. Open your project's 'dist' folder, then open'lumed-angular2-guidelines' folder, copy all the contents inside 'lumed-angular2-guidelines' folder into your IIS wwwroot\lumed-guideline-frontend folder.
 
-# For the backend:
-1. Copy 'empty.json' and 'guideline.json' to your local disk in order to read/write file.
-'empty.json' is an empty json file, 'guideline.json' has the mock dataset in it.
-2. Edit Web.config to read and save data:
+> Backend
+
+1. Edit Web.config to read and save data:
 Open Web.config, in 'appSettings':
 *  key 'SavePath' is the path to save current data into a json file when clicking button 'save to json'. Current value is 'c:\Source\lumed-guidelines\empty.json'. Replace with a new one.
    
