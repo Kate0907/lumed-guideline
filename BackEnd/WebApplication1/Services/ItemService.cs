@@ -103,13 +103,5 @@ namespace Guideline.Services
       UserDb.USERS.Add(userToAdd);
       return userToAdd;
     }
-
-    public bool login(User user)
-    {
-      if (user.name == ConfigurationManager.AppSettings["name"] && user.pwd == ConfigurationManager.AppSettings["password"])
-        return true;
-      else
-        return false; 
-    }
   }
 }

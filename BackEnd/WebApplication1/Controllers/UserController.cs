@@ -9,7 +9,7 @@ namespace Guideline.Controllers
   [EnableCors(origins: "*", headers: "*", methods: "*")]
   public class UserController : ApiController
   {
-    private ItemService service = new ItemService();
+    private LoginService service = new LoginService();
     public bool Post([FromBody]User user)
     {
       return service.login(user);
