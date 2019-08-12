@@ -87,10 +87,11 @@ textarea {
 
 input[type=text]:focus,
 textarea:focus {
-  box-shadow: 0 0 5px rgb(75, 86, 88);
-  padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
-  border: 1px solid rgba(81, 203, 238, 1);
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
 .button {
