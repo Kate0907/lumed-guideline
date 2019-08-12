@@ -5,6 +5,7 @@ import { GuidelineItemService } from '../main.service';
 import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-base';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
+import { SessionCheckService } from '../session-check.service';
 
 @Component({
   selector: 'lumed-guideline-result',
@@ -20,14 +21,13 @@ export class LumedGuidelineResultComponent extends GuidelineItemBase implements 
     protected route: ActivatedRoute,
     protected router: Router,
     protected itemService: GuidelineItemService,
+    protected sessionService: SessionCheckService,
     protected location: Location) {
-    super(route, router, itemService, location);
+    super(route, router, itemService, sessionService, location);
   }
 
   public async ngOnInit(): Promise<void> {
     await this.getResult();
-    console.log(this.item.id);
-    console.log(this.items.length);
   }
 
   public async getResult(): Promise<void> {

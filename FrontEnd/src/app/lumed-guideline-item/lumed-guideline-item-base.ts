@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
+import { SessionCheckService } from '../session-check.service';
 
 export class GuidelineItemBase implements OnInit {
     @Input() public item: Item;
@@ -14,16 +15,14 @@ export class GuidelineItemBase implements OnInit {
     public show = true;
 
     public get isAdmin(): boolean {
-        if (sessionStorage.getItem('loggedIn') === 'true') {
-            return true;
-        }
-        return false;
+        return this.sessionService.checkSession();
     }
 
     constructor(
         protected route: ActivatedRoute,
         protected router: Router,
         protected itemService: GuidelineItemService,
+        protected sessionService: SessionCheckService,
         protected location: Location) {
 
         this.router.events.subscribe(navigation => {
@@ -63,7 +62,4 @@ export class GuidelineItemBase implements OnInit {
     public goBack(): void {
         this.location.back();
     }
-
-
-
 }

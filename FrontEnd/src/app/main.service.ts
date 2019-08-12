@@ -10,9 +10,9 @@ import { User } from './user';
 export class GuidelineItemService {
   constructor(private _DB: GuidelineHttpService, ) { }
 
-  public async login(user: User): Promise<boolean> {
-    return await this._DB.login(user);
-  }
+  // public async login(user: User): Promise<boolean> {
+  //   return await this._DB.login(user);
+  // }
 
   public getAllItems(): Promise<Item[]> {
     return this._DB.getAllItems();

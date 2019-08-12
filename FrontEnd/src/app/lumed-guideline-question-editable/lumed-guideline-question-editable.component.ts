@@ -5,6 +5,7 @@ import { GuidelineItemService } from '../main.service';
 import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-base';
 import { ItemType } from '../ItemType';
 import { Item } from '../item';
+import { SessionCheckService } from '../session-check.service';
 
 @Component({
   selector: 'lumed-guideline-question-editable',
@@ -24,8 +25,9 @@ export class LumedGuidelineQuestionEditableComponent extends GuidelineItemBase i
     protected route: ActivatedRoute,
     protected router: Router,
     protected itemService: GuidelineItemService,
+    protected sessionService: SessionCheckService,
     protected location: Location) {
-    super(route, router, itemService, location);
+    super(route, router, itemService, sessionService, location);
   }
 
   public ngOnInit(): void {
@@ -51,7 +53,7 @@ export class LumedGuidelineQuestionEditableComponent extends GuidelineItemBase i
     this.checkedItemList.childrenIds = this.checkedItemIds;
     this.checkedItemList.name = this.item.name + ' Result';
     await this.itemService.updateItem(this.checkedItemList);
-    var resultUrl = '/result/' + this.newResultId;
+    const resultUrl = '/result/' + this.newResultId;
     console.log(resultUrl);
     this.router.navigate([resultUrl]);
   }
@@ -72,14 +74,14 @@ export class LumedGuidelineQuestionEditableComponent extends GuidelineItemBase i
   }
 
   public async itemUp(sectionId: number, messageIndex: number): Promise<void> {
-    const section = this.getItemById(sectionId);
-    await this.itemService.itemUp(section, messageIndex);
+    const item = this.getItemById(sectionId);
+    await this.itemService.itemUp(item, messageIndex);
     await this.refresh();
   }
 
   public async itemDown(sectionId: number, messageIndex: number): Promise<void> {
-    const section = this.getItemById(sectionId);
-    await this.itemService.itemDown(section, messageIndex);
+    const item = this.getItemById(sectionId);
+    await this.itemService.itemDown(item, messageIndex);
     await this.refresh();
   }
 }

@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, } from '@angular/router';
 import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
 import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-base';
 import { ItemType } from '../ItemType';
 import { Item } from '../item';
+import { SessionCheckService } from '../session-check.service';
 
 
 @Component({
@@ -25,8 +26,9 @@ export class LumedGuidelineQuestionReadonlyComponent extends GuidelineItemBase i
     protected route: ActivatedRoute,
     protected router: Router,
     protected itemService: GuidelineItemService,
+    protected sessionService: SessionCheckService,
     protected location: Location) {
-    super(route, router, itemService, location);
+    super(route, router, itemService, sessionService, location);
   }
 
   public ngOnInit(): void {
@@ -53,7 +55,7 @@ export class LumedGuidelineQuestionReadonlyComponent extends GuidelineItemBase i
     this.checkedItemList.name = this.item.name + ' Result';
     await this.itemService.updateItem(this.checkedItemList);
 
-    var resultUrl = '/result/' + this.newResultId;
+    const resultUrl = '/result/' + this.newResultId;
 
     console.log(resultUrl);
     this.router.navigate([resultUrl]);
