@@ -4,7 +4,7 @@
 ## Prerequisites
 1. Install Visual Studio Code and Visual Studio
 2. Open FrontEnd folder with Visual Studio Code
-3. Open BackEnd folder with Visual Studio
+3. Open `Guideline.sln` in BackEnd folder with Visual Studio
 
 ## How to deploy:
 > Database
@@ -19,9 +19,9 @@ Open Web.config, under `appSettings`:
 
 
 > Frontend
-1. Find your IIS defualt web root. It should be in `C:\inetpub\wwwroot`.
+1. Find your IIS default web root. It should be in `C:\inetpub\wwwroot`.
 2. Remove all files in folder `wwwroot` and create a new folder called `lumed-guideline-frontend`.<br>
-   <img src=".\readme.dir\wwwroot1.png" width=400px >
+   <img src=".\readme.dir\wwwroot.png" width=400px >
 3. In Angular CLI write: 
    ```javascript
    ng build --base-href "/lumed-guideline-frontend/" --prod
@@ -32,13 +32,13 @@ Open Web.config, under `appSettings`:
 
 > Backend
 
-1. Open BeckEnd folder with Visual Studio
+1. Open `Guideline.sln` in BackEnd folder with Visual Studio
 2. Build `Guideline` project in Release mode.
 3. Right click on `Guideline` project and click `Publish` .
 Set the Target Location. Target Location is where the published files will be saved. <br>
 <img src=".\readme.dir\publish.png" width=400px >
 4. Create a new folder in `C:\inetpub\wwwroot` called `lumed-guideline-backend`.
-Copy the files your just published from target location to new folder `C:\inetpub\wwwroot\lumed-guideline-backend`.
+Copy the files you just published from target location into the new folder `C:\inetpub\wwwroot\lumed-guideline-backend`.
 5.  In IIS manager, right click on `Sites` --> `Add Website` set:
 - Site name: `Default Web Site`
 - Application pool: `DefaultAppPool`

@@ -1,26 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
+import { SessionCheckService } from '../session-check.service';
 
 @Component({
   selector: 'lumed-guideline-item',
   templateUrl: './lumed-guideline-item.component.html',
   styleUrls: ['./lumed-guideline-item.component.css']
 })
-export class GuidelineItemComponent implements OnInit {
+export class GuidelineItemComponent {
 
   public get isAdmin(): boolean {
-    if (sessionStorage.getItem('loggedIn') === 'true') {
-      return true;
-    }
-    return false;
+    return this.sessionService.checkSession();
   }
 
   constructor(
     protected itemService: GuidelineItemService,
+    protected sessionService: SessionCheckService,
     protected location: Location) { }
-
-  public ngOnInit(): void { }
 
   public goBack(): void {
     this.location.back();

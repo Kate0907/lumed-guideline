@@ -42,7 +42,8 @@ namespace Guideline.Services.Tests
     [ExpectedException(typeof(NullReferenceException))]
     public void TestGet_WithUnexistItem_ShouldThrowNullReferenceException()
     {
-      _Service.Get(456);
+      var idThatDontExist = 456;
+      _Service.Get(idThatDontExist);
     }
 
     [TestMethod()]
@@ -73,11 +74,9 @@ namespace Guideline.Services.Tests
     [ExpectedException(typeof(NullReferenceException))]
     public void TestCreateNewItemAndAddTo_WithParentIdNotExist_ShouldThrowException()
     {
-      _Service.createNewItemAndAddTo(500, ItemType.Checkbox);
+       var idThatDontExist = 500;
+      _Service.createNewItemAndAddTo(idThatDontExist, ItemType.Checkbox);
     }
-
-    //UpdateItem_WithNull_ShouldReturn
-    //UpdateItem_WithItemThatDoesntExist_
 
     [TestMethod()]
     public void TestUpdateUnItem_WithANewItem_ShouldUpdateOldItemNameAndChildrenIdsWithNewItem()
@@ -135,7 +134,8 @@ namespace Guideline.Services.Tests
     [ExpectedException(typeof(NullReferenceException))]
     public void Delete_WithAnUnexistItem_ShouldThrowException()
     {
-      _Service.Delete(500);
+      var idThatDontExist = 500;
+      _Service.Delete(idThatDontExist);
     }
 
   }

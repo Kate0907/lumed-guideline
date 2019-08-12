@@ -17,8 +17,4 @@ export class GuidelineGroupComponent extends GuidelineGroupBase {
   ) {
     super(itemService, sessionService);
   }
-
-  public async saveToJson(): Promise<void> {
-    await this.itemService.saveToJson();
-  }
 }

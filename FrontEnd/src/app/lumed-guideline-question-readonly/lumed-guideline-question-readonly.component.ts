@@ -36,16 +36,17 @@ export class LumedGuidelineQuestionReadonlyComponent extends GuidelineItemBase i
   }
 
   public async saveResult(): Promise<void> {
-    this.checkedItemIds = [];
+    if (this.checkedItemIds == null) {
+      this.checkedItemIds = [];
+    }
     const questionnaire = this.getItemById(this.item.id);
     for (const id of questionnaire.childrenIds) {
       for (const checkboxId of this.getItemById(id).childrenIds) {
         if (this.getItemById(checkboxId).isChecked === true) {
-          if (this.checkedItemIds === null) {
-            this.checkedItemIds = [checkboxId];
-          } else {
-            this.checkedItemIds.push(checkboxId);
-          }
+          // if (this.checkedItemIds == null) {
+          //   this.checkedItemIds = [checkboxId];
+          // } else {
+          this.checkedItemIds.push(checkboxId);
         }
       }
     }
@@ -56,8 +57,6 @@ export class LumedGuidelineQuestionReadonlyComponent extends GuidelineItemBase i
     await this.itemService.updateItem(this.checkedItemList);
 
     const resultUrl = '/result/' + this.newResultId;
-
-    console.log(resultUrl);
     this.router.navigate([resultUrl]);
   }
 

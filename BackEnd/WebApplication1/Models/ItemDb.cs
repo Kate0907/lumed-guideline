@@ -24,7 +24,7 @@ namespace Guideline.Models
       var filepath = @ConfigurationManager.AppSettings["ReadPath"];
       if (File.Exists(filepath) == false)
       {
-        throw new FileNotFoundException($"can't find the file");
+        throw new FileNotFoundException($"can't find the file at {filepath}");
       }
       var json = File.ReadAllText(filepath);
       var data = JsonConvert.DeserializeObject<List<Item>>(json);
@@ -38,17 +38,17 @@ namespace Guideline.Models
 
     public static void SerializeToFile(string filename)
     {
-      var filepath = $"c:\\Source\\lumed-guidelines\\{filename}.json";
+      var filepath = @ConfigurationManager.AppSettings["FilePath"] + filename +".json";
       var json = JsonConvert.SerializeObject(ITEMS, Formatting.Indented);
       File.WriteAllText(filepath, json);
     }
 
     public static void DeserializeFromFile(string filename)
     {
-      var filepath = $"c:\\Source\\lumed-guidelines\\{filename}.json";
+      var filepath = @ConfigurationManager.AppSettings["FilePath"] + filename + ".json";
       if (File.Exists(filepath) == false)
       {
-        throw new FileNotFoundException($"can't find the file");
+        throw new FileNotFoundException($"can't find the file at {filepath}");
       }
       var json = File.ReadAllText(filepath);
       var data = JsonConvert.DeserializeObject<List<Item>>(json);
