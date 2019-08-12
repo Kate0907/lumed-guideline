@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { GuidelineItemService } from '../main.service';
+import { Component } from '@angular/core';
 import { SessionCheckService } from '../session-check.service';
 
 @Component({
@@ -15,14 +13,8 @@ export class GuidelineItemComponent {
   }
 
   constructor(
-    protected itemService: GuidelineItemService,
     protected sessionService: SessionCheckService,
-    protected location: Location) { }
+  ) { }
 
-  public goBack(): void {
-    this.location.back();
-  }
-  public async saveToJson(): Promise<void> {
-    await this.itemService.saveToJson();
-  }
+ 
 }

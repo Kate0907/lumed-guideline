@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
-import { GuidelineItemService } from '../main.service';
 import { SessionCheckService } from '../session-check.service';
 
 @Component({
@@ -15,7 +13,6 @@ export class LumedGuidelineQuestionComponent {
   }
 
   constructor(
-    // protected itemService: GuidelineItemService,
     protected sessionService: SessionCheckService,
     ) { }
 

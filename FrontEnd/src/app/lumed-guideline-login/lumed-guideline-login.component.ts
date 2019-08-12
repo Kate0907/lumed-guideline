@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
 import { User } from '../user';
 import { LoginService } from '../login.service';
@@ -20,7 +19,7 @@ export class LumedGuidelineLoginComponent {
     protected router: Router,
     protected itemService: GuidelineItemService,
     protected loginService: LoginService,
-    protected location: Location) {
+    ) {
   }
 
   public async login(form: NgForm) {

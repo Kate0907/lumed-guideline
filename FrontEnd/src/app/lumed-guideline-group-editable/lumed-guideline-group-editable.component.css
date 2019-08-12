@@ -127,13 +127,6 @@ textarea {
   border-radius: 0.25rem;
 }
 
-/* input[type=text]:focus,
-textarea:focus {
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-  padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
-  border: 1px solid rgba(81, 203, 238, 1);
-} */
 input[type=text]:focus,
 textarea:focus {
   color: #495057;
@@ -170,7 +163,6 @@ textarea:focus {
 
 li .fieldset {
   height: auto;
-  /* border: 1px solid rgb(168, 225, 241); */
   border-radius: 0.25rem;
   margin: 0.3em;
   padding: 0.3em;

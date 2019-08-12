@@ -49,8 +49,4 @@ export class GuidelineGroupEditableComponent extends GuidelineGroupBase {
     await this.itemService.itemDown(item, messageIndex);
     await this.refresh();
   }
-
-  public async saveToJson(): Promise<void> {
-    await this.itemService.saveToJson();
-  }
 }

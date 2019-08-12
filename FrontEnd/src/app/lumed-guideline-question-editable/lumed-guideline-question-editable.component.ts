@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, } from '@angular/router';
-import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
 import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-base';
 import { ItemType } from '../ItemType';
@@ -26,8 +25,8 @@ export class LumedGuidelineQuestionEditableComponent extends GuidelineItemBase i
     protected router: Router,
     protected itemService: GuidelineItemService,
     protected sessionService: SessionCheckService,
-    protected location: Location) {
-    super(route, router, itemService, sessionService, location);
+    ) {
+    super(route, router, itemService, sessionService);
   }
 
   public ngOnInit(): void {
@@ -42,9 +41,6 @@ export class LumedGuidelineQuestionEditableComponent extends GuidelineItemBase i
     for (const id of questionnaire.childrenIds) {
       for (const checkboxId of this.getItemById(id).childrenIds) {
         if (this.getItemById(checkboxId).isChecked === true) {
-          // if (this.checkedItemIds == null) {
-          //   this.checkedItemIds = [checkboxId];
-          // } else {
           this.checkedItemIds.push(checkboxId);
         }
       }

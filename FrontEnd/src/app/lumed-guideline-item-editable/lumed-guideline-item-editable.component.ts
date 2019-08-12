@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
@@ -20,8 +19,8 @@ export class ItemEditableComponent extends GuidelineItemBase  {
     protected router: Router,
     protected itemService: GuidelineItemService,
     protected sessionService: SessionCheckService,
-    protected location: Location) {
-    super(route, router, itemService, sessionService, location);
+    ) {
+    super(route, router, itemService, sessionService, );
   }
 
   public async addItem(parentId: number, type: ItemType): Promise<void> {
