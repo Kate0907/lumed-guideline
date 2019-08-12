@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { GuidelineHttpService } from './main-database.service';
 import { Item } from './item';
 import { ItemType } from './ItemType';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuidelineItemService {
   constructor(private _DB: GuidelineHttpService, ) { }
+
+  // public async login(user: User): Promise<boolean> {
+  //   return await this._DB.login(user);
+  // }
 
   public getAllItems(): Promise<Item[]> {
     return this._DB.getAllItems();
@@ -17,8 +22,8 @@ export class GuidelineItemService {
     return this._DB.getOneItem(id);
   }
 
-  public async addItemNoParent(type: ItemType): Promise<void> {
-    await this._DB.createItem(type);
+  public async addItemNoParent(type: ItemType): Promise<Item> {
+    return await this._DB.createItem(type);
   }
 
   public async addItem(parentId: number, type: ItemType): Promise<void> {
@@ -31,6 +36,10 @@ export class GuidelineItemService {
 
   public async deleteItem(itemId: number): Promise<void> {
     await this._DB.deleteItem(itemId);
+  }
+
+  public async saveToJson(): Promise<void> {
+    await this._DB.saveToJson();
   }
 
   public async itemUp(section: Item, itemIndex: number): Promise<void> {

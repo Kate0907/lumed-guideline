@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { GuidelineItemService } from '../main.service';
-import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-base';
+import { SessionCheckService } from '../session-check.service';
 
 @Component({
   selector: 'lumed-guideline-item',
@@ -11,15 +8,13 @@ import { GuidelineItemBase } from '../lumed-guideline-item/lumed-guideline-item-
 })
 export class GuidelineItemComponent {
 
-  public isAdmin = false;
-
-  constructor(
-    protected location: Location) { }
-
-  public goBack(): void {
-    this.location.back();
+  public get isAdmin(): boolean {
+    return this.sessionService.checkSession();
   }
 
+  constructor(
+    protected sessionService: SessionCheckService,
+  ) { }
 
-
+ 
 }

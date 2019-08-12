@@ -11,12 +11,14 @@ body {
 }
 
 a {
-  color: #45A2D8;
+  color: rgb(130, 170, 235);
   cursor: pointer;
   font-size: 19.2px;
+  padding-left: 0.2em;
 }
 
 ul {
-  margin-right: 8%;
+  margin-right: 0;
   list-style-type: none;
+  padding: 0;
 }

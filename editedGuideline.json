@@ -1,0 +1,60 @@
+[
+  {
+    "id": 0,
+    "name": "Books for babies",
+    "type": 2,
+    "childrenIds": [
+      1
+    ],
+    "isChecked": false
+  },
+  {
+    "id": 1,
+    "name": "Three little pigs",
+    "type": 1,
+    "childrenIds": [
+      2
+    ],
+    "isChecked": false
+  },
+  {
+    "id": 2,
+    "name": "Pigs names",
+    "type": 1,
+    "childrenIds": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "isChecked": false
+  },
+  {
+    "id": 3,
+    "name": "Pig 1",
+    "type": 0,
+    "childrenIds": [],
+    "isChecked": false
+  },
+  {
+    "id": 4,
+    "name": "Pig 2",
+    "type": 0,
+    "childrenIds": [],
+    "isChecked": false
+  },
+  {
+    "id": 5,
+    "name": "Pig 3",
+    "type": 0,
+    "childrenIds": [],
+    "isChecked": false
+  },
+  {
+    "id": 6,
+    "name": "Wolf",
+    "type": 1,
+    "childrenIds": [],
+    "isChecked": false
+  }
+]

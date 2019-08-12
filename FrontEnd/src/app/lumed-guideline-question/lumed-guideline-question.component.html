@@ -1,0 +1,6 @@
+<div *ngIf="!isAdmin">
+  <lumed-guideline-question-readonly></lumed-guideline-question-readonly>
+</div>
+<div *ngIf="isAdmin">
+  <lumed-guideline-question-editable></lumed-guideline-question-editable>
+</div>

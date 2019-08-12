@@ -1,8 +1,15 @@
 <div class="root">
     <app-breadcrumb></app-breadcrumb>
-    <h2><a style="text-decoration:none" routerLink="/main">
-            <img style="height: 30px; width: 30px" src="./assets/menu.png">
+    <h2 class="menu">
+        <a style="text-decoration:none" routerLink="/main">
+            <img class="img" style="height: 30px; width: 30px" src="./assets/menu.png">
         </a>
+
+        <button *ngIf="isAdmin" class="button" style="text-decoration:none" (click)="signOut()">Sign Out</button>
+        <button *ngIf="!isAdmin" class="button" style="text-decoration:none" routerLink="/login">Sign In</button>
+        <button class="button" *ngIf="isAdmin" (click)="saveToJson()">Save To Json</button>
+        <button class="button" (click)="goBack()">Back</button>
+
     </h2>
     <router-outlet></router-outlet>
 </div>

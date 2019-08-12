@@ -13,8 +13,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { GuidelineGroupEditableComponent } from './lumed-guideline-group-editable/lumed-guideline-group-editable.component';
 import { GuidelineGroupReadonlyComponent } from './lumed-guideline-group-readonly/lumed-guideline-group-readonly.component';
 import { DisplaySectionComponent } from './displaySection/display-section.component';
-import { QuestionComponent } from './question/question.component';
-import { ResultComponent } from './result/result.component';
+import { LumedGuidelineQuestionComponent } from './lumed-guideline-question/lumed-guideline-question.component';
+import { LumedGuidelineResultComponent } from './lumed-guideline-result/lumed-guideline-result.component';
+import { LumedGuidelineQuestionReadonlyComponent } from './lumed-guideline-question-readonly/lumed-guideline-question-readonly.component';
+import { LumedGuidelineQuestionEditableComponent } from './lumed-guideline-question-editable/lumed-guideline-question-editable.component';
+import { LumedGuidelineLoginComponent }
+from './lumed-guideline-login/lumed-guideline-login.component';
 
 
 
@@ -29,8 +33,11 @@ import { ResultComponent } from './result/result.component';
     GuidelineGroupEditableComponent,
     GuidelineGroupReadonlyComponent,
     DisplaySectionComponent,
-    QuestionComponent,
-    ResultComponent,
+    LumedGuidelineQuestionComponent,
+    LumedGuidelineResultComponent,
+    LumedGuidelineQuestionReadonlyComponent,
+    LumedGuidelineQuestionEditableComponent,
+    LumedGuidelineLoginComponent
   ],
   imports: [
     BrowserModule,

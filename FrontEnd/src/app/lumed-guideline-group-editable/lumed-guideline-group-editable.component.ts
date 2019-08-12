@@ -3,6 +3,7 @@ import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
 import { GuidelineGroupBase } from '../lumed-guideline-group/lumed-guideline-group-base';
+import { SessionCheckService } from '../session-check.service';
 
 @Component({
   selector: 'lumed-guideline-group-editable',
@@ -13,8 +14,9 @@ export class GuidelineGroupEditableComponent extends GuidelineGroupBase {
 
   constructor(
     protected itemService: GuidelineItemService,
-    ) {
-      super(itemService);
+    protected sessionService: SessionCheckService,
+  ) {
+    super(itemService, sessionService);
   }
 
   public async updateItem(maingroup: Item): Promise<void> {
@@ -33,6 +35,18 @@ export class GuidelineGroupEditableComponent extends GuidelineGroupBase {
 
   public async deleteMain(mainId: number): Promise<void> {
     await this.itemService.deleteItem(mainId);
+    await this.refresh();
+  }
+
+  public async itemUp(sectionId: number, messageIndex: number): Promise<void> {
+    const item = this.getItemById(sectionId);
+    await this.itemService.itemUp(item, messageIndex);
+    await this.refresh();
+  }
+
+  public async itemDown(sectionId: number, messageIndex: number): Promise<void> {
+    const item = this.getItemById(sectionId);
+    await this.itemService.itemDown(item, messageIndex);
     await this.refresh();
   }
 }

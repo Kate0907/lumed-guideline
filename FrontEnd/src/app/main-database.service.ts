@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, } from 'rxjs/operators';
 import { ItemType } from './ItemType';
+import { User } from './user';
+import { environment } from './../environments/environment';
 
 const httpOptions = {
    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,7 +15,10 @@ const httpOptions = {
    providedIn: 'root'
 })
 export class GuidelineHttpService {
-   private itemUrl = 'http://localhost:61291/api/Item';
+
+   private itemUrl = environment.apiUrl + '/api/Item';
+   private jsonUrl = environment.apiUrl + '/api/Json';
+   private userUrl = environment.apiUrl + '/api/User';
 
    constructor(
       private http: HttpClient,
@@ -40,15 +45,24 @@ export class GuidelineHttpService {
       return this.http.post(url, type, httpOptions).toPromise();
    }
 
-   /** POST: create a new item and add to parent item's (id = parentId) childrenIds */
-   public createItem(type: ItemType): Promise<any> {
-      return this.http.post(this.itemUrl, type, httpOptions).toPromise();
+   /** POST: create a new item without parent  */
+   public createItem(type: ItemType): Promise<Item> {
+      return this.http.post<Item>(this.itemUrl, type, httpOptions).toPromise<Item>();
+   }
+
+   /** POST: login a user */
+   public login(user: User): Promise<any> {
+      return this.http.post(this.userUrl, user, httpOptions).toPromise();
    }
 
    /** PUT: update the main section on the server and return a message; */
    public updateItem(item: Item): Promise<any> {
       const url = `${this.itemUrl}/${item.id}`;
       return this.http.put(url, item, httpOptions).toPromise();
+   }
+
+   public async saveToJson(): Promise<Item> {
+      return this.http.get<Item>(this.jsonUrl, httpOptions).toPromise();
    }
 
    /** DELETE: delete item from itemDB */
@@ -65,10 +79,7 @@ export class GuidelineHttpService {
  */
    private handleError<T>(operation = 'operation', result?: T) {
       return (error: any): Observable<T> => {
-
-         // TODO: send the error to remote logging infrastructure
-         console.error(error); // log to console instead
-         // Let the app keep running by returning an empty result.
+         console.error(error);
          return of(result as T);
       };
    }

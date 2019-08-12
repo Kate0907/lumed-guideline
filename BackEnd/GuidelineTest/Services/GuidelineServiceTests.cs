@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Guideline.Services;
 using System;
 using System.Collections.Generic;
@@ -10,109 +10,133 @@ using Guideline.Models;
 namespace Guideline.Services.Tests
 {
 
-    [TestClass()]
-    public class GuidelineServiceTests
+  [TestClass()]
+  public class ItemServiceTests
+  {
+    private ItemService _Service;
+
+    [TestInitialize]
+    public void BeforeEach()
     {
-        private GuidelineService _Service;
-
-        [TestInitialize]
-        public void BeforeEach()
-        {
-            _Service = new GuidelineService();
-        }
-
-        [TestMethod()]
-        public void GetAllMainSectionsTest()
-        {
-            var result = _Service.GetAllMainSections();
-            Assert.AreEqual(result.Count(), 20);
-        }
-
-        [TestMethod()]
-        public void GetTest()
-        {
-            var result = _Service.Get(1);
-            Assert.AreEqual("ENT Infections", result.name);
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void GetAnUnexistItemTest()
-        {
-             _Service.Get(77);
-        }
-
-
-
-        [TestMethod()]
-        public void PostTestCreateNewMainSection()
-        {
-            var result = _Service.Post();
-            Assert.AreEqual(803, result.id);
-            Assert.AreEqual(21, MainDb.MAINS.Count());
-        }
-
-        [TestMethod()]
-        public void PostTestCreateNewMainSectionOnASection()
-        {
-            var s = SectionDb.SECTIONS.FirstOrDefault(v => v.id == 3);
-            Assert.AreEqual(0, s.mainIds.Count());
-            _Service.Post(3);
-            Assert.AreEqual(1, s.mainIds.Count());
-            Assert.AreEqual(803, s.mainIds[0]);
-        }
-
-        [TestMethod()]
-        public void PostTestCreateNewMainSectionOnASectionWithNullMainIds()
-        {
-            var s = SectionDb.SECTIONS.FirstOrDefault(v => v.id == 4);
-            Assert.IsNull(s.mainIds);
-            _Service.Post(4);
-            Assert.IsNotNull(s.mainIds);
-            Assert.AreEqual(1, s.mainIds.Count());
-            Assert.AreEqual(803, s.mainIds[0]);
-        }
-
-        [TestMethod()]
-        public void PutTestUpdateUnMainSectionName()
-        {
-            Assert.AreEqual(1, MainDb.MAINS[5].sectionIds.Count());
-            var main = new MainSection();
-            main.name = "Raining";
-            main.sectionIds = new List<int> { 3, 5, 8 };
-            _Service.Put(5, main);
-            Assert.AreEqual(3, MainDb.MAINS[5].sectionIds.Count());
-            Assert.AreEqual("Raining", MainDb.MAINS[5].name);
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void PutTestUpdateAnUnexistId()
-        {
-            Assert.AreEqual(1, MainDb.MAINS[5].sectionIds.Count());
-            var main = new MainSection();
-            main.name = "Raining";
-            main.sectionIds = new List<int> { 3, 5, 8 };
-            _Service.Put(90, main);
-        }
-
-        [TestMethod()]
-        public void DeleteAMainSectionTest()
-        {
-            Assert.AreEqual(20, MainDb.MAINS.Count());
-            Assert.AreEqual(14, MainDb.MAINS[14].id);
-            Assert.IsNotNull(MainDb.MAINS.FirstOrDefault(s => s.id == 14));
-            _Service.Delete(14);
-            Assert.AreEqual(19, MainDb.MAINS.Count());
-            Assert.AreEqual(500, MainDb.MAINS[14].id);
-            Assert.IsNull(MainDb.MAINS.FirstOrDefault(s => s.id == 14));
-        }
-
-        [TestMethod()]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void DeleteAnUnexistMainSectionTest()
-        {
-            _Service.Delete(90);
-        }
+      _Service = new ItemService();
+      string filename = "guideline";
+      // ItemDb.Deserialize();
+      ItemDb.DeserializeFromFile(filename);
     }
+
+    [TestMethod()]
+    public void TestGetAllItems_ShouldReturnAListOfAllItems()
+    {
+      var result = _Service.GetAllItems();
+      Assert.AreEqual(ItemDb.ITEMS.Count, result.Count());
+    }
+
+    [TestMethod()]
+    public void TestGet_ItemWithId_ShouldReturnThatItem()
+    {
+      var result = _Service.Get(0);
+      Assert.AreEqual("Elephant and Piggie", result.name);
+    }
+
+    [TestMethod()]
+    [ExpectedException(typeof(NullReferenceException))]
+    public void TestGet_WithUnexistItem_ShouldThrowNullReferenceException()
+    {
+      var idThatDontExist = 456;
+      _Service.Get(idThatDontExist);
+    }
+
+    [TestMethod()]
+    public void TestCreateNewItem_WithoutParentId_ShouldCreateItemNotAddToParentsChildrenIds()
+    {
+      var total = ItemDb.ITEMS.Count();
+      Assert.AreEqual(ItemDb.LastId, 101);
+      var result = _Service.createNewItem(ItemType.Checkbox);
+      Assert.AreEqual(total + 1, ItemDb.ITEMS.Count());
+      Assert.AreEqual(ItemDb.LastId, 102);
+    }
+
+    [TestMethod()]
+    public void TestCreateNewItemAndAddTo_WithParentIdAndType_ShouldAddNewItemIdToParentsChildrenIds()
+    {
+      var parent = ItemDb.ITEMS.FirstOrDefault(item => item.id == 10);
+      Assert.AreEqual(1, parent.childrenIds.Count());
+      _Service.createNewItemAndAddTo(10, ItemType.Checkbox);
+      Assert.AreEqual(2, parent.childrenIds.Count());
+      Assert.AreEqual(parent.childrenIds[1], ItemDb.LastId - 1);
+      var id = parent.childrenIds[1];
+      var newCreate = ItemDb.ITEMS.FirstOrDefault(item => item.id == id);
+      Assert.AreEqual(newCreate.type, ItemType.Checkbox);
+      Assert.AreEqual(newCreate.name, "New Checkbox");
+    }
+
+    [TestMethod()]
+    [ExpectedException(typeof(NullReferenceException))]
+    public void TestCreateNewItemAndAddTo_WithParentIdNotExist_ShouldThrowException()
+    {
+       var idThatDontExist = 500;
+      _Service.createNewItemAndAddTo(idThatDontExist, ItemType.Checkbox);
+    }
+
+    [TestMethod()]
+    public void TestUpdateUnItem_WithANewItem_ShouldUpdateOldItemNameAndChildrenIdsWithNewItem()
+    {
+      var oldItem = ItemDb.ITEMS.FirstOrDefault(item => item.id == 100);
+      var childrenIds = new List<int> { 70, 71, 72, 73, 74 };
+      Assert.AreEqual("The Magic School Bus Questionnaire", oldItem.name);
+      Assert.AreEqual(childrenIds.Count, oldItem.childrenIds.Count);
+      for (var i = 0; i < childrenIds.Count; i++)
+      {
+        Assert.AreEqual(childrenIds[i], oldItem.childrenIds[i]);
+      }
+      var newItem = _Service.createNewItem(ItemType.Questionnaire);
+      newItem.name = "Aladin";
+      newItem.childrenIds = new List<int> { 30, 40, 50 };
+      newItem.id = oldItem.id;
+      _Service.Update(newItem);
+      Assert.AreEqual("Aladin", oldItem.name);
+      Assert.AreEqual(3, oldItem.childrenIds.Count);
+      for (var i = 0; i < newItem.childrenIds.Count; i++)
+      {
+        Assert.AreEqual(oldItem.childrenIds[i], newItem.childrenIds[i]);
+      }
+
+    }
+
+    [TestMethod()]
+    [ExpectedException(typeof(NullReferenceException))]
+    public void TestUpdate_WithNull_ShouldThrowException()
+    {
+      _Service.Update(null);
+    }
+
+    [TestMethod()]
+    [ExpectedException(typeof(NullReferenceException))]
+    public void TestUpdate_WithItemNotExist_ShouldThrowException()
+    {
+      var newItem = new Item();
+      Assert.AreEqual(0, newItem.id);
+      newItem.id = 300;
+      Assert.AreEqual(300, newItem.id);
+      _Service.Update(newItem);
+    }
+
+    [TestMethod()]
+    public void Delete_WithValidId_ShouldDelete()
+    {
+      var total = ItemDb.ITEMS.Count;
+      _Service.Delete(14);
+      Assert.AreEqual(ItemDb.ITEMS.Count, total - 1);
+      Assert.IsNull(ItemDb.ITEMS.FirstOrDefault(item => item.id == 14));
+    }
+
+    [TestMethod()]
+    [ExpectedException(typeof(NullReferenceException))]
+    public void Delete_WithAnUnexistItem_ShouldThrowException()
+    {
+      var idThatDontExist = 500;
+      _Service.Delete(idThatDontExist);
+    }
+
+  }
 }

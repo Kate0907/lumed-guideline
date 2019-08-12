@@ -1,9 +1,9 @@
 import { OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Location } from '@angular/common';
 import { GuidelineItemService } from '../main.service';
 import { Item } from '../item';
 import { ItemType } from '../ItemType';
+import { SessionCheckService } from '../session-check.service';
 
 export class GuidelineItemBase implements OnInit {
     @Input() public item: Item;
@@ -13,11 +13,16 @@ export class GuidelineItemBase implements OnInit {
     public readonly itemType = ItemType;
     public show = true;
 
+    public get isAdmin(): boolean {
+        return this.sessionService.checkSession();
+    }
+
     constructor(
         protected route: ActivatedRoute,
         protected router: Router,
         protected itemService: GuidelineItemService,
-        protected location: Location) {
+        protected sessionService: SessionCheckService,
+        ) {
 
         this.router.events.subscribe(navigation => {
             if (navigation instanceof NavigationEnd && navigation.url.indexOf('detail') !== -1) {
@@ -52,11 +57,4 @@ export class GuidelineItemBase implements OnInit {
     public getItemById(id: number): Item {
         return this.items.find(main => main.id === id);
     }
-
-    public goBack(): void {
-        this.location.back();
-    }
-
-
-
 }

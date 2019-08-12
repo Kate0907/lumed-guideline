@@ -1,0 +1,34 @@
+.checkbox {
+  position: relative;
+  float: right;
+  margin-right: 10px;
+  width: 100%;
+}
+
+.button {
+  width: auto;
+  background: #45a2d8;
+  color: #f6f5fc;
+  border: 1px solid transparent;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  float: right;
+}
+
+.isAdmin {
+  float: left;
+}
+
+.buttonBack {
+  float: left;
+  background: #45a2d8;
+  color: #f6f5fc;
+  border: 1px solid transparent;
+  padding: 0.2rem 0.4rem;
+  margin: 0.2rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+}

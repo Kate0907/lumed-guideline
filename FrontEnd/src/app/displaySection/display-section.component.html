@@ -1,6 +1,6 @@
-<div *ngIf="item!=null">
+<div class="main" *ngIf="item!=null">
   <button class="collapsable" (click)="changeShow()" *ngIf="getItemById(Sid).name =='Key Messages'; else elseButton">
-    <img style="height: 30px; width: 30px" src="./assets/exclam.jpg">
+    <img style="height: 36px; width: 36px" src="./assets/info.jpg">
     <span class="title">{{getItemById(Sid).name}}</span>
     <span *ngIf="show === true; else hide">
       <i class="arrow down"></i>
@@ -30,7 +30,15 @@
       {{getItemById(childId).name}}
     </li>
 
-    <li class="linkClass" *ngIf="getItemById(childId).type === itemType.Link">
+    <li class="linkClass"
+      *ngIf="getItemById(childId).type === itemType.Link && childId !== getItemById(Sid).childrenIds[getItemById(Sid).childrenIds.length-1]">
+      <a style="text-decoration:none" routerLink="/detail/{{childId}}">{{getItemById(childId).name}}
+        <i class="arrow right"></i>
+      </a>
+    </li>
+
+    <li class="linkClassLast"
+      *ngIf="getItemById(childId).type === itemType.Link && childId == getItemById(Sid).childrenIds[getItemById(Sid).childrenIds.length-1]">
       <a style="text-decoration:none" routerLink="/detail/{{childId}}">{{getItemById(childId).name}}
         <i class="arrow right"></i>
       </a>

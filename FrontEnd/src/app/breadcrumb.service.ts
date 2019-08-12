@@ -39,12 +39,7 @@ export class BreadcrumbService {
     if (currentItem == null) {
       currentName = 'No Data';
     } else {
-      if (type === 'result') {
-        currentName = name + ' Result';
-      } else {
-        currentName = name;
-      }
-
+      currentName = name;
     }
 
     // add breadcrumb

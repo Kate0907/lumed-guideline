@@ -1,0 +1,179 @@
+.h2 {
+  text-align: center;
+}
+
+.fieldset {
+  margin: 0 0 0 0;
+  list-style-type: none;
+  padding: 0;
+  border-color: #f1f1f1;
+  border-style: solid;
+  border-width: 1px 0 0 0;
+  border-radius: 4px;
+  background-color: #f3f3f3;
+}
+
+.fieldset li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  margin: .5em;
+  padding: .3em 0;
+  border-radius: 4px;
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  box-sizing: border-box;
+  width: 80%;
+  height: 2em;
+  font-size: 0.8em;
+  font-weight: 300;
+}
+
+.textarea {
+  width: 80%;
+  height: 1.5em;
+  font-size: 1em;
+}
+
+.message {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  font-size: 1em;
+  font-weight: 300;
+}
+
+.checkboxName {
+  box-sizing: border-box;
+  width: 90%;
+  height: 2em;
+  font-size: 1em;
+  font-weight: 300;
+}
+
+#forCheckbox {
+  height: auto;
+  width: 100%;
+  align-self: center;
+}
+
+input[type=text],
+textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+  border-radius: 0.25rem;
+}
+
+input[type=text]:focus,
+textarea:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.button {
+  background: #96C8FF;
+  color: #f6f5fc;
+  border: 1px solid transparent;
+  padding: 0.2rem 0.5rem;
+  margin: 0.2rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.link {
+  padding-left: 0.5em;
+}
+
+fieldset {
+  border: 1px solid rgb(188, 219, 251);
+  border-radius: 0.25rem;
+  margin: 0.1em;
+}
+
+.legend {
+  color: #96C8FF;
+}
+
+.button2 {
+  background: #96C8FF;
+  color: #f6f5fc;
+  border: 1px solid transparent;
+  padding: 0.2rem 0.5rem;
+  margin: 0.1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  float: bottom;
+}
+
+li .fieldset {
+  height: auto;
+  border-radius: 0.25rem;
+  margin: 0.3em;
+  padding: 0.3em;
+}
+
+.button3 {
+  background: #96C8FF;
+  color: #f6f5fc;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  width: 80%;
+}
+
+.button3Div {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 3em;
+  margin-top: 2em;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.button2Div {
+  text-align: center;
+}
+
+.button1Div {
+  text-align: center;
+}
+
+.section {
+  padding-left: 1em;
+}
+
+.checkbox {
+  color: #45A2D8;
+}
+
+textarea {
+  border-block-color: #45A2D8;
+}
+
+.a {
+  text-decoration: none;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  margin-top: 2em;
+  display: inline-block;
+  cursor: pointer;
+}

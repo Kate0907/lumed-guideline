@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-
+import { Component} from '@angular/core';
+import { GuidelineItemService } from '../main.service';
+import { GuidelineGroupBase } from './lumed-guideline-group-base';
+import { SessionCheckService } from '../session-check.service';
 
 @Component({
   selector: 'lumed-guideline-group',
@@ -7,6 +9,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./lumed-guideline-group.component.css']
 })
 
-export class GuidelineGroupComponent {
-  public isAdmin = false;
+export class GuidelineGroupComponent extends GuidelineGroupBase {
+
+  constructor(
+    protected itemService: GuidelineItemService,
+    protected sessionService: SessionCheckService,
+  ) {
+    super(itemService, sessionService);
+  }
 }
